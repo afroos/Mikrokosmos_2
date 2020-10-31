@@ -3,6 +3,7 @@ module;
 #include <cstddef>
 
 export module Mikrokosmos_Mathematics_Geometry_Point;
+
 import Mikrokosmos_Mathematics_Algebra_Vector;
 
 export

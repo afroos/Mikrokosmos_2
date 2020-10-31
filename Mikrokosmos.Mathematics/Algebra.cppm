@@ -1,3 +1,3 @@
-//export module Mikrokosmos_Mathematics_Algebra;
+export module Mikrokosmos_Mathematics_Algebra;
 
-//export import Mikrokosmos_Mathematics_Algebra_Vector;
+export import Mikrokosmos_Mathematics_Algebra_Vector;

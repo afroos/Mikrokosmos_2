@@ -1,5 +1,6 @@
 export module Mikrokosmos_Graphics;
 
-export import Mikrokosmos_Graphics_Rendering_Rasterizer;
-export import Mikrokosmos_Graphics_Rendering_Buffer;
 export import Mikrokosmos_Graphics_Color;
+export import Mikrokosmos_Graphics_Rendering_Buffer;
+export import Mikrokosmos_Graphics_Rendering_Framebuffer;
+export import Mikrokosmos_Graphics_Rendering_Rasterizer;

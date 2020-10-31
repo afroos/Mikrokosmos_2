@@ -143,10 +143,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Graphics.cppm" />
+    <ClCompile Include="Color.cppm" />
+    <ClCompile Include="Graphics.cppm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Rendering\Buffer.cppm" />
-    <ClCompile Include="Rendering\Color.cppm" />
-    <ClCompile Include="Rendering\Rasterizer.cppm" />
+    <ClCompile Include="Rendering\Framebuffer.cppm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Rendering\Rasterizer.cppm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mikrokosmos.Mathematics\Mikrokosmos.Mathematics.vcxproj">
