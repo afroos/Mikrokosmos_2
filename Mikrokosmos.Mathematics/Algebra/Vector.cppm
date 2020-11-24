@@ -2,7 +2,7 @@ module;
 
 #include <array>
 
-export module Mikrokosmos_Mathematics_Algebra_Vector;
+export module Mikrokosmos.Mathematics.Algebra.Vector;
 
 export
 {
@@ -15,9 +15,10 @@ export
 
 			Vector() = default;
 
-			template<typename... Args, typename = std::enable_if_t<sizeof...(Args) == Dimension>>
-			Vector(Args&&... args)
-				: _coordinates{ args... }
+			template<typename... CoordinateList>
+				requires (sizeof...(CoordinateList) == Dimension)
+			Vector(CoordinateList&&... coordinates)
+				: _coordinates{ coordinates... }
 			{
 			}
 

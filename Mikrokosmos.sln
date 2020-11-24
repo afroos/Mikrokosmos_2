@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mikrokosmos.Graphics", "Mik
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mikrokosmos.Mathematics", "Mikrokosmos.Mathematics\Mikrokosmos.Mathematics.vcxproj", "{BA7A2FA3-78EB-4AD1-9957-87BD3DF2E6E5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mikrokosmos.Graphics.SoftwareRasterizer", "Mikrokosmos.Graphics.SoftwareRasterizer\Mikrokosmos.Graphics.SoftwareRasterizer.vcxproj", "{ECB4587B-0D30-4D92-89FF-384FA5001623}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mikrokosmos.Graphics.Examples", "Mikrokosmos.Graphics.Examples\Mikrokosmos.Graphics.Examples.vcxproj", "{ECB4587B-0D30-4D92-89FF-384FA5001623}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

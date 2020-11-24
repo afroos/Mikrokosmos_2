@@ -147,13 +147,25 @@
     <ClCompile Include="Graphics.cppm">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Rendering\Buffer.cppm" />
-    <ClCompile Include="Rendering\Framebuffer.cppm">
+    <ClCompile Include="Rendering\Array.cppm" />
+    <ClCompile Include="Rendering\ColorBuffer.cppm">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Rendering\DepthBuffer.cppm" />
+    <ClCompile Include="Rendering\IndexBuffer.cppm" />
+    <ClCompile Include="Rendering\Mesh.cppm" />
     <ClCompile Include="Rendering\Rasterizer.cppm">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Rendering\Renderer.cppm" />
+    <ClCompile Include="Rendering\Shader.cppm" />
+    <ClCompile Include="Rendering\Vertex.cppm" />
+    <ClCompile Include="Rendering\VertexBuffer.cppm" />
+    <ClCompile Include="SceneGraph\Camera.cppm" />
+    <ClCompile Include="SceneGraph\Light.cppm" />
+    <ClCompile Include="SceneGraph\Model.cppm" />
+    <ClCompile Include="SceneGraph\Scene.cppm" />
+    <ClCompile Include="SceneGraph\Node.cppm" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mikrokosmos.Mathematics\Mikrokosmos.Mathematics.vcxproj">

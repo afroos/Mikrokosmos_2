@@ -2,10 +2,10 @@ module;
 
 #include <cstddef>
 
-export module Mikrokosmos_Mathematics_Geometry_LineSegment;
+export module Mikrokosmos.Mathematics.Geometry.LineSegment;
 
-import Mikrokosmos_Mathematics_Algebra_Vector; // why?
-import Mikrokosmos_Mathematics_Geometry_Point;
+import Mikrokosmos.Mathematics.Algebra.Vector; // why?
+import Mikrokosmos.Mathematics.Geometry.Point;
 
 export
 {

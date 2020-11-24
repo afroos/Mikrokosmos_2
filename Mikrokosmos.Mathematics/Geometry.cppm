@@ -1,4 +1,4 @@
-export module Mikrokosmos_Mathematics_Geometry;
+export module Mikrokosmos.Mathematics.Geometry;
 
-export import Mikrokosmos_Mathematics_Geometry_Point;
-export import Mikrokosmos_Mathematics_Geometry_LineSegment;
+export import Mikrokosmos.Mathematics.Geometry.Point;
+export import Mikrokosmos.Mathematics.Geometry.LineSegment;

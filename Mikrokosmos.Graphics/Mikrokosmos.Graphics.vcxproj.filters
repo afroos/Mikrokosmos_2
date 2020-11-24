@@ -13,22 +13,64 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Rendering">
+      <UniqueIdentifier>{472f73fd-2ee8-4ff6-84f9-28dd7cdbf20b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SceneGraph">
+      <UniqueIdentifier>{e75fb422-aba8-485e-ba53-c6ae689477cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graphics.cppm">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\Buffer.cppm">
+    <ClCompile Include="Color.cppm">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Mesh.cppm">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\Rasterizer.cppm">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\Framebuffer.cppm">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Rendering\Renderer.cppm">
+      <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Color.cppm">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Rendering\Shader.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Vertex.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Scene.cppm">
+      <Filter>Source Files\SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Light.cppm">
+      <Filter>Source Files\SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Model.cppm">
+      <Filter>Source Files\SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Camera.cppm">
+      <Filter>Source Files\SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGraph\Node.cppm">
+      <Filter>Source Files\SceneGraph</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\VertexBuffer.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\IndexBuffer.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Array.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\ColorBuffer.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\DepthBuffer.cppm">
+      <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{ecb4587b-0d30-4d92-89ff-384fa5001623}</ProjectGuid>
-    <RootNamespace>MikrokosmosGraphicsSoftwareRasterizer</RootNamespace>
+    <RootNamespace>MikrokosmosGraphicsExamples</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -154,7 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="DrawTriangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mikrokosmos.Graphics\Mikrokosmos.Graphics.vcxproj">

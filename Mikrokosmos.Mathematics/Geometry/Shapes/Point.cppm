@@ -2,9 +2,9 @@ module;
 
 #include <cstddef>
 
-export module Mikrokosmos_Mathematics_Geometry_Point;
+export module Mikrokosmos.Mathematics.Geometry.Point;
 
-import Mikrokosmos_Mathematics_Algebra_Vector;
+import Mikrokosmos.Mathematics.Algebra.Vector;
 
 export
 {

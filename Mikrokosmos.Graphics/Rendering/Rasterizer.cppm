@@ -3,12 +3,12 @@ module;
 #include <algorithm>
 #include <cmath>
 
-export module Mikrokosmos_Graphics_Rendering_Rasterizer;
+export module Mikrokosmos.Graphics.Rendering.Rasterizer;
 
-import Mikrokosmos_Mathematics_Geometry_Point;
-import Mikrokosmos_Graphics_Color;
-import Mikrokosmos_Graphics_Rendering_Buffer;
-import Mikrokosmos_Graphics_Rendering_Framebuffer;
+import Mikrokosmos.Core.Array;
+import Mikrokosmos.Mathematics.Geometry.Point;
+import Mikrokosmos.Graphics.Color;
+import Mikrokosmos.Graphics.Rendering.ColorBuffer;
 
 export namespace mk
 {
@@ -18,7 +18,7 @@ export namespace mk
 
         Rasterizer() = default;
 
-		void drawLine(const Point2i& p0, const Point2i& p1, const Color& color, Framebuffer& framebuffer)
+		void drawLine(const Point2i& p0, const Point2i& p1, const Color& color, ColorBuffer& framebuffer)
 		{
             bool steep = false;
 
@@ -43,10 +43,10 @@ export namespace mk
             int y = y0;
             for (int x = x0; x <= x1; x++) {
                 if (steep) {
-                    framebuffer.setPixel(y, x, color);
+                    framebuffer.at(y, x) = color;
                 }
                 else {
-                    framebuffer.setPixel(x, y, color);
+                    framebuffer.at(x, y) = color;
                 }
                 error2 += derror2;
                 if (error2 > dx) {
