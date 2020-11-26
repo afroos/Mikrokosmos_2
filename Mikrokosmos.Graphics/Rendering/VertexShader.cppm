@@ -2,7 +2,7 @@ module;
 
 #include <memory>
 
-export module Mikrokosmos.Graphics.Rendering.Rasterizer;
+export module Mikrokosmos.Graphics.Rendering.VertexShader;
 
 //import Mikrokosmos.Core;
 //import Mikrokosmos.Graphics;
@@ -10,11 +10,11 @@ export module Mikrokosmos.Graphics.Rendering.Rasterizer;
 
 export namespace mk
 {
-	class Rasterizer
+	class VertexShader
 	{
 	public:
 
-		Rasterizer() = default;
+		VertexShader() = default;
 
 	private:
 

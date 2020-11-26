@@ -154,7 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DrawTriangle.cpp" />
+    <ClCompile Include="HelloWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mikrokosmos.Graphics\Mikrokosmos.Graphics.vcxproj">

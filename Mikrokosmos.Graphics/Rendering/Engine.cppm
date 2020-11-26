@@ -2,24 +2,42 @@ module;
 
 #include <memory>
 
-export module Mikrokosmos.Graphics.Rendering.Rasterizer;
+export module Mikrokosmos.Graphics.Rendering.Engine;
 
-//import Mikrokosmos.Core;
-//import Mikrokosmos.Graphics;
-//import Mikrokosmos.Graphics.Rendering;
+import Mikrokosmos.Core.Array;
+import Mikrokosmos.Graphics.Color;
+import Mikrokosmos.Graphics.Rendering.Device;
+import Mikrokosmos.Graphics.Rendering.DeviceContext;
+import Mikrokosmos.Graphics.Rendering.IndexBuffer;
+import Mikrokosmos.Graphics.Rendering.InputAssembler;
+import Mikrokosmos.Graphics.Rendering.OutputMerger;
+import Mikrokosmos.Graphics.Rendering.PixelShader;
+import Mikrokosmos.Graphics.Rendering.Rasterizer;
+import Mikrokosmos.Graphics.Rendering.Vertex;
+import Mikrokosmos.Graphics.Rendering.VertexBuffer;
+import Mikrokosmos.Graphics.Rendering.VertexShader;
+import Mikrokosmos.Graphics.Rendering.VertexStream;
 
 export namespace mk
 {
-	class Rasterizer
+	class Engine
 	{
 	public:
 
-		Rasterizer() = default;
+		Engine()
+		{
+			device_ = std::make_shared<Device>();
+			immediateContext_ = device_->immediateContext();
+		}
 
 	private:
 
+		std::shared_ptr<Device> device_;
+		std::shared_ptr<DeviceContext> immediateContext_;
+
 	};
 }
+
 
 /*
 Input Assembler

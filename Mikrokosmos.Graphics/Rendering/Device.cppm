@@ -2,24 +2,54 @@ module;
 
 #include <memory>
 
-export module Mikrokosmos.Graphics.Rendering.Rasterizer;
+export module Mikrokosmos.Graphics.Rendering.Device;
 
-//import Mikrokosmos.Core;
-//import Mikrokosmos.Graphics;
-//import Mikrokosmos.Graphics.Rendering;
+import Mikrokosmos.Core.Array;
+import Mikrokosmos.Graphics.Color;
+import Mikrokosmos.Graphics.Rendering.DeviceContext;
+import Mikrokosmos.Graphics.Rendering.IndexBuffer;
+import Mikrokosmos.Graphics.Rendering.InputAssembler;
+import Mikrokosmos.Graphics.Rendering.OutputMerger;
+import Mikrokosmos.Graphics.Rendering.PixelShader;
+import Mikrokosmos.Graphics.Rendering.Rasterizer;
+import Mikrokosmos.Graphics.Rendering.Vertex;
+import Mikrokosmos.Graphics.Rendering.VertexBuffer;
+import Mikrokosmos.Graphics.Rendering.VertexShader;
+import Mikrokosmos.Graphics.Rendering.VertexStream;
 
 export namespace mk
 {
-	class Rasterizer
+	class Device
 	{
 	public:
 
-		Rasterizer() = default;
+		Device()
+		{
+			immediateContext_ = std::make_shared<DeviceContext>();
+		}
+
+		std::shared_ptr<DeviceContext> immediateContext()
+		{
+			return immediateContext_;
+		}
+
+		std::shared_ptr<VertexBuffer> createVertexBuffer(std::size_t size)
+		{
+			return std::make_shared<VertexBuffer>(size);
+		}
+
+		std::shared_ptr<IndexBuffer> createIndexBuffer(std::size_t size)
+		{
+			return std::make_shared<IndexBuffer>(size);
+		}
 
 	private:
 
+		std::shared_ptr<DeviceContext> immediateContext_;
+
 	};
 }
+
 
 /*
 Input Assembler

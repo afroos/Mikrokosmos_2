@@ -1,13 +1,17 @@
 module;
 
 #include <array>
+#include <concepts>
 #include <numeric>
+#include <type_traits>
 #include <vector>
 
 export module Mikrokosmos.Core.Array;
 
 export namespace mk
 {
+	template<typename Type>
+	concept SizeType = std::is_convertible_v<Type, std::size_t>;
 
 	template <std::size_t NumDimensions, typename ElementType>
 	class Array
@@ -17,22 +21,19 @@ export namespace mk
 
 		Array() = default;
 
-		template<typename... ExtentList>
-			requires ( sizeof...(ExtentList) == NumDimensions)
+		template<SizeType... ExtentList> requires (sizeof...(ExtentList) == NumDimensions)
 		Array(ExtentList&&... extents)
 		{
 			resize(extents...);
 		}
 
-		template<typename... IndexList>
-			requires (sizeof...(IndexList) == NumDimensions)
+		template<SizeType... IndexList> requires (sizeof...(IndexList) == NumDimensions)
 		ElementType& at(IndexList&&... indices)
 		{
 			return elements_[computeOffset(indices...)];
 		}
 
-		template<typename... IndexList>
-		requires (sizeof...(IndexList) == NumDimensions)
+		template<SizeType... IndexList> requires (sizeof...(IndexList) == NumDimensions)
 		const ElementType& at(IndexList&&... indices) const
 		{
 			return elements_[computeOffset(indices...)];
@@ -73,17 +74,17 @@ export namespace mk
 			return extents_[i];
 		}
 		
-		std::size_t height() requires (NumDimensions == 2 || NumDimensions == 3)
+		std::size_t height() const requires (NumDimensions == 2 || NumDimensions == 3)
 		{
 			return size(0);
 		}
 
-		std::size_t width() requires (NumDimensions == 2 || NumDimensions == 3)
+		std::size_t width() const requires (NumDimensions == 2 || NumDimensions == 3)
 		{
 			return size(1);
 		}
 
-		std::size_t depth() requires (NumDimensions == 3)
+		std::size_t depth() const requires (NumDimensions == 3)
 		{
 			return size(2);
 		}
@@ -98,7 +99,7 @@ export namespace mk
 		void resize(ExtentList&&... extents)
 		{
 			elements_.resize((... * extents));
-			extents_ = { std::size_t(extents)... };
+			extents_ = { static_cast<std::size_t>(extents)... };
 		}
 
 		void fill(const ElementType& value)
@@ -112,7 +113,7 @@ export namespace mk
 			requires (sizeof...(IndexList) == NumDimensions)
 		std::size_t computeOffset(IndexList... indices)
 		{
-			std::array<std::size_t, NumDimensions> indexes{ std::size_t(indices)... };
+			std::array<std::size_t, NumDimensions> indexes{ static_cast<std::size_t>(indices)... };
 
 			auto offset = indexes[0];
 			for (std::size_t i = 1; i < NumDimensions; ++i)
@@ -127,4 +128,5 @@ export namespace mk
 		std::array<std::size_t, NumDimensions> extents_;
 
 	};
+
 }

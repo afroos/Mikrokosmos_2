@@ -2,7 +2,7 @@ module;
 
 #include <memory>
 
-export module Mikrokosmos.Graphics.Rendering.Rasterizer;
+export module Mikrokosmos.Graphics.Rendering.OutputMerger;
 
 //import Mikrokosmos.Core;
 //import Mikrokosmos.Graphics;
@@ -10,11 +10,11 @@ export module Mikrokosmos.Graphics.Rendering.Rasterizer;
 
 export namespace mk
 {
-	class Rasterizer
+	class OutputMerger
 	{
 	public:
 
-		Rasterizer() = default;
+		OutputMerger() = default;
 
 	private:
 

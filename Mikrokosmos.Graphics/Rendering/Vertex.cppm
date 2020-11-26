@@ -21,6 +21,8 @@ export namespace mk
 		{
 		}
 
+		Point3f position() { return position_; }
+
 	private:
 
 		Point3f position_;

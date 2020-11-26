@@ -27,19 +27,7 @@
     <ClCompile Include="Color.cppm">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\Mesh.cppm">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Rasterizer.cppm">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Renderer.cppm">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\Shader.cppm">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Vertex.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="SceneGraph\Scene.cppm">
@@ -66,10 +54,46 @@
     <ClCompile Include="Rendering\Array.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\ColorBuffer.cppm">
+    <ClCompile Include="Rendering\Effect.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\DepthBuffer.cppm">
+    <ClCompile Include="Rendering\Mesh.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Vertex.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Texture.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Device.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Engine.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\DeviceContext.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\InputAssembler.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\OutputMerger.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\PixelShader.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\VertexShader.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Rasterizerzin.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Rasterizer.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\VertexStream.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>

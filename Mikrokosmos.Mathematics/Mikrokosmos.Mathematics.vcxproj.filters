@@ -13,22 +13,28 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Algebra">
+      <UniqueIdentifier>{da521f35-e417-4c03-a58c-806e827b43b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Geometry">
+      <UniqueIdentifier>{2b799e3f-5615-47ab-9b51-1f1e2c92c150}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Algebra.cppm">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry.cppm">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\Shapes\LineSegment.cppm">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Geometry\Shapes\Point.cppm">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Algebra</Filter>
     </ClCompile>
     <ClCompile Include="Algebra\Vector.cppm">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry.cppm">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Shapes\Point.cppm">
+      <Filter>Source Files\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Shapes\LineSegment.cppm">
+      <Filter>Source Files\Geometry</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

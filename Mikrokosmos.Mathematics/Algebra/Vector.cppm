@@ -15,10 +15,9 @@ export
 
 			Vector() = default;
 
-			template<typename... CoordinateList>
-				requires (sizeof...(CoordinateList) == Dimension)
+			template<typename... CoordinateList> requires (sizeof...(CoordinateList) == Dimension)
 			Vector(CoordinateList&&... coordinates)
-				: _coordinates{ coordinates... }
+					: _coordinates{ static_cast<CoordinateType>(coordinates)... }
 			{
 			}
 

@@ -1,12 +1,15 @@
 module;
 
-#include <vector>
+#include <memory>
 
 export module Mikrokosmos.Graphics.Rendering.Mesh;
 
+import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics.Color;
-import Mikrokosmos.Mathematics.Algebra.Vector;
-import Mikrokosmos.Mathematics.Geometry.Point;
+import Mikrokosmos.Graphics.Rendering.Effect;
+import Mikrokosmos.Graphics.Rendering.IndexBuffer;
+import Mikrokosmos.Graphics.Rendering.Vertex;
+import Mikrokosmos.Graphics.Rendering.VertexBuffer;
 
 export namespace mk
 {
@@ -16,21 +19,22 @@ export namespace mk
 
 		Mesh() = default;
 
-		std::size_t vertexCount() const
+		Mesh(const std::shared_ptr<VertexBuffer>& vertexBuffer,
+			 const std::shared_ptr<IndexBuffer>& indexBuffer,
+			 const std::shared_ptr<Effect>& effect)
+			:
+			vertexBuffer_{ vertexBuffer },
+			indexBuffer_ { indexBuffer },
+			effect_ { effect }
 		{
-			return _positions.size();
+
 		}
 
 	private:
 
-		std::vector<Point3d>  _positions;
-		std::vector<Color>    _colors;
-		//std::vector<Vector3d> _normals;
-		//std::vector<Vector2d> _textureCoordinates;
-		//std::vector<Vector3f> _tangents;
-		//std::vector<Vector3f> _bitangents;
-
-		std::vector<std::size_t> _indices;
+		std::shared_ptr<VertexBuffer> vertexBuffer_;
+		std::shared_ptr<IndexBuffer> indexBuffer_;
+		std::shared_ptr<Effect> effect_;
 
 	};
 }

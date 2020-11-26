@@ -148,19 +148,25 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Rendering\Array.cppm" />
-    <ClCompile Include="Rendering\ColorBuffer.cppm">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Rendering\DepthBuffer.cppm" />
+    <ClCompile Include="Rendering\DeviceContext.cppm" />
+    <ClCompile Include="Rendering\Effect.cppm" />
+    <ClCompile Include="Rendering\Engine.cppm" />
     <ClCompile Include="Rendering\IndexBuffer.cppm" />
+    <ClCompile Include="Rendering\InputAssembler.cppm" />
     <ClCompile Include="Rendering\Mesh.cppm" />
-    <ClCompile Include="Rendering\Rasterizer.cppm">
+    <ClCompile Include="Rendering\OutputMerger.cppm" />
+    <ClCompile Include="Rendering\PixelShader.cppm" />
+    <ClCompile Include="Rendering\Rasterizer.cppm" />
+    <ClCompile Include="Rendering\Rasterizerzin.cppm">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Rendering\Renderer.cppm" />
+    <ClCompile Include="Rendering\Device.cppm" />
     <ClCompile Include="Rendering\Shader.cppm" />
+    <ClCompile Include="Rendering\Texture.cppm" />
     <ClCompile Include="Rendering\Vertex.cppm" />
     <ClCompile Include="Rendering\VertexBuffer.cppm" />
+    <ClCompile Include="Rendering\VertexShader.cppm" />
+    <ClCompile Include="Rendering\VertexStream.cppm" />
     <ClCompile Include="SceneGraph\Camera.cppm" />
     <ClCompile Include="SceneGraph\Light.cppm" />
     <ClCompile Include="SceneGraph\Model.cppm" />
