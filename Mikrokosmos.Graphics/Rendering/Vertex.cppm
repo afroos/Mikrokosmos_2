@@ -16,17 +16,17 @@ export namespace mk
 
 		Vertex(const Point3f& position, const Color& color)
 			:
-			position_{ position },
-			color_{ color }
+			_position{ position },
+			_color{ color }
 		{
 		}
 
-		Point3f position() { return position_; }
+		Point3f position() { return _position; }
 
 	private:
 
-		Point3f position_;
-		Color color_;
+		Point3f _position;
+		Color _color;
 		//Vector3f _normal;
 		//Vector2f _textureCoordinates;
 

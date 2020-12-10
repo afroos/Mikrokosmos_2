@@ -156,6 +156,8 @@
     <ClCompile Include="Rendering\Mesh.cppm" />
     <ClCompile Include="Rendering\OutputMerger.cppm" />
     <ClCompile Include="Rendering\PixelShader.cppm" />
+    <ClCompile Include="Rendering\Primitive.cppm" />
+    <ClCompile Include="Rendering\PrimitiveStream.cppm" />
     <ClCompile Include="Rendering\Rasterizer.cppm" />
     <ClCompile Include="Rendering\Rasterizerzin.cppm">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -177,6 +179,9 @@
     <ProjectReference Include="..\Mikrokosmos.Mathematics\Mikrokosmos.Mathematics.vcxproj">
       <Project>{ba7a2fa3-78eb-4ad1-9957-87bd3df2e6e5}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Text.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

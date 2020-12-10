@@ -8,5 +8,6 @@ import Mikrokosmos.Core.Array;
 
 export namespace mk
 {
-	using IndexBuffer = Array<1, std::size_t>;
+	using Index = std::size_t;
+	using IndexBuffer = Array<1, Index>;
 }

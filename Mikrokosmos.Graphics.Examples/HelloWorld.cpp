@@ -2,6 +2,7 @@
 #include <iostream>
 #include <memory>
 #include <SFML/Graphics.hpp>
+#include <span>
 #include <string>
 
 import Mikrokosmos.Core.Array;
@@ -13,36 +14,44 @@ int main()
     auto width = 640;
     auto height = 480;
 
-    mk::Device device;
+    auto device = std::make_shared<mk::Device>();
+    auto context = device->immediateContext();
 
-    auto vertexBuffer = device.createVertexBuffer(3);
+    auto vertexBuffer = device->createVertexBuffer(4);
     vertexBuffer->at(0) = mk::Vertex{ mk::Point3f{1.5f, 2.22f, -5.0f}, mk::Color::Red() };
     vertexBuffer->at(1) = mk::Vertex{ mk::Point3f{1.6f, 2.22f, -5.0f}, mk::Color::Green() };
     vertexBuffer->at(2) = mk::Vertex{ mk::Point3f{1.7f, 2.22f, -5.0f}, mk::Color::Blue() };
+    vertexBuffer->at(3) = mk::Vertex{ mk::Point3f{1.8f, 2.22f, -5.0f}, mk::Color::Yellow() };
 
-    auto indexBuffer = device.createIndexBuffer(3);
+    auto indexBuffer = device->createIndexBuffer(4);
     indexBuffer->at(0) = 0;
     indexBuffer->at(1) = 1;
     indexBuffer->at(2) = 2;
+    indexBuffer->at(3) = 3;
 
-    auto effect = std::make_shared<mk::Effect>();
+    // auto vertexShader = device->createVertexShader(...);
+
+    //auto effect = std::make_shared<mk::Effect>();
    
-    auto triangle = std::make_shared<mk::Mesh>(vertexBuffer, indexBuffer, effect);
+    //auto triangle = std::make_shared<mk::Mesh>(vertexBuffer, indexBuffer, effect);
+
+    context->inputAssembler()->setPrimitiveTopology(mk::PrimitiveTopology::LineList);
+    context->inputAssembler()->setVertexBuffer(vertexBuffer);
+    context->inputAssembler()->setIndexBuffer(indexBuffer);
+
+    //context->vertexShader()->setShader(vertexShader);
+    //context->pixelShader()->setShader(pixelShader);
 
     auto target = std::make_shared<mk::Texture>(height, width);
     target->fill(mk::Color{ 100, 149, 237 });
-
-    mk::VertexStream stream(2, indexBuffer->data(), vertexBuffer->data());
-
-    std::cout << "Oi" << std::endl;
-    for (auto vertex : stream) std::cout << vertex.position().x() << std::endl;
-
 
     mk::Rasterizerzin rasterizer;
 
     rasterizer.drawLine(mk::Point2i{ 13, 20 }, mk::Point2i{ 80, 40 }, mk::Color::White(), *target);
     rasterizer.drawLine(mk::Point2i{ 20, 13 }, mk::Point2i{ 40, 80 }, mk::Color::Red(), *target);
     rasterizer.drawLine(mk::Point2i{ 80, 40 }, mk::Point2i{ 13, 20 }, mk::Color::Red(), *target);
+
+    context->drawIndexed(indexBuffer->size(), 0, 0);
 
     sf::RenderWindow window(sf::VideoMode(width, height), "Test");
 

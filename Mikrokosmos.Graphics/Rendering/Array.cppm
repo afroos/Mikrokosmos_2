@@ -106,7 +106,7 @@ export namespace mk
 		{
 			std::fill(elements_.begin(), elements_.end(), value);
 		}
-	
+
 	private:
 
 		template<typename... IndexList>

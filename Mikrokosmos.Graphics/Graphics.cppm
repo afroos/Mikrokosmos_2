@@ -11,6 +11,8 @@ export import Mikrokosmos.Graphics.Rendering.InputAssembler;
 export import Mikrokosmos.Graphics.Rendering.Mesh;
 export import Mikrokosmos.Graphics.Rendering.OutputMerger;
 export import Mikrokosmos.Graphics.Rendering.PixelShader;
+export import Mikrokosmos.Graphics.Rendering.Primitive;
+export import Mikrokosmos.Graphics.Rendering.PrimitiveStream;
 export import Mikrokosmos.Graphics.Rendering.Vertex;
 export import Mikrokosmos.Graphics.Rendering.VertexBuffer;
 export import Mikrokosmos.Graphics.Rendering.VertexShader;

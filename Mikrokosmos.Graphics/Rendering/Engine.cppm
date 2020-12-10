@@ -8,10 +8,14 @@ import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.Device;
 import Mikrokosmos.Graphics.Rendering.DeviceContext;
+import Mikrokosmos.Graphics.Rendering.Effect;
 import Mikrokosmos.Graphics.Rendering.IndexBuffer;
 import Mikrokosmos.Graphics.Rendering.InputAssembler;
+import Mikrokosmos.Graphics.Rendering.Mesh;
 import Mikrokosmos.Graphics.Rendering.OutputMerger;
 import Mikrokosmos.Graphics.Rendering.PixelShader;
+import Mikrokosmos.Graphics.Rendering.Primitive;
+import Mikrokosmos.Graphics.Rendering.PrimitiveStream;
 import Mikrokosmos.Graphics.Rendering.Rasterizer;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;
@@ -26,14 +30,36 @@ export namespace mk
 
 		Engine()
 		{
-			device_ = std::make_shared<Device>();
-			immediateContext_ = device_->immediateContext();
+			_device = std::make_shared<Device>();
+			_immediateContext = _device->immediateContext();
+		}
+
+		std::shared_ptr<VertexBuffer> createVertexBuffer(std::size_t size)
+		{
+			return _device->createVertexBuffer(size);
+		}
+
+		std::shared_ptr<IndexBuffer> createIndexBuffer(std::size_t size)
+		{
+			return _device->createIndexBuffer(size);
+		}
+
+
+
+		void clearBuffers()
+		{
+
+		}
+
+		void draw(const std::shared_ptr<Mesh>& mesh)
+		{
+
 		}
 
 	private:
 
-		std::shared_ptr<Device> device_;
-		std::shared_ptr<DeviceContext> immediateContext_;
+		std::shared_ptr<Device> _device;
+		std::shared_ptr<DeviceContext> _immediateContext;
 
 	};
 }

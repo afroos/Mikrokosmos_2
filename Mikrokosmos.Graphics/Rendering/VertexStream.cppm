@@ -1,6 +1,9 @@
 module;
 
 #include <cstddef>
+#include <iterator>
+#include <memory>
+#include <span>
 
 export module Mikrokosmos.Graphics.Rendering.VertexStream;
 
@@ -17,76 +20,111 @@ export namespace mk
 
 	public:
 
-		VertexStream() = default;
-
-		VertexStream(std::size_t indexCount, std::size_t* startIndex, Vertex* startVertex)
-			:
-			startVertex_{ startVertex },
-			startIndex_{ startIndex },
-			indexCount_{ indexCount }
+		class Iterator
 		{
-
-		}
-
-		class Iterator 
-		{
-		
 		public:
 			
-			Iterator(Vertex* vertex, std::size_t* index) 
-				: 
-				vertex_{ vertex },
-				index_{ index }
+			Iterator() = default;
+
+			Iterator(Vertex* firstVertex, std::size_t* currentIndex, std::size_t baseVertexLocation)
+				:
+				_firstVertex{ firstVertex },
+				_currentIndex{ currentIndex },
+				_baseVertexLocation{ baseVertexLocation }
 			{
 			}
-			
+
 			Iterator operator++() 
 			{ 
-				++index_; 
+				++_currentIndex; 
 				return *this; 
 			}
 			
 			bool operator!=(const Iterator& other) const 
 			{ 
-				return ( vertex_ != other.vertex_ || index_ != other.index_ );			
+				return (_firstVertex != other._firstVertex || _currentIndex != other._currentIndex); 
 			}
 			
 			const Vertex& operator*() const 
 			{ 
-				return *(vertex_ + *index_);
+				return *(_firstVertex + *_currentIndex + _baseVertexLocation); 
 			}
-		
+
+			Iterator operator+(std::size_t offset) 
+			{ 
+				return Iterator{_firstVertex, _currentIndex + offset, _baseVertexLocation }; 
+			}
+
+			std::size_t operator-(const Iterator& other) const
+			{
+				return (_currentIndex - other._currentIndex);
+			}
+
 		private:
-			
-			Vertex* vertex_;
-			std::size_t* index_;
+
+			Vertex* _firstVertex;
+			Index* _currentIndex;
+			std::size_t _baseVertexLocation;
 
 		};
 
+		VertexStream() = default;
+
+		VertexStream(VertexBuffer& vertexBuffer, 
+			         IndexBuffer& indexBuffer, 
+				     std::size_t indexCount, 
+			         std::size_t startIndexLocation, 
+			         std::size_t baseVertexLocation)
+			:
+			_vertexes{ vertexBuffer.data(), vertexBuffer.size() },
+			_indexes{ indexBuffer.data() + startIndexLocation, indexCount },
+			_baseVertexLocation{baseVertexLocation}
+		{
+		}
+
+		std::size_t size() const
+		{
+			return _indexes.size();
+		}
+
+		bool empty() const
+		{
+			return _indexes.empty();
+		}
+
 		Iterator begin()
 		{
-			return Iterator(startVertex_, startIndex_);
+			return Iterator{ _vertexes.data(), _indexes.data(), _baseVertexLocation };
 		}
 
 		const Iterator begin() const
 		{
-			return Iterator(startVertex_, startIndex_);
+			return Iterator{ _vertexes.data(), _indexes.data(), _baseVertexLocation };
 		}
 
 		Iterator end()
 		{
-			return Iterator(startVertex_, startIndex_ + indexCount_);
+			return Iterator{ _vertexes.data(), _indexes.data() + _indexes.size(), _baseVertexLocation };
 		}
 
 		const Iterator end() const
 		{
-			return Iterator(startVertex_, startIndex_ + indexCount_);
+			return Iterator{ _vertexes.data(), _indexes.data() + _indexes.size(), _baseVertexLocation };
+		}
+
+		VertexStream slice(std::size_t offset, std::size_t size) const
+		{
+			VertexStream slice{ *this };
+			slice._indexes = _indexes.subspan(offset, size);
+			auto f = _indexes.front();
+			auto l = _indexes.back();
+			return slice;
 		}
 
 	private:
 
-		Vertex* startVertex_;
-		std::size_t* startIndex_;
-		std::size_t indexCount_;
+		std::span<Vertex> _vertexes;
+		std::span<Index> _indexes;
+		std::size_t _baseVertexLocation;
 	};
 }

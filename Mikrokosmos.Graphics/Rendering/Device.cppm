@@ -11,6 +11,8 @@ import Mikrokosmos.Graphics.Rendering.IndexBuffer;
 import Mikrokosmos.Graphics.Rendering.InputAssembler;
 import Mikrokosmos.Graphics.Rendering.OutputMerger;
 import Mikrokosmos.Graphics.Rendering.PixelShader;
+import Mikrokosmos.Graphics.Rendering.Primitive;
+import Mikrokosmos.Graphics.Rendering.PrimitiveStream;
 import Mikrokosmos.Graphics.Rendering.Rasterizer;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;

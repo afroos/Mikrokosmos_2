@@ -4,9 +4,12 @@ module;
 
 export module Mikrokosmos.Graphics.Rendering.VertexShader;
 
-//import Mikrokosmos.Core;
-//import Mikrokosmos.Graphics;
-//import Mikrokosmos.Graphics.Rendering;
+import Mikrokosmos.Core.Array;
+import Mikrokosmos.Graphics.Color;
+//import Mikrokosmos.Graphics.Rendering.IndexBuffer;
+import Mikrokosmos.Graphics.Rendering.Vertex;
+import Mikrokosmos.Graphics.Rendering.VertexBuffer;
+import Mikrokosmos.Graphics.Rendering.VertexStream;
 
 export namespace mk
 {
@@ -15,6 +18,11 @@ export namespace mk
 	public:
 
 		VertexShader() = default;
+
+		void process(const VertexStream& vertexStream)
+		{
+
+		}
 
 	private:
 
