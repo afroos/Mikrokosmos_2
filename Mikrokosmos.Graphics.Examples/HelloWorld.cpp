@@ -35,9 +35,11 @@ int main()
    
     //auto triangle = std::make_shared<mk::Mesh>(vertexBuffer, indexBuffer, effect);
 
-    context->inputAssembler()->setPrimitiveTopology(mk::PrimitiveTopology::LineList);
-    context->inputAssembler()->setVertexBuffer(vertexBuffer);
-    context->inputAssembler()->setIndexBuffer(indexBuffer);
+    context->inputAssemblerStage()->setPrimitiveTopology(mk::PrimitiveTopology::LineList);
+    context->inputAssemblerStage()->setVertexBuffer(vertexBuffer);
+    context->inputAssemblerStage()->setIndexBuffer(indexBuffer);
+
+    context->rasterizerStage()->setState(mk::RasterizerState{.fillMode = mk::FillMode::Wireframe});
 
     //context->vertexShader()->setShader(vertexShader);
     //context->pixelShader()->setShader(pixelShader);
@@ -45,7 +47,7 @@ int main()
     auto target = std::make_shared<mk::Texture>(height, width);
     target->fill(mk::Color{ 100, 149, 237 });
 
-    mk::Rasterizerzin rasterizer;
+    mk::RasterizerStage rasterizer{ context->inputAssemblerStage() };
 
     rasterizer.drawLine(mk::Point2i{ 13, 20 }, mk::Point2i{ 80, 40 }, mk::Color::White(), *target);
     rasterizer.drawLine(mk::Point2i{ 20, 13 }, mk::Point2i{ 40, 80 }, mk::Color::Red(), *target);

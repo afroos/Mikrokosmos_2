@@ -152,16 +152,17 @@
     <ClCompile Include="Rendering\Effect.cppm" />
     <ClCompile Include="Rendering\Engine.cppm" />
     <ClCompile Include="Rendering\IndexBuffer.cppm" />
-    <ClCompile Include="Rendering\InputAssembler.cppm" />
+    <ClCompile Include="Rendering\InputAssemblerStage.cppm" />
     <ClCompile Include="Rendering\Mesh.cppm" />
     <ClCompile Include="Rendering\OutputMerger.cppm" />
     <ClCompile Include="Rendering\PixelShader.cppm" />
     <ClCompile Include="Rendering\Primitive.cppm" />
     <ClCompile Include="Rendering\PrimitiveStream.cppm" />
+    <ClCompile Include="Rendering\PrimitiveTopology.cppm" />
     <ClCompile Include="Rendering\Rasterizer.cppm" />
-    <ClCompile Include="Rendering\Rasterizerzin.cppm">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Rendering\RasterizerFactory.cppm" />
+    <ClCompile Include="Rendering\RasterizerStage.cppm" />
+    <ClCompile Include="Rendering\RasterizerState.cppm" />
     <ClCompile Include="Rendering\Device.cppm" />
     <ClCompile Include="Rendering\Shader.cppm" />
     <ClCompile Include="Rendering\Texture.cppm" />

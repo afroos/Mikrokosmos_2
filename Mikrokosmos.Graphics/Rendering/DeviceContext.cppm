@@ -8,12 +8,16 @@ export module Mikrokosmos.Graphics.Rendering.DeviceContext;
 import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.IndexBuffer;
-import Mikrokosmos.Graphics.Rendering.InputAssembler;
+import Mikrokosmos.Graphics.Rendering.InputAssemblerStage;
 import Mikrokosmos.Graphics.Rendering.OutputMerger;
 import Mikrokosmos.Graphics.Rendering.PixelShader;
 import Mikrokosmos.Graphics.Rendering.Primitive;
 import Mikrokosmos.Graphics.Rendering.PrimitiveStream;
+import Mikrokosmos.Graphics.Rendering.PrimitiveTopology;
 import Mikrokosmos.Graphics.Rendering.Rasterizer;
+import Mikrokosmos.Graphics.Rendering.RasterizerFactory;
+import Mikrokosmos.Graphics.Rendering.RasterizerStage;
+import Mikrokosmos.Graphics.Rendering.RasterizerState;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;
 import Mikrokosmos.Graphics.Rendering.VertexShader;
@@ -27,18 +31,18 @@ export namespace mk
 
 		DeviceContext()
 		{
-			_inputAssembler = std::make_shared<InputAssembler>();
+			_inputAssemblerStage = std::make_shared<InputAssemblerStage>();
 			_vertexShader = std::make_shared<VertexShader>();
-			_rasterizer = std::make_shared<Rasterizer>();
+			_rasterizerStage = std::make_shared<RasterizerStage>(_inputAssemblerStage);
 			_pixelShader = std::make_shared<PixelShader>();
 			_outputMerger = std::make_shared<OutputMerger>();
 		}
 
-		std::shared_ptr<InputAssembler> inputAssembler() { return _inputAssembler; }
+		std::shared_ptr<InputAssemblerStage> inputAssemblerStage() { return _inputAssemblerStage; }
 		
 		std::shared_ptr<VertexShader> vertexShader() { return _vertexShader; }
 		
-		std::shared_ptr<Rasterizer> rasterizer() { return _rasterizer; }
+		std::shared_ptr<RasterizerStage> rasterizerStage() { return _rasterizerStage; }
 		
 		std::shared_ptr<PixelShader> pixelShader() { return _pixelShader; }
 		
@@ -46,7 +50,7 @@ export namespace mk
 
 		void drawIndexed(std::size_t indexCount, std::size_t startIndexLocation, std::size_t baseVertexLocation)
 		{
-			auto vertexStream = _inputAssembler->generateVertexStreamIndexed(indexCount, startIndexLocation, baseVertexLocation);
+			auto vertexStream = _inputAssemblerStage->generateVertexStreamIndexed(indexCount, startIndexLocation, baseVertexLocation);
 			drawInternal(vertexStream);
 		}
 
@@ -57,16 +61,8 @@ export namespace mk
 		void drawInternal(VertexStream& vertexStream)
 		{
 			//_vertexShader->process(vertexStream);
-			auto primitiveStream = _inputAssembler->generatePrimitiveStream(vertexStream);
-			int p = 0;
-			for (auto primitive : primitiveStream)
-			{
-				for (size_t v = 0; v < primitive.vertexCount(); v++)
-				{
-					std::cout << "Primitive " << p << " - Vertex " << v << ": " << primitive.vertex(v).position().x() << std::endl;
-				}
-				p++;
-			}
+			auto primitiveStream = _inputAssemblerStage->generatePrimitiveStream(vertexStream);
+
 			/*
 
 			rasterizerInputTopology = _inputAssembler.PrimitiveTopology;
@@ -81,9 +77,9 @@ export namespace mk
 			*/
 		}
 
-		std::shared_ptr<InputAssembler> _inputAssembler;
+		std::shared_ptr<InputAssemblerStage> _inputAssemblerStage;
 		std::shared_ptr<VertexShader> _vertexShader;
-		std::shared_ptr<Rasterizer> _rasterizer;
+		std::shared_ptr<RasterizerStage> _rasterizerStage;
 		std::shared_ptr<PixelShader> _pixelShader;
 		std::shared_ptr<OutputMerger> _outputMerger;
 

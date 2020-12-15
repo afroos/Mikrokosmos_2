@@ -75,9 +75,6 @@
     <ClCompile Include="Rendering\DeviceContext.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\InputAssembler.cppm">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\OutputMerger.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
@@ -87,12 +84,6 @@
     <ClCompile Include="Rendering\VertexShader.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\Rasterizerzin.cppm">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
-    <ClCompile Include="Rendering\Rasterizer.cppm">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\VertexStream.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
@@ -100,6 +91,24 @@
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\PrimitiveStream.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\RasterizerState.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\InputAssemblerStage.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\RasterizerStage.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Rasterizer.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\RasterizerFactory.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\PrimitiveTopology.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>

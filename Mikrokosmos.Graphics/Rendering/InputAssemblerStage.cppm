@@ -4,34 +4,25 @@ module;
 #include <memory>
 #include <span>
 
-export module Mikrokosmos.Graphics.Rendering.InputAssembler;
+export module Mikrokosmos.Graphics.Rendering.InputAssemblerStage;
 
 import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.IndexBuffer;
 import Mikrokosmos.Graphics.Rendering.Primitive;
 import Mikrokosmos.Graphics.Rendering.PrimitiveStream;
+import Mikrokosmos.Graphics.Rendering.PrimitiveTopology;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;
 import Mikrokosmos.Graphics.Rendering.VertexStream;
 
 export namespace mk
 {
-
-	enum class PrimitiveTopology
-	{
-		PointList,
-		LineList,
-		LineStrip,
-		TriangleList,
-		TriangleStrip
-	};
-
-	class InputAssembler
+	class InputAssemblerStage
 	{
 	public:
 
-		InputAssembler() = default;
+		InputAssemblerStage() = default;
 
 		std::shared_ptr<VertexBuffer> vertexBuffer() const { return _vertexBuffer; }
 		
@@ -100,60 +91,6 @@ export namespace mk
 				primitive = Primitive{ vertexList.begin(), vertexList.end() };
 				offset += _primitiveAssemblyStep;
 			}
-
-			/*switch (_primitiveTopology)
-			{
-			case PrimitiveTopology::PointList:
-				while (currentVertex != vertexStream.end())
-				{
-					//auto vertex0 = currentVertex;
-					//Primitive primitive{ {vertex0} };
-					//primitiveStream.add(primitive);
-					//++currentVertex;
-				}
-				break;
-
-			case PrimitiveTopology::LineList:
-				while (currentVertex != vertexStream.end())
-				{
-					//auto vertex0 = currentVertex;
-					//++currentVertex;
-					//auto vertex1 = currentVertex;
-					//Primitive line(vertex0, vertex1);
-					//primitiveStream.add(line);
-					//++currentVertex;
-				}
-				break;
-
-			case PrimitiveTopology::LineStrip:
-				break;
-
-			case PrimitiveTopology::TriangleList:
-				while (currentVertex != vertexStream.end())
-				{
-					//auto vertex0 = currentVertex;
-					//++currentVertex;
-					//auto vertex1 = currentVertex;
-					//++currentVertex;
-					//auto vertex2 = currentVertex;
-					//auto vertexes = { vertex0, vertex1, vertex2 };
-					//Primitive primitive{ 3 , vertexes };
-					//primitiveStream.add(primitive);
-					//++currentVertex;
-				}
-				break;
-
-			case PrimitiveTopology::TriangleStrip:
-				break;
-
-			default:
-				break;
-			}
-			//for (auto vertex : vertexStream)
-			//{
-
-			//}*/
-			
 
 			return primitiveStream;
 		}

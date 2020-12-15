@@ -116,8 +116,6 @@ export namespace mk
 		{
 			VertexStream slice{ *this };
 			slice._indexes = _indexes.subspan(offset, size);
-			auto f = _indexes.front();
-			auto l = _indexes.back();
 			return slice;
 		}
 
