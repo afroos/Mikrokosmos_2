@@ -151,6 +151,8 @@
     <ClCompile Include="Rendering\DeviceContext.cppm" />
     <ClCompile Include="Rendering\Effect.cppm" />
     <ClCompile Include="Rendering\Engine.cppm" />
+    <ClCompile Include="Rendering\Fragment.cppm" />
+    <ClCompile Include="Rendering\FragmentStream.cppm" />
     <ClCompile Include="Rendering\IndexBuffer.cppm" />
     <ClCompile Include="Rendering\InputAssemblerStage.cppm" />
     <ClCompile Include="Rendering\Mesh.cppm" />
@@ -170,6 +172,7 @@
     <ClCompile Include="Rendering\VertexBuffer.cppm" />
     <ClCompile Include="Rendering\VertexShader.cppm" />
     <ClCompile Include="Rendering\VertexStream.cppm" />
+    <ClCompile Include="Rendering\Viewport.cppm" />
     <ClCompile Include="SceneGraph\Camera.cppm" />
     <ClCompile Include="SceneGraph\Light.cppm" />
     <ClCompile Include="SceneGraph\Model.cppm" />

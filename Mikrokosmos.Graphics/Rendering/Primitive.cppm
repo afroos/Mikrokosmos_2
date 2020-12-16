@@ -25,6 +25,26 @@ export namespace mk
 		{
 		}
 
+		VertexStream::Iterator begin()
+		{
+			return _firstVertex;
+		}
+
+		const VertexStream::Iterator begin() const
+		{
+			return _firstVertex;
+		}
+
+		VertexStream::Iterator end()
+		{
+			return _lastVertex;
+		}
+
+		const VertexStream::Iterator end() const
+		{
+			return _lastVertex;
+		}
+		
 		std::size_t vertexCount() const
 		{
 			return (_lastVertex - _firstVertex);

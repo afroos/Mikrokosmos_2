@@ -7,6 +7,8 @@ export module Mikrokosmos.Graphics.Rendering.DeviceContext;
 
 import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics.Color;
+import Mikrokosmos.Graphics.Rendering.Fragment;
+import Mikrokosmos.Graphics.Rendering.FragmentStream;
 import Mikrokosmos.Graphics.Rendering.IndexBuffer;
 import Mikrokosmos.Graphics.Rendering.InputAssemblerStage;
 import Mikrokosmos.Graphics.Rendering.OutputMerger;
@@ -22,6 +24,7 @@ import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;
 import Mikrokosmos.Graphics.Rendering.VertexShader;
 import Mikrokosmos.Graphics.Rendering.VertexStream;
+import Mikrokosmos.Graphics.Rendering.Viewport;
 
 export namespace mk
 {
@@ -62,10 +65,9 @@ export namespace mk
 		{
 			//_vertexShader->process(vertexStream);
 			auto primitiveStream = _inputAssemblerStage->generatePrimitiveStream(vertexStream);
-
+			
+			auto fragmentStream = _rasterizerStage->execute(primitiveStream);
 			/*
-
-			rasterizerInputTopology = _inputAssembler.PrimitiveTopology;
 
 			var rasterizerOutputs = _rasterizer.Execute(rasterizerInputs, rasterizerInputTopology,
 				rasterizerInputSignature, _pixelShader.Shader.Bytecode,

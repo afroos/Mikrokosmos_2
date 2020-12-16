@@ -7,6 +7,8 @@ export module Mikrokosmos.Graphics.Rendering.Device;
 import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.DeviceContext;
+import Mikrokosmos.Graphics.Rendering.Fragment;
+import Mikrokosmos.Graphics.Rendering.FragmentStream;
 import Mikrokosmos.Graphics.Rendering.IndexBuffer;
 import Mikrokosmos.Graphics.Rendering.InputAssemblerStage;
 import Mikrokosmos.Graphics.Rendering.OutputMerger;
@@ -22,6 +24,7 @@ import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;
 import Mikrokosmos.Graphics.Rendering.VertexShader;
 import Mikrokosmos.Graphics.Rendering.VertexStream;
+import Mikrokosmos.Graphics.Rendering.Viewport;
 
 export namespace mk
 {

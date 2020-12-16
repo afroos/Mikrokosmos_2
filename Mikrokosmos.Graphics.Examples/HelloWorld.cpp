@@ -18,28 +18,27 @@ int main()
     auto context = device->immediateContext();
 
     auto vertexBuffer = device->createVertexBuffer(4);
-    vertexBuffer->at(0) = mk::Vertex{ mk::Point3f{1.5f, 2.22f, -5.0f}, mk::Color::Red() };
-    vertexBuffer->at(1) = mk::Vertex{ mk::Point3f{1.6f, 2.22f, -5.0f}, mk::Color::Green() };
-    vertexBuffer->at(2) = mk::Vertex{ mk::Point3f{1.7f, 2.22f, -5.0f}, mk::Color::Blue() };
-    vertexBuffer->at(3) = mk::Vertex{ mk::Point3f{1.8f, 2.22f, -5.0f}, mk::Color::Yellow() };
+    vertexBuffer->at(0) = mk::Vertex{ mk::Point3f{-0.5f, -0.5f, +0.0f}, mk::Color::Red()   };
+    vertexBuffer->at(1) = mk::Vertex{ mk::Point3f{+0.5f, -0.5f, +0.0f}, mk::Color::Green() };
+    vertexBuffer->at(2) = mk::Vertex{ mk::Point3f{+0.0f, +0.5f, +0.0f}, mk::Color::Blue()  };
 
     auto indexBuffer = device->createIndexBuffer(4);
     indexBuffer->at(0) = 0;
     indexBuffer->at(1) = 1;
     indexBuffer->at(2) = 2;
-    indexBuffer->at(3) = 3;
 
-    // auto vertexShader = device->createVertexShader(...);
+    //auto vertexShader = device->createVertexShader(...);
 
     //auto effect = std::make_shared<mk::Effect>();
    
     //auto triangle = std::make_shared<mk::Mesh>(vertexBuffer, indexBuffer, effect);
 
-    context->inputAssemblerStage()->setPrimitiveTopology(mk::PrimitiveTopology::LineList);
+    context->inputAssemblerStage()->setPrimitiveTopology(mk::PrimitiveTopology::TriangleList);
     context->inputAssemblerStage()->setVertexBuffer(vertexBuffer);
     context->inputAssemblerStage()->setIndexBuffer(indexBuffer);
 
     context->rasterizerStage()->setState(mk::RasterizerState{.fillMode = mk::FillMode::Wireframe});
+    context->rasterizerStage()->setViewport({ 0.0, 0.0, (float) width, (float) height });
 
     //context->vertexShader()->setShader(vertexShader);
     //context->pixelShader()->setShader(pixelShader);

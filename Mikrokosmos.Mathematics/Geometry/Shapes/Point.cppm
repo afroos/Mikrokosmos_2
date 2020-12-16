@@ -1,5 +1,6 @@
 module;
 
+#include <cassert>
 #include <cstddef>
 
 export module Mikrokosmos.Mathematics.Geometry.Point;
@@ -18,31 +19,39 @@ export namespace mk
 
 		template<typename... CoordinateList> requires (sizeof...(CoordinateList) == Dimension)
 		constexpr Point(CoordinateList&&... coordinates)
-			: coordinates_( static_cast<CoordinateType>(coordinates)... )
+			: _coordinates( static_cast<CoordinateType>(coordinates)... )
 		{
 		}
 
 		constexpr const CoordinateType& operator[](std::size_t index) const
 		{
-			//assert(index < coords.size());
-			return coordinates_[index];
+			assert(index < _coordinates.size());
+			return _coordinates[index];
 		}
 
 		constexpr CoordinateType& operator[](std::size_t index)
 		{
-			//assert(index < coords.size());
-			return coordinates_[index];
+			assert(index < _coordinates.size());
+			return _coordinates[index];
 		}
 
-		constexpr CoordinateType x() const requires (Dimension > 0) { return coordinates_[0]; }
+		constexpr CoordinateType& x() requires (Dimension > 0) { return _coordinates[0]; }
 
-		constexpr CoordinateType y() const requires (Dimension > 1) { return coordinates_[1]; }
+		constexpr const CoordinateType& x() const requires (Dimension > 0) { return _coordinates[0]; }
 
-		constexpr CoordinateType z() const requires (Dimension > 2) { return coordinates_[2]; }
+		constexpr CoordinateType& y() requires (Dimension > 1) { return _coordinates[1]; }
+
+		constexpr const CoordinateType& y() const requires (Dimension > 1) { return _coordinates[1]; }
+
+		constexpr CoordinateType& z() requires (Dimension > 2) { return _coordinates[2]; }
+
+		constexpr const CoordinateType& z() const requires (Dimension > 2) { return _coordinates[2]; }
+
+		constexpr Vector<Dimension, CoordinateType> coordinates() const { return _coordinates; }
 
 	private:
 
-		Vector<Dimension, CoordinateType> coordinates_{};
+		Vector<Dimension, CoordinateType> _coordinates{};
 	};
 	
 	using Point2  = Point<2, double>;

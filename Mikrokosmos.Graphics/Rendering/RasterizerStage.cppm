@@ -1,11 +1,14 @@
 module;
 
 #include <memory>
+#include <iostream>
 
 export module Mikrokosmos.Graphics.Rendering.RasterizerStage;
 
 import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics.Color;
+import Mikrokosmos.Graphics.Rendering.Fragment;
+import Mikrokosmos.Graphics.Rendering.FragmentStream;
 import Mikrokosmos.Graphics.Rendering.InputAssemblerStage;
 import Mikrokosmos.Graphics.Rendering.Primitive;
 import Mikrokosmos.Graphics.Rendering.PrimitiveStream;
@@ -17,6 +20,7 @@ import Mikrokosmos.Graphics.Rendering.Texture;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;
 import Mikrokosmos.Graphics.Rendering.VertexStream;
+import Mikrokosmos.Graphics.Rendering.Viewport;
 import Mikrokosmos.Mathematics.Geometry.Point;
 
 export namespace mk
@@ -42,19 +46,44 @@ export namespace mk
 			_rasterizer = RasterizerFactory::create(_inputAssemblerStage->primitiveTopology(), _state);
 		}
 
-		void execute(const PrimitiveStream& primitiveStream)
+		void setViewport(const Viewport& viewport)
 		{
+			_viewport = viewport;
+		}
+
+		FragmentStream execute(const PrimitiveStream& primitiveStream)
+		{
+			FragmentStream fragmentStream{};
 			for (auto& primitive : primitiveStream)
 			{
 				// frustum culling
 				// Clipping
-				// Perspective divide (homogeneous division)
+
+				// Perspective divide
+				for (auto& vertex : primitive)
+				{
+					auto& position = vertex.position();
+					position.x() /= position.w();
+					position.y() /= position.w();
+					position.z() /= position.w();
+				}
+
 				// Backface culling (face culling)
-				// Transform from clip space tp screen space (viewport transformation)
+
+				// Transform from clip space to screen space (viewport transformation)
+				for (auto& vertex : primitive)
+				{
+					auto& position = vertex.position();
+					position.x() = (position.x() + 1.0f) * _viewport.width()  * 0.5f + _viewport.x();
+					position.y() = (position.y() + 1.0f) * _viewport.height() * 0.5f + _viewport.y();
+					position.z() = _viewport.minDepth() + position.z() * (_viewport.maxDepth() - _viewport.minDepth());
+
+					std::cout << "[" << position.x() << " " << position.y() << " " << position.z() << "]" << std::endl;
+				}
 
 				_rasterizer->rasterize(primitive);
 			}
-			
+			return fragmentStream;
 
 			/*
 			
@@ -141,6 +170,7 @@ export namespace mk
 		RasterizerState _state;
 		std::unique_ptr<Rasterizer> _rasterizer;
 		std::shared_ptr<InputAssemblerStage> _inputAssemblerStage;
+		Viewport _viewport { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
 	};
 }
 

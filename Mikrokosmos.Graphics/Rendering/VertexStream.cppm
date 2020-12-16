@@ -45,7 +45,7 @@ export namespace mk
 				return (_firstVertex != other._firstVertex || _currentIndex != other._currentIndex); 
 			}
 			
-			const Vertex& operator*() const 
+			Vertex& operator*() 
 			{ 
 				return *(_firstVertex + *_currentIndex + _baseVertexLocation); 
 			}

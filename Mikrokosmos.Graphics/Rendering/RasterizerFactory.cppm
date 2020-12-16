@@ -27,8 +27,8 @@ export namespace mk
 
 		static std::unique_ptr<Rasterizer> create(PrimitiveTopology primitiveTopology, RasterizerState rasterizerState)
 		{
-			auto it = mapping.find({ primitiveTopology, rasterizerState.fillMode });
-			if (it != mapping.end()) return it->second();
+			auto it = _dispatchTable.find({ primitiveTopology, rasterizerState.fillMode });
+			if (it != _dispatchTable.end()) return it->second();
 			else return nullptr;
 		}
 
@@ -39,7 +39,7 @@ export namespace mk
 
 		static inline std::map<
 			std::pair<PrimitiveTopology, FillMode>,
-			std::function<std::unique_ptr<Rasterizer>()>> mapping
+			std::function<std::unique_ptr<Rasterizer>()>> _dispatchTable
 		{
 			{ { PointList,     Point     }, []() {return std::make_unique<PointRasterizer>();    } },
 			{ { PointList,     Wireframe }, []() {return std::make_unique<PointRasterizer>();    } },
