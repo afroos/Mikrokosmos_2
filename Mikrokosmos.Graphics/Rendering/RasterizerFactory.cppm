@@ -9,6 +9,8 @@ export module Mikrokosmos.Graphics.Rendering.RasterizerFactory;
 
 import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics.Color;
+import Mikrokosmos.Graphics.Rendering.Fragment;
+import Mikrokosmos.Graphics.Rendering.FragmentStream;
 import Mikrokosmos.Graphics.Rendering.Primitive;
 import Mikrokosmos.Graphics.Rendering.PrimitiveTopology;
 import Mikrokosmos.Graphics.Rendering.Rasterizer;

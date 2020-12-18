@@ -20,6 +20,7 @@ import Mikrokosmos.Graphics.Rendering.Rasterizer;
 import Mikrokosmos.Graphics.Rendering.RasterizerFactory;
 import Mikrokosmos.Graphics.Rendering.RasterizerStage;
 import Mikrokosmos.Graphics.Rendering.RasterizerState;
+import Mikrokosmos.Graphics.Rendering.RenderTargetView;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;
 import Mikrokosmos.Graphics.Rendering.VertexShader;
@@ -38,7 +39,7 @@ export namespace mk
 			_vertexShader = std::make_shared<VertexShader>();
 			_rasterizerStage = std::make_shared<RasterizerStage>(_inputAssemblerStage);
 			_pixelShader = std::make_shared<PixelShader>();
-			_outputMerger = std::make_shared<OutputMerger>();
+			_outputMergerStage = std::make_shared<OutputMergerStage>();
 		}
 
 		std::shared_ptr<InputAssemblerStage> inputAssemblerStage() { return _inputAssemblerStage; }
@@ -49,7 +50,7 @@ export namespace mk
 		
 		std::shared_ptr<PixelShader> pixelShader() { return _pixelShader; }
 		
-		std::shared_ptr<OutputMerger> outputMerger() { return _outputMerger; }
+		std::shared_ptr<OutputMergerStage> outputMergerStage() { return _outputMergerStage; }
 
 		void drawIndexed(std::size_t indexCount, std::size_t startIndexLocation, std::size_t baseVertexLocation)
 		{
@@ -64,26 +65,22 @@ export namespace mk
 		void drawInternal(VertexStream& vertexStream)
 		{
 			//_vertexShader->process(vertexStream);
+			
 			auto primitiveStream = _inputAssemblerStage->generatePrimitiveStream(vertexStream);
 			
-			auto fragmentStream = _rasterizerStage->execute(primitiveStream);
-			/*
+			auto fragmentStream = _rasterizerStage->process(primitiveStream);
+			
+			//_pixelShaderStage->process(fragmentStream);
+			
+			_outputMergerStage->process(fragmentStream);
 
-			var rasterizerOutputs = _rasterizer.Execute(rasterizerInputs, rasterizerInputTopology,
-				rasterizerInputSignature, _pixelShader.Shader.Bytecode,
-				_outputMerger.MultiSampleCount);
-
-			var pixelShaderOutputs = _pixelShader.Execute(rasterizerOutputs);
-			_outputMerger.Execute(pixelShaderOutputs);
-
-			*/
 		}
 
 		std::shared_ptr<InputAssemblerStage> _inputAssemblerStage;
 		std::shared_ptr<VertexShader> _vertexShader;
 		std::shared_ptr<RasterizerStage> _rasterizerStage;
 		std::shared_ptr<PixelShader> _pixelShader;
-		std::shared_ptr<OutputMerger> _outputMerger;
+		std::shared_ptr<OutputMergerStage> _outputMergerStage;
 
 	};
 }

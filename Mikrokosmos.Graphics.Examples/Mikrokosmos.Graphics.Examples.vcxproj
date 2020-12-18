@@ -155,6 +155,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="HelloWorld.cpp" />
+    <ClCompile Include="SFMLSwapChainPresenter.cppm" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mikrokosmos.Graphics\Mikrokosmos.Graphics.vcxproj">

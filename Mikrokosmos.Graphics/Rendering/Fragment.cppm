@@ -18,6 +18,24 @@ export namespace mk
 
 		Fragment() = default;
 
+		Fragment(const Point2i& position, float depth, const Color& color, const Vector3f& normal, Vector2f textureCoordinates)
+			:
+			_position{ position },
+			_depth{ depth },
+			_color{ color },
+			_normal{ normal },
+			_textureCoordinates{ textureCoordinates }
+		{
+		}
+
+		Point2i& position() { return _position; }
+
+		const Point2i& position() const { return _position; }
+
+		Color& color() { return _color; }
+
+		const Color& color() const { return _color; }
+
 	private:
 
 		Point2i _position;
@@ -27,4 +45,5 @@ export namespace mk
 		Vector2f _textureCoordinates;
 		// primitive id?
 	};
+
 }

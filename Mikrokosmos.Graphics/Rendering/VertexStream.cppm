@@ -20,13 +20,14 @@ export namespace mk
 
 	public:
 
-		class Iterator
+		template<typename Type>
+		class BaseIterator
 		{
 		public:
 			
-			Iterator() = default;
+			BaseIterator() = delete;
 
-			Iterator(Vertex* firstVertex, std::size_t* currentIndex, std::size_t baseVertexLocation)
+			BaseIterator(Type* firstVertex, std::size_t* currentIndex, std::size_t baseVertexLocation)
 				:
 				_firstVertex{ firstVertex },
 				_currentIndex{ currentIndex },
@@ -34,39 +35,42 @@ export namespace mk
 			{
 			}
 
-			Iterator operator++() 
+			BaseIterator operator++()
 			{ 
 				++_currentIndex; 
 				return *this; 
 			}
 			
-			bool operator!=(const Iterator& other) const 
+			bool operator!=(const BaseIterator& other) const
 			{ 
 				return (_firstVertex != other._firstVertex || _currentIndex != other._currentIndex); 
 			}
 			
-			Vertex& operator*() 
+			Type& operator*()
 			{ 
 				return *(_firstVertex + *_currentIndex + _baseVertexLocation); 
 			}
 
-			Iterator operator+(std::size_t offset) 
+			BaseIterator operator+(std::size_t offset)
 			{ 
-				return Iterator{_firstVertex, _currentIndex + offset, _baseVertexLocation }; 
+				return BaseIterator{_firstVertex, _currentIndex + offset, _baseVertexLocation };
 			}
 
-			std::size_t operator-(const Iterator& other) const
+			std::size_t operator-(const BaseIterator& other) const
 			{
 				return (_currentIndex - other._currentIndex);
 			}
 
 		private:
 
-			Vertex* _firstVertex;
-			Index* _currentIndex;
+			Type* _firstVertex;
+			std::size_t* _currentIndex;
 			std::size_t _baseVertexLocation;
 
 		};
+
+		using Iterator = BaseIterator<Vertex>;
+		using ConstIterator = BaseIterator<const Vertex>;
 
 		VertexStream() = default;
 
@@ -97,9 +101,9 @@ export namespace mk
 			return Iterator{ _vertexes.data(), _indexes.data(), _baseVertexLocation };
 		}
 
-		const Iterator begin() const
+		ConstIterator begin() const
 		{
-			return Iterator{ _vertexes.data(), _indexes.data(), _baseVertexLocation };
+			return ConstIterator{ _vertexes.data(), _indexes.data(), _baseVertexLocation };
 		}
 
 		Iterator end()
@@ -107,9 +111,9 @@ export namespace mk
 			return Iterator{ _vertexes.data(), _indexes.data() + _indexes.size(), _baseVertexLocation };
 		}
 
-		const Iterator end() const
+		ConstIterator end() const
 		{
-			return Iterator{ _vertexes.data(), _indexes.data() + _indexes.size(), _baseVertexLocation };
+			return ConstIterator{ _vertexes.data(), _indexes.data() + _indexes.size(), _baseVertexLocation };
 		}
 
 		VertexStream slice(std::size_t offset, std::size_t size) const

@@ -5,9 +5,9 @@ export module Mikrokosmos.Graphics.Rendering.Texture;
 import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics.Color;
 
-
 export namespace mk 
 {
-	using Texture = Array<2, Color>;
-
+	using Texture1D = Array<1, Color>;
+	using Texture2D = Array<2, Color>;
+	using Texture3D = Array<3, Color>;
 }

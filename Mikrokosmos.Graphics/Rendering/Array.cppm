@@ -3,6 +3,7 @@ module;
 #include <array>
 #include <concepts>
 #include <numeric>
+#include <span>
 #include <type_traits>
 #include <vector>
 
@@ -21,6 +22,14 @@ export namespace mk
 
 		Array() = default;
 
+		Array(std::span<ElementType> span) requires (NumDimensions == 1)
+			: 
+			_elements{ span.begin(), span.end() },
+			_extents{ span.size() }
+		{
+
+		}
+
 		template<SizeType... ExtentList> requires (sizeof...(ExtentList) == NumDimensions)
 		Array(ExtentList&&... extents)
 		{
@@ -30,48 +39,48 @@ export namespace mk
 		template<SizeType... IndexList> requires (sizeof...(IndexList) == NumDimensions)
 		ElementType& at(IndexList&&... indices)
 		{
-			return elements_[computeOffset(indices...)];
+			return _elements[computeOffset(indices...)];
 		}
 
 		template<SizeType... IndexList> requires (sizeof...(IndexList) == NumDimensions)
 		const ElementType& at(IndexList&&... indices) const
 		{
-			return elements_[computeOffset(indices...)];
+			return _elements[computeOffset(indices...)];
 		}
 
 		ElementType* begin()
 		{
-			return elements_.data();
+			return _elements.data();
 		}
 
 		const ElementType* begin() const
 		{
-			return elements_.data();
+			return _elements.data();
 		}
 
 		ElementType* end()
 		{
-			return elements_.data() + elements_.size();
+			return _elements.data() + _elements.size();
 		}
 
 		const ElementType* end() const
 		{
-			return elements_.data() + elements_.size();
+			return _elements.data() + _elements.size();
 		}
 
 		ElementType* data()
 		{
-			return elements_.data();
+			return _elements.data();
 		}
 
 		std::size_t size() const
 		{
-			return elements_.size();
+			return _elements.size();
 		}
 
 		std::size_t size(std::size_t i) const
 		{
-			return extents_[i];
+			return _extents[i];
 		}
 		
 		std::size_t height() const requires (NumDimensions == 2 || NumDimensions == 3)
@@ -91,20 +100,20 @@ export namespace mk
 
 		std::size_t numDimensions() const
 		{
-			return extents_.size();
+			return _extents.size();
 		}
 
 		template<typename... ExtentList>
 		requires (sizeof...(ExtentList) == NumDimensions)
 		void resize(ExtentList&&... extents)
 		{
-			elements_.resize((... * extents));
-			extents_ = { static_cast<std::size_t>(extents)... };
+			_elements.resize((... * extents));
+			_extents = { static_cast<std::size_t>(extents)... };
 		}
 
 		void fill(const ElementType& value)
 		{
-			std::fill(elements_.begin(), elements_.end(), value);
+			std::fill(_elements.begin(), _elements.end(), value);
 		}
 
 	private:
@@ -118,14 +127,14 @@ export namespace mk
 			auto offset = indexes[0];
 			for (std::size_t i = 1; i < NumDimensions; ++i)
 			{
-				offset = offset * extents_[i] + indexes[i];
+				offset = offset * _extents[i] + indexes[i];
 			}
 
 			return offset;
 		}
 
-		std::vector<ElementType> elements_;
-		std::array<std::size_t, NumDimensions> extents_;
+		std::vector<ElementType> _elements;
+		std::array<std::size_t, NumDimensions> _extents;
 
 	};
 

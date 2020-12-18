@@ -1,5 +1,7 @@
 module;
 
+#include <vector>
+
 export module Mikrokosmos.Graphics.Rendering.FragmentStream;
 
 import Mikrokosmos.Core.Array;
@@ -10,5 +12,5 @@ import Mikrokosmos.Mathematics.Geometry.Point;
 
 export namespace mk
 {
-	using FragmentStream = Array<1, Fragment>;
+	using FragmentStream = std::vector<Fragment>;
 }

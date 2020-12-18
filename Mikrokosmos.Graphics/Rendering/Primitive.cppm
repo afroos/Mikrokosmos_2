@@ -1,5 +1,6 @@
 module;
 
+#include <cassert>
 #include <cstddef>
 
 export module Mikrokosmos.Graphics.Rendering.Primitive;
@@ -25,19 +26,9 @@ export namespace mk
 		{
 		}
 
-		VertexStream::Iterator begin()
-		{
-			return _firstVertex;
-		}
-
 		const VertexStream::Iterator begin() const
 		{
 			return _firstVertex;
-		}
-
-		VertexStream::Iterator end()
-		{
-			return _lastVertex;
 		}
 
 		const VertexStream::Iterator end() const
@@ -50,15 +41,21 @@ export namespace mk
 			return (_lastVertex - _firstVertex);
 		}
 
-		Vertex vertex(std::size_t index)
+		Vertex& vertex(std::size_t index)
 		{
-			// Assert
+			assert(index < vertexCount());
 			return *(_firstVertex + index);
 		}
 
+		//const Vertex& vertex(std::size_t index) const
+		//{
+		//	assert(index < vertexCount());
+		//	return *(_firstVertex + index);
+		//}
+
 	private:
 
-		VertexStream::Iterator _firstVertex;
-		VertexStream::Iterator _lastVertex;
+		VertexStream::Iterator _firstVertex{ nullptr, nullptr, 0U };
+		VertexStream::Iterator _lastVertex{ nullptr, nullptr, 0U };
 	};
 }

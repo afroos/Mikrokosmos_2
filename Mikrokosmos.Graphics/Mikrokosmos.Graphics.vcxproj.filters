@@ -75,9 +75,6 @@
     <ClCompile Include="Rendering\DeviceContext.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\OutputMerger.cppm">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\PixelShader.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
@@ -118,6 +115,18 @@
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\Viewport.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\SwapChain.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\SwapChainPresenter.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\RenderTargetView.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\OutputMergerStage.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>

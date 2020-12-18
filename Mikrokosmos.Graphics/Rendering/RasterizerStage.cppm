@@ -51,10 +51,12 @@ export namespace mk
 			_viewport = viewport;
 		}
 
-		FragmentStream execute(const PrimitiveStream& primitiveStream)
+		FragmentStream process(const PrimitiveStream& primitiveStream)
 		{
-			FragmentStream fragmentStream{};
-			for (auto& primitive : primitiveStream)
+			FragmentStream fragmentStream;
+			fragmentStream.reserve(static_cast<std::size_t>(_viewport.width() * _viewport.height()));
+
+			for (auto primitive : primitiveStream)
 			{
 				// frustum culling
 				// Clipping
@@ -70,18 +72,17 @@ export namespace mk
 
 				// Backface culling (face culling)
 
-				// Transform from clip space to screen space (viewport transformation)
+				// Transform from NDC space to screen space (viewport transformation)
 				for (auto& vertex : primitive)
 				{
 					auto& position = vertex.position();
 					position.x() = (position.x() + 1.0f) * _viewport.width()  * 0.5f + _viewport.x();
-					position.y() = (position.y() + 1.0f) * _viewport.height() * 0.5f + _viewport.y();
+					position.y() = (1.0f - position.y()) * _viewport.height() * 0.5f + _viewport.y();
 					position.z() = _viewport.minDepth() + position.z() * (_viewport.maxDepth() - _viewport.minDepth());
 
-					std::cout << "[" << position.x() << " " << position.y() << " " << position.z() << "]" << std::endl;
 				}
 
-				_rasterizer->rasterize(primitive);
+				_rasterizer->rasterize(primitive, fragmentStream);
 			}
 			return fragmentStream;
 
@@ -125,44 +126,6 @@ export namespace mk
 
 			
 			*/
-		}
-
-		void drawLine(const Point2i& p0, const Point2i& p1, const Color& color, Texture& target)
-		{
-			bool steep = false;
-
-			auto x0 = p0.x();
-			auto y0 = p0.y();
-			auto x1 = p1.x();
-			auto y1 = p1.y();
-
-			if (std::abs(x0 - x1) < std::abs(y0 - y1)) {
-				std::swap(x0, y0);
-				std::swap(x1, y1);
-				steep = true;
-			}
-			if (x0 > x1) {
-				std::swap(x0, x1);
-				std::swap(y0, y1);
-			}
-			int dx = x1 - x0;
-			int dy = y1 - y0;
-			int derror2 = std::abs(dy) * 2;
-			int error2 = 0;
-			int y = y0;
-			for (int x = x0; x <= x1; x++) {
-				if (steep) {
-					target.at(y, x) = color;
-				}
-				else {
-					target.at(x, y) = color;
-				}
-				error2 += derror2;
-				if (error2 > dx) {
-					y += (y1 > y0 ? 1 : -1);
-					error2 -= dx * 2;
-				}
-			}
 		}
 
 	private:

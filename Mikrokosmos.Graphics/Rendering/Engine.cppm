@@ -23,6 +23,9 @@ import Mikrokosmos.Graphics.Rendering.Rasterizer;
 import Mikrokosmos.Graphics.Rendering.RasterizerFactory;
 import Mikrokosmos.Graphics.Rendering.RasterizerStage;
 import Mikrokosmos.Graphics.Rendering.RasterizerState;
+import Mikrokosmos.Graphics.Rendering.RenderTargetView;
+import Mikrokosmos.Graphics.Rendering.SwapChain;
+import Mikrokosmos.Graphics.Rendering.SwapChainPresenter;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;
 import Mikrokosmos.Graphics.Rendering.VertexShader;
@@ -67,7 +70,6 @@ export namespace mk
 
 		std::shared_ptr<Device> _device;
 		std::shared_ptr<DeviceContext> _immediateContext;
-
 	};
 }
 

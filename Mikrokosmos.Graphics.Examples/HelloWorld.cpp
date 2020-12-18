@@ -7,6 +7,7 @@
 
 import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics;
+import Mikrokosmos.Graphics.Rendering.SFMLSwapChainPresenter;
 import Mikrokosmos.Mathematics.Algebra;
 
 int main()
@@ -15,17 +16,36 @@ int main()
     auto height = 480;
 
     auto device = std::make_shared<mk::Device>();
+
+    sf::RenderWindow window(sf::VideoMode(width, height), "Hello Triangle");
+
+    auto presenter = std::make_shared<mk::SFMLSwapChainPresenter>(window);
+
+    auto swapChain = device->createSwapChain(width, height, presenter.get());
+
+    //auto target = std::make_shared<mk::Texture2D>(height, width);
+    //target->fill(mk::Color{ 100, 149, 237 });
+    
+    auto renderTargetView = device->createRenderTargetView(&swapChain->backBuffer());
+
     auto context = device->immediateContext();
 
-    auto vertexBuffer = device->createVertexBuffer(4);
-    vertexBuffer->at(0) = mk::Vertex{ mk::Point3f{-0.5f, -0.5f, +0.0f}, mk::Color::Red()   };
-    vertexBuffer->at(1) = mk::Vertex{ mk::Point3f{+0.5f, -0.5f, +0.0f}, mk::Color::Green() };
-    vertexBuffer->at(2) = mk::Vertex{ mk::Point3f{+0.0f, +0.5f, +0.0f}, mk::Color::Blue()  };
+    mk::Vertex vertexes[] =
+    {
+        { {-0.5f, -0.5f, +0.0f}, mk::Color::Red()   },
+        { {+0.5f, -0.5f, +0.0f}, mk::Color::Green() },
+        { {+0.0f, +0.5f, +0.0f}, mk::Color::Blue()  }
+    };
 
-    auto indexBuffer = device->createIndexBuffer(4);
-    indexBuffer->at(0) = 0;
-    indexBuffer->at(1) = 1;
-    indexBuffer->at(2) = 2;
+    auto vertexBuffer = device->createVertexBuffer(vertexes);
+
+    mk::Index indexes[] = {0, 1, 2};
+
+    auto indexBuffer = device->createIndexBuffer(indexes);
+
+    context->inputAssemblerStage()->setPrimitiveTopology(mk::PrimitiveTopology::TriangleList);
+    context->inputAssemblerStage()->setVertexBuffer(vertexBuffer);
+    context->inputAssemblerStage()->setIndexBuffer(indexBuffer);
 
     //auto vertexShader = device->createVertexShader(...);
 
@@ -33,40 +53,37 @@ int main()
    
     //auto triangle = std::make_shared<mk::Mesh>(vertexBuffer, indexBuffer, effect);
 
-    context->inputAssemblerStage()->setPrimitiveTopology(mk::PrimitiveTopology::TriangleList);
-    context->inputAssemblerStage()->setVertexBuffer(vertexBuffer);
-    context->inputAssemblerStage()->setIndexBuffer(indexBuffer);
+    //context->vertexShaderStage()->setShader(vertexShader);
 
     context->rasterizerStage()->setState(mk::RasterizerState{.fillMode = mk::FillMode::Wireframe});
     context->rasterizerStage()->setViewport({ 0.0, 0.0, (float) width, (float) height });
 
-    //context->vertexShader()->setShader(vertexShader);
-    //context->pixelShader()->setShader(pixelShader);
+    //context->pixelShaderStage()->setShader(pixelShader);
 
-    auto target = std::make_shared<mk::Texture>(height, width);
-    target->fill(mk::Color{ 100, 149, 237 });
+    context->outputMergerStage()->setRenderTargetView(*renderTargetView);
 
-    mk::RasterizerStage rasterizer{ context->inputAssemblerStage() };
+    //mk::RasterizerStage rasterizer{ context->inputAssemblerStage() };
 
-    rasterizer.drawLine(mk::Point2i{ 13, 20 }, mk::Point2i{ 80, 40 }, mk::Color::White(), *target);
-    rasterizer.drawLine(mk::Point2i{ 20, 13 }, mk::Point2i{ 40, 80 }, mk::Color::Red(), *target);
-    rasterizer.drawLine(mk::Point2i{ 80, 40 }, mk::Point2i{ 13, 20 }, mk::Color::Red(), *target);
+    //rasterizer.drawLine(mk::Point2i{ 13, 20 }, mk::Point2i{ 80, 40 }, mk::Color::White(), *target);
+    //rasterizer.drawLine(mk::Point2i{ 20, 13 }, mk::Point2i{ 40, 80 }, mk::Color::Red(), *target);
+    //rasterizer.drawLine(mk::Point2i{ 80, 40 }, mk::Point2i{ 13, 20 }, mk::Color::Red(), *target);
+
 
     context->drawIndexed(indexBuffer->size(), 0, 0);
 
-    sf::RenderWindow window(sf::VideoMode(width, height), "Test");
+   
 
-    auto pixelData = reinterpret_cast<uint8_t*>(target->data());
+    //auto pixelData = reinterpret_cast<uint8_t*>(target->data());
 
-    sf::Image image;
-    image.create(width, height, pixelData);
+    //sf::Image imag|e;
+    //image.create(width, height, pixelData);
 
-    image.flipVertically();
+    //image.flipVertically();
 
-    sf::Texture texture;
-    texture.loadFromImage(image);
+    //sf::Texture texture;
+    //texture.loadFromImage(image);
 
-    sf::Sprite sprite(texture);
+    //sf::Sprite sprite(texture);
     
     while (window.isOpen())
     {
@@ -77,9 +94,10 @@ int main()
                 window.close();
         }
 
-        window.clear();
-        window.draw(sprite);
-        window.display();
+        swapChain->present();
+        //window.clear();
+        //window.draw(sprite);
+        //window.display();
     }
 
     return 0;

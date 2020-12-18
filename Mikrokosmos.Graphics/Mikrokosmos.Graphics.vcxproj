@@ -156,7 +156,7 @@
     <ClCompile Include="Rendering\IndexBuffer.cppm" />
     <ClCompile Include="Rendering\InputAssemblerStage.cppm" />
     <ClCompile Include="Rendering\Mesh.cppm" />
-    <ClCompile Include="Rendering\OutputMerger.cppm" />
+    <ClCompile Include="Rendering\OutputMergerStage.cppm" />
     <ClCompile Include="Rendering\PixelShader.cppm" />
     <ClCompile Include="Rendering\Primitive.cppm" />
     <ClCompile Include="Rendering\PrimitiveStream.cppm" />
@@ -166,7 +166,10 @@
     <ClCompile Include="Rendering\RasterizerStage.cppm" />
     <ClCompile Include="Rendering\RasterizerState.cppm" />
     <ClCompile Include="Rendering\Device.cppm" />
+    <ClCompile Include="Rendering\RenderTargetView.cppm" />
     <ClCompile Include="Rendering\Shader.cppm" />
+    <ClCompile Include="Rendering\SwapChain.cppm" />
+    <ClCompile Include="Rendering\SwapChainPresenter.cppm" />
     <ClCompile Include="Rendering\Texture.cppm" />
     <ClCompile Include="Rendering\Vertex.cppm" />
     <ClCompile Include="Rendering\VertexBuffer.cppm" />

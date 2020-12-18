@@ -1,6 +1,7 @@
 module;
 
 #include <memory>
+#include <span>
 
 export module Mikrokosmos.Graphics.Rendering.Device;
 
@@ -20,6 +21,10 @@ import Mikrokosmos.Graphics.Rendering.Rasterizer;
 import Mikrokosmos.Graphics.Rendering.RasterizerFactory;
 import Mikrokosmos.Graphics.Rendering.RasterizerStage;
 import Mikrokosmos.Graphics.Rendering.RasterizerState;
+import Mikrokosmos.Graphics.Rendering.RenderTargetView;
+import Mikrokosmos.Graphics.Rendering.SwapChain;
+import Mikrokosmos.Graphics.Rendering.SwapChainPresenter;
+import Mikrokosmos.Graphics.Rendering.Texture;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;
 import Mikrokosmos.Graphics.Rendering.VertexShader;
@@ -34,12 +39,12 @@ export namespace mk
 
 		Device()
 		{
-			immediateContext_ = std::make_shared<DeviceContext>();
+			_immediateContext = std::make_shared<DeviceContext>();
 		}
 
 		std::shared_ptr<DeviceContext> immediateContext()
 		{
-			return immediateContext_;
+			return _immediateContext;
 		}
 
 		std::shared_ptr<VertexBuffer> createVertexBuffer(std::size_t size)
@@ -47,79 +52,34 @@ export namespace mk
 			return std::make_shared<VertexBuffer>(size);
 		}
 
+		std::shared_ptr<VertexBuffer> createVertexBuffer(std::span<Vertex> vertexes)
+		{
+			return std::make_shared<VertexBuffer>(vertexes);
+		}
+
 		std::shared_ptr<IndexBuffer> createIndexBuffer(std::size_t size)
 		{
 			return std::make_shared<IndexBuffer>(size);
 		}
 
+		std::shared_ptr<IndexBuffer> createIndexBuffer(std::span<Index> indexes)
+		{
+			return std::make_shared<IndexBuffer>(indexes);
+		}
+
+		std::shared_ptr<SwapChain> createSwapChain(std::size_t width, std::size_t height, SwapChainPresenter* presenter)
+		{
+			return std::make_shared<SwapChain>(width, height, presenter);
+		}
+
+		std::shared_ptr<RenderTargetView> createRenderTargetView(Texture2D* resource)
+		{
+			return std::make_shared<RenderTargetView>(resource);
+		}
+
 	private:
 
-		std::shared_ptr<DeviceContext> immediateContext_;
+		std::shared_ptr<DeviceContext> _immediateContext;
 
 	};
 }
-
-
-/*
-Input Assembler
-	*Input layout
-	1 or more vertex buffers
-	0 or 1 index buffer
-	*index buffer format (16-bit or 32-bit)
-	primitive topology setting
-
-Vertex Shader
-	Vertex shader program
-	up to 16 constant buffers
-	up to 128 textures (shader resource view + texture resource)
-	*up to 16 samplers (ID3D11SamplerState)
-
-Rasterizer
-	rasterizer state (ID3D11RasterizerState)
-	up to 16 viewports
-	up to 16 scissor rectangles
-	
-Pixel Shader
-	Pixel shader program
-	up to 16 constant buffers
-	up to 128 textures (shader resource view + texture resource)
-	up to 16 samplers (ID3D11SamplerState)
-	
-Output Merger
-
-	blend state (ID3D11BlendState)
-	depth/stencil state (ID3D11DepthStencilState)
-	up to 8 render targets (render target resource view + texture resource)
-
-	So to draw anything, you have to set all this state before you call Draw or DrawIndexed.
-
-*/
-
-/*
-			Vertex processing
-				Vertex shader
-			Primitive processing
-				Primitive assembly
-				Viewport transformation
-				Clipping
-			Rasterization
-				Rasterization
-				Face culling
-			Fragment processing
-				Tests
-				Fragment shader
-			Pixel processing
-				Blend
-				Depth
-				Stencil
-*/
-
-// Vertex specification
-// Vertex shader
-// Primitive assembly
-// Clipping
-// Viewport transformation
-// Backface culling
-// Rasterization
-// Fragment shader
-// Framebuffer processing
