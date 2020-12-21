@@ -24,6 +24,6 @@ export import Mikrokosmos.Graphics.Rendering.Shader;
 export import Mikrokosmos.Graphics.Rendering.Texture;
 export import Mikrokosmos.Graphics.Rendering.Vertex;
 export import Mikrokosmos.Graphics.Rendering.VertexBuffer;
-export import Mikrokosmos.Graphics.Rendering.VertexShader;
+export import Mikrokosmos.Graphics.Rendering.VertexShaderStage;
 export import Mikrokosmos.Graphics.Rendering.VertexStream;
 export import Mikrokosmos.Graphics.Rendering.Viewport;

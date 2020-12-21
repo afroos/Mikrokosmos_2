@@ -154,7 +154,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="HelloWorld.cpp" />
+    <ClCompile Include="HelloTriangle.cpp" />
     <ClCompile Include="SFMLSwapChainPresenter.cppm" />
   </ItemGroup>
   <ItemGroup>

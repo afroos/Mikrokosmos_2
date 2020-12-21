@@ -1,9 +1,12 @@
 module;
 
+#include <cassert>
 #include <cstddef>
 #include <iterator>
 #include <memory>
 #include <span>
+#include <iostream>
+
 
 export module Mikrokosmos.Graphics.Rendering.VertexStream;
 
@@ -116,11 +119,31 @@ export namespace mk
 			return ConstIterator{ _vertexes.data(), _indexes.data() + _indexes.size(), _baseVertexLocation };
 		}
 
+		Vertex& operator[](std::size_t index)
+		{
+			assert(index < size());
+			return *Iterator{ _vertexes.data(), _indexes.data() + index, _baseVertexLocation };
+		}
+
+		const Vertex& operator[](std::size_t index) const
+		{
+			assert(index < size());
+			return *ConstIterator{ _vertexes.data(), _indexes.data() + index, _baseVertexLocation };
+		}
+
 		VertexStream slice(std::size_t offset, std::size_t size) const
 		{
 			VertexStream slice{ *this };
-			slice._indexes = _indexes.subspan(offset, size);
+
+			slice._indexes = _indexes.subspan(offset, size);	
+			
 			return slice;
+		}
+
+		void updateVertexes(std::span<Vertex> newVertexes)
+		{
+			// TODO: throw exception
+			_vertexes = newVertexes;
 		}
 
 	private:

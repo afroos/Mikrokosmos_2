@@ -3,7 +3,7 @@ module;
 #include <cstddef>
 #include <SFML/Graphics.hpp>
 
-export module Mikrokosmos.Graphics.Rendering.SFMLSwapChainPresenter;
+export module Mikrokosmos.Platform.SFML.SFMLSwapChainPresenter;
 
 import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics.Color;
@@ -33,12 +33,10 @@ export namespace mk
 		void present(Color* pixels) override
 		{
 			_image.create(_width, _height, reinterpret_cast<uint8_t*>(pixels));
-			//_image.flipVertically();
 			_texture.loadFromImage(_image);
-			sf::Sprite sprite(_texture);
 
 			_window.clear();
-			_window.draw(sprite);
+			_window.draw(sf::Sprite{ _texture });
 			_window.display();
 		}
 

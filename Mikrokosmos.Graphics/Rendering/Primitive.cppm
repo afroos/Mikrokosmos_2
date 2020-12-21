@@ -8,6 +8,7 @@ export module Mikrokosmos.Graphics.Rendering.Primitive;
 import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.Vertex;
+import Mikrokosmos.Graphics.Rendering.VertexBuffer;
 import Mikrokosmos.Graphics.Rendering.VertexStream;
 
 export namespace mk
@@ -19,43 +20,49 @@ export namespace mk
 
 		Primitive() = default;
 
-		Primitive(const VertexStream::Iterator& firstVertex, const VertexStream::Iterator& lastVertex)
+		Primitive(const VertexStream& vertexes)
 			:
-			_firstVertex{ firstVertex },
-			_lastVertex{ lastVertex }
+			_vertexes{ vertexes }
 		{
 		}
 
-		const VertexStream::Iterator begin() const
+		VertexStream::Iterator begin()
 		{
-			return _firstVertex;
+			return _vertexes.begin();
 		}
 
-		const VertexStream::Iterator end() const
+		VertexStream::ConstIterator begin() const
 		{
-			return _lastVertex;
+			return _vertexes.begin();
+		}
+
+		VertexStream::Iterator end()
+		{
+			return _vertexes.end();
+		}
+
+		VertexStream::ConstIterator end() const
+		{
+			return _vertexes.end();
 		}
 		
 		std::size_t vertexCount() const
 		{
-			return (_lastVertex - _firstVertex);
+			return _vertexes.size();
 		}
 
 		Vertex& vertex(std::size_t index)
 		{
-			assert(index < vertexCount());
-			return *(_firstVertex + index);
+			return _vertexes[index];
 		}
 
-		//const Vertex& vertex(std::size_t index) const
-		//{
-		//	assert(index < vertexCount());
-		//	return *(_firstVertex + index);
-		//}
+		const Vertex& vertex(std::size_t index) const
+		{
+			return _vertexes[index];
+		}
 
 	private:
 
-		VertexStream::Iterator _firstVertex{ nullptr, nullptr, 0U };
-		VertexStream::Iterator _lastVertex{ nullptr, nullptr, 0U };
+		VertexStream _vertexes;
 	};
 }

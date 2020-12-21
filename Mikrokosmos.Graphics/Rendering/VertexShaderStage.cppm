@@ -1,12 +1,14 @@
 module;
 
 #include <memory>
+#include <vector>
+#include <iostream>
 
-export module Mikrokosmos.Graphics.Rendering.VertexShader;
+export module Mikrokosmos.Graphics.Rendering.VertexShaderStage;
 
 import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics.Color;
-//import Mikrokosmos.Graphics.Rendering.IndexBuffer;
+import Mikrokosmos.Graphics.Rendering.IndexBuffer;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;
 import Mikrokosmos.Graphics.Rendering.VertexStream;
@@ -19,9 +21,21 @@ export namespace mk
 
 		VertexShader() = default;
 
-		void process(const VertexStream& vertexStream)
+		VertexStream process(const VertexStream& vertexStream)
 		{
+		//	static VertexBuffer outputVertexes{ vertexStream.size() };
+		//	static IndexBuffer outputIndexes{ vertexStream.size() };	
+		//	static VertexStream outputVertexStream{ outputVertexes, outputIndexes, outputIndexes.size(), 0, 0 };
 
+		//	for (std::size_t i = 0; i < vertexStream.size(); ++i)
+		//	{
+		//		outputVertexes.at(i) = vertexStream[i];
+		//		outputIndexes.at(i) = i;
+		//	}
+
+			auto outputVertexStream = vertexStream;
+			
+			return outputVertexStream;
 		}
 
 	private:

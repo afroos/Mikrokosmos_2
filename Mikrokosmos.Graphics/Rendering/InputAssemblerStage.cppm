@@ -4,6 +4,8 @@ module;
 #include <memory>
 #include <span>
 
+#include <iostream>
+
 export module Mikrokosmos.Graphics.Rendering.InputAssemblerStage;
 
 import Mikrokosmos.Core.Array;
@@ -88,7 +90,7 @@ export namespace mk
 			for (auto& primitive : primitiveStream)
 			{
 				auto vertexList = vertexStream.slice(offset, _primitiveSize);
-				primitive = Primitive{ vertexList.begin(), vertexList.end() };
+				primitive = Primitive{ vertexList };
 				offset += _primitiveAssemblyStep;
 			}
 

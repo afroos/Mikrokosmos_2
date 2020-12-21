@@ -27,6 +27,10 @@ export namespace mk
 		{
 			for (auto fragment : fragmentStream)
 			{
+				auto x = fragment.position().x();
+				auto y = fragment.position().y();
+
+				//if(fragment.position().x() < 800 && fragment.position().x() > 0 && fragment.position().y() < 800 && fragment.position().y() > 0)
 				_renderTargetView.at(fragment.position().y(), fragment.position().x()) = fragment.color();
 			}
 		}

@@ -78,9 +78,6 @@
     <ClCompile Include="Rendering\PixelShader.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\VertexShader.cppm">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\VertexStream.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
@@ -127,6 +124,9 @@
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\OutputMergerStage.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\VertexShaderStage.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>

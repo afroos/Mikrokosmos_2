@@ -1,7 +1,9 @@
 module;
 
+#include <algorithm>
 #include <memory>
 #include <iostream>
+#include <vector>
 
 export module Mikrokosmos.Graphics.Rendering.RasterizerStage;
 
@@ -53,16 +55,27 @@ export namespace mk
 
 		FragmentStream process(const PrimitiveStream& primitiveStream)
 		{
+
 			FragmentStream fragmentStream;
 			fragmentStream.reserve(static_cast<std::size_t>(_viewport.width() * _viewport.height()));
 
-			for (auto primitive : primitiveStream)
+			auto vertexCount = primitiveStream[0].vertexCount();
+
+			std::vector<Vertex> vertexes{ vertexCount };
+			//vertexes.reserve(vertexCount);
+
+			for (auto& primitive : primitiveStream)
 			{
+				for (std::size_t i = 0; i < vertexCount; i++)
+				{
+					vertexes[i] = primitive.vertex(i);
+				}
+				
 				// frustum culling
 				// Clipping
 
 				// Perspective divide
-				for (auto& vertex : primitive)
+				for (auto& vertex : vertexes)
 				{
 					auto& position = vertex.position();
 					position.x() /= position.w();
@@ -73,16 +86,16 @@ export namespace mk
 				// Backface culling (face culling)
 
 				// Transform from NDC space to screen space (viewport transformation)
-				for (auto& vertex : primitive)
+				for (auto& vertex : vertexes)
 				{
 					auto& position = vertex.position();
 					position.x() = (position.x() + 1.0f) * _viewport.width()  * 0.5f + _viewport.x();
 					position.y() = (1.0f - position.y()) * _viewport.height() * 0.5f + _viewport.y();
 					position.z() = _viewport.minDepth() + position.z() * (_viewport.maxDepth() - _viewport.minDepth());
-
 				}
 
-				_rasterizer->rasterize(primitive, fragmentStream);
+				_rasterizer->rasterize(vertexes, fragmentStream);
+
 			}
 			return fragmentStream;
 

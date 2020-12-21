@@ -27,7 +27,7 @@ import Mikrokosmos.Graphics.Rendering.SwapChainPresenter;
 import Mikrokosmos.Graphics.Rendering.Texture;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;
-import Mikrokosmos.Graphics.Rendering.VertexShader;
+import Mikrokosmos.Graphics.Rendering.VertexShaderStage;
 import Mikrokosmos.Graphics.Rendering.VertexStream;
 import Mikrokosmos.Graphics.Rendering.Viewport;
 
