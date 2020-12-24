@@ -72,9 +72,23 @@ export namespace mk
 				}
 				
 				// frustum culling
-				// Clipping
 
-				// Perspective divide
+				// Frustum clipping
+				auto clipped = false;
+				for (auto& vertex : vertexes)
+				{
+					const auto& position = vertex.position();
+					if (position.x() < -position.w() || position.x() > position.w() ||
+						position.y() < -position.w() || position.y() > position.w() ||
+						position.z() < -position.w() || position.z() > position.w())
+					{
+						clipped = true;
+						break;
+					}
+				}
+				if (clipped) continue;
+
+				// Perspective divide (clip space to NDC space)
 				for (auto& vertex : vertexes)
 				{
 					auto& position = vertex.position();
@@ -85,7 +99,7 @@ export namespace mk
 
 				// Backface culling (face culling)
 
-				// Transform from NDC space to screen space (viewport transformation)
+				// Viewport transformation (NDC space to screen space)
 				for (auto& vertex : vertexes)
 				{
 					auto& position = vertex.position();

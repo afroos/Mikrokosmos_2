@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Algebra.cppm" />
+    <ClCompile Include="Algebra\Matrix.cppm" />
     <ClCompile Include="Algebra\Vector.cppm" />
     <ClCompile Include="Geometry.cppm" />
     <ClCompile Include="Geometry\Shapes\LineSegment.cppm" />

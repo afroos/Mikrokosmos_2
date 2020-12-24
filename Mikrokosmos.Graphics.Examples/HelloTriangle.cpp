@@ -5,7 +5,7 @@
 #include <span>
 #include <string>
 
-
+#include <chrono>
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -19,6 +19,20 @@ import Mikrokosmos.Platform.SFML.SFMLSwapChainPresenter;
 
 int main()
 {
+
+    mk::Matrix<3, 2, float> m1{ {1.0f, 2.0f}, {3.0f, 4.0f}, {5.0f, 6.0f} };
+
+    mk::Matrix<2, 3, float> m2{ {1.0f, 2.0f, 3.0f}, {4.0f, 5.0f, 6.0f} };
+
+    auto result = m1 * m2;
+
+    for (std::size_t row = 0; row < result.rows(); ++row)
+    {
+        for (std::size_t column = 0; column < result.columns(); ++column)
+        {
+            std::cout << "(" << row << "," << column << ") = " << result[row][column] << std::endl;
+        }
+    }
 
     std::vector<mk::Vertex> vertexes;
     std::vector<mk::Index> indexes;
@@ -35,7 +49,7 @@ int main()
             iss >> trash;
             mk::Vector3f position;  mk::Vertex vertex;
             float v;
-            for (int i = 0; i < 3; i++) { iss >> v; vertex.position()[i] = v * 0.95f; }
+            for (int i = 0; i < 3; i++) { iss >> v; vertex.position()[i] = v * 0.99f; }
             vertex.position().w() = 1.0f;
             vertex.color() = mk::Color::White();
             vertexes.push_back(vertex);
@@ -94,9 +108,13 @@ int main()
 
     context->outputMergerStage()->setRenderTargetView(*renderTargetView);
 
+        auto start = std::chrono::high_resolution_clock::now();
+
     context->drawIndexed(indexBuffer->size(), 0, 0);
-    
-    
+   
+        auto finish = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsed = finish - start;
+        std::cout << "Elapsed time: " << elapsed.count() << " s\n";
     
                 //auto vertexShader = device->createVertexShader(...);
 

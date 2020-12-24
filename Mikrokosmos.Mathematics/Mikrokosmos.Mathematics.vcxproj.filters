@@ -36,5 +36,8 @@
     <ClCompile Include="Geometry\Shapes\LineSegment.cppm">
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
+    <ClCompile Include="Algebra\Matrix.cppm">
+      <Filter>Source Files\Algebra</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
