@@ -149,6 +149,7 @@
     <ClCompile Include="Geometry.cppm" />
     <ClCompile Include="Geometry\Shapes\LineSegment.cppm" />
     <ClCompile Include="Geometry\Shapes\Point.cppm" />
+    <ClCompile Include="Geometry\Transformations\MatrixTransform.cppm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -11,7 +11,7 @@ export
 {
 	namespace mk 
 	{
-		template <std::size_t Dimension, typename CoordinateType>
+		template <std::size_t Dimension, typename Scalar>
 		class LineSegment
 		{
 
@@ -19,27 +19,27 @@ export
 			LineSegment()
 			{
 			}
-			LineSegment(const Point<Dimension, CoordinateType>& p0, const Point<Dimension, CoordinateType>& p1)
+			LineSegment(const Point<Dimension, Scalar>& p0, const Point<Dimension, Scalar>& p1)
 				: 
 				_p0{ p0 }, 
 				_p1{ p1 }
 			{
 			}
 
-			Point<Dimension, CoordinateType> p0() const 
+			Point<Dimension, Scalar> p0() const 
 			{ 
 				return _p0; 
 			}
 
-			Point<Dimension, CoordinateType> p1() const
+			Point<Dimension, Scalar> p1() const
 			{
 				return _p1;
 			}
 
 		private:
 
-			Point<Dimension, CoordinateType> _p0;
-			Point<Dimension, CoordinateType> _p1;
+			Point<Dimension, Scalar> _p0;
+			Point<Dimension, Scalar> _p1;
 		};
 	
 		using LineSegment2  = LineSegment<2, double>;

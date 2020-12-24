@@ -15,6 +15,7 @@
 import Mikrokosmos.Core.Array;
 import Mikrokosmos.Graphics;
 import Mikrokosmos.Mathematics.Algebra;
+import Mikrokosmos.Mathematics.Geometry;
 import Mikrokosmos.Platform.SFML.SFMLSwapChainPresenter;
 
 int main()
@@ -24,7 +25,11 @@ int main()
 
     mk::Matrix<2, 3, float> m2{ {1.0f, 2.0f, 3.0f}, {4.0f, 5.0f, 6.0f} };
 
-    auto result = m1 * m2;
+   // auto result = m1 * m2;
+
+   // auto result = mk::Translation(mk::Vector3f{2.0f, 3.0f, 4.0f});
+
+    auto result = mk::LookAt(mk::Point3f{ 5.0f, 6.0f, 7.0f }, mk::Point3f{ 7.0f, 6.0f, 7.0f }, mk::Vector3f{ 0.0f, 1.0f, 0.0f });
 
     for (std::size_t row = 0; row < result.rows(); ++row)
     {

@@ -85,6 +85,16 @@ export
 				}
 			}
 
+			static constexpr Matrix Identity() noexcept
+			{
+				Matrix result;
+				for (Index i = 0; i < result.rows(); ++i)
+				{
+					result(i, i) = Scalar{ 1 };
+				}
+				return result;
+			}
+
 			constexpr std::size_t rows() const noexcept { return NumRows; }
 
 			constexpr std::size_t columns() const noexcept { return NumColumns; }

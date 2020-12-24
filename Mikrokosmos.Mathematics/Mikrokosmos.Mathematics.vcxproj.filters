@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Geometry">
       <UniqueIdentifier>{2b799e3f-5615-47ab-9b51-1f1e2c92c150}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Geometry\Transformations">
+      <UniqueIdentifier>{885f9265-4b4c-4816-a49a-978840d62c3f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Algebra.cppm">
@@ -38,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="Algebra\Matrix.cppm">
       <Filter>Source Files\Algebra</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Transformations\MatrixTransform.cppm">
+      <Filter>Source Files\Geometry\Transformations</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
