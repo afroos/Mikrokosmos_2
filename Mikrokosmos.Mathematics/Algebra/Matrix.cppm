@@ -72,7 +72,12 @@ export
 				Index _row;
 			};
 
-			constexpr Matrix() = default;
+			constexpr Matrix()
+			{
+				std::array < Scalar, NumColumns> row{};
+				row.fill(Scalar{ 0 });
+				_elements.fill(row);
+			}
 
 			constexpr Matrix(std::initializer_list<std::initializer_list<Scalar>> elements)
 			{
@@ -122,7 +127,7 @@ export
 			}
 
 		private:
-			std::array<std::array<Scalar, NumColumns>, NumRows> _elements{}; // Row-major storage.
+			std::array<std::array<Scalar, NumColumns>, NumRows> _elements; // Row-major storage.
 		};
 
 		template <std::size_t NumRows1, std::size_t NumColumns1, std::size_t NumRows2, std::size_t NumColumns2, typename Scalar>

@@ -1,6 +1,7 @@
 module;
 
 #include <cstddef>
+#include <cmath>
 
 export module Mikrokosmos.Mathematics.Geometry.Transformations.MatrixTransform;
 
@@ -27,30 +28,83 @@ export
 		}
 
 		template <typename Scalar>
+		constexpr Matrix<4, 4, Scalar> Rotation(const Vector<3, Scalar>& axis, Scalar angle) noexcept
+		{
+			const auto c = std::cos(angle);
+			const auto s = std::sin(angle);
+			auto u = normalize(axis);
+			auto alpha = (Scalar{ 1 } - c) * u;
+
+			Matrix<4, 4, Scalar> result;
+
+			result[0][0] = c + alpha[0] * u[0];
+			result[1][0] = alpha[0] * u[1] + s * u[2];
+			result[2][0] = alpha[0] * u[2] - s * u[1];
+
+			result[0][1] = alpha[1] * u[0] - s * u[2];
+			result[1][1] = c + alpha[1] * u[1];
+			result[2][1] = alpha[1] * u[2] + s * u[0];
+
+			result[0][2] = alpha[2] * u[0] + s * u[1];
+			result[1][2] = alpha[2] * u[1] - s * u[0];
+			result[2][2] = c + alpha[2] * u[2];
+
+			result[3][3] = Scalar{ 1 };
+
+			return result;
+		}
+
+		template <typename Scalar>
 		constexpr Matrix<4, 4, Scalar> LookAt(const Point<3, Scalar>&  eyePosition,
 											  const Point<3, Scalar>&  targetPosition,
 											  const Vector<3, Scalar>& upDirection) noexcept
 		{
-			auto forward = normalize(targetPosition - eyePosition);
-			auto left = normalize(cross(upDirection, forward));
-			auto up = cross(forward, left);
+			auto backward = normalize(eyePosition - targetPosition);
+			auto right = normalize(cross(upDirection, backward));
+			auto up = cross(backward, right);
 			
-			auto eyeToWorld = Matrix<4, 4, Scalar>::Identity();
+			Matrix<4, 4, Scalar> result;
 
-			eyeToWorld[0][0] = left.x();
-			eyeToWorld[1][0] = left.y();
-			eyeToWorld[2][0] = left.z();
-			eyeToWorld[0][1] = up.x();
-			eyeToWorld[1][1] = up.y();
-			eyeToWorld[2][1] = up.z();
-			eyeToWorld[0][2] = forward.x();
-			eyeToWorld[1][2] = forward.y();
-			eyeToWorld[2][2] = forward.z();
-			eyeToWorld[3][0] = eyePosition.x();
-			eyeToWorld[3][1] = eyePosition.y();
-			eyeToWorld[3][2] = eyePosition.z();
+			result[0][0] = right.x();
+			result[1][0] = right.y();
+			result[2][0] = right.z();
 
-			return eyeToWorld;
+			result[0][1] = up.x();
+			result[1][1] = up.y();
+			result[2][1] = up.z();
+
+			result[0][2] = backward.x();
+			result[1][2] = backward.y();
+			result[2][2] = backward.z();
+
+			result[3][0] = eyePosition.x();
+			result[3][1] = eyePosition.y();
+			result[3][2] = eyePosition.z();
+			result[3][3] = Scalar{ 1 };
+
+			return result;
+		}
+
+		template <typename Scalar>
+		constexpr Matrix<4, 4, Scalar> Orthographic(Scalar left, 
+													Scalar right, 
+													Scalar bottom, 
+													Scalar top,
+													Scalar near, 
+													Scalar far) noexcept
+		{
+			Matrix<4, 4, Scalar> result;
+
+			result[0][0] =   Scalar{ 2 } / (right - left);
+			result[1][1] =   Scalar{ 2 } / (top - bottom);
+			result[2][2] = - Scalar{ 2 } / (far - near);
+
+			result[3][0] = - (right + left) / (right - left);
+			result[3][1] = - (top + bottom) / (top - bottom);
+			result[3][2] = - (far + near)   / (far - near);
+			result[3][3] =   Scalar{ 1 };
+
+			return result;
 		}
 
 	}

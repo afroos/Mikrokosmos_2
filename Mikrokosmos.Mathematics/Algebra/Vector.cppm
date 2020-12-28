@@ -69,13 +69,22 @@ export
 				}
 				return *this;
 			}
-			
-			constexpr Vector& operator/=(const Scalar scalar) noexcept
+
+			constexpr Vector& operator*=(const Scalar scalar) noexcept
 			{
 				for (Index i = 0; i < Dimension; ++i)
 				{
-					(*this)[i] /= scalar;
+					(*this)[i] *= scalar;
 				}
+				return *this;
+			}
+			
+			constexpr Vector& operator/=(const Scalar scalar) noexcept
+			{
+				auto inverseScalar = Scalar{ 1 } / scalar;
+
+				*this *= inverseScalar;
+
 				return *this;
 			}
 
@@ -103,6 +112,14 @@ export
 		{
 			Vector<Dimension, Scalar> result{ vector1 };
 			result -= vector2;
+			return result;
+		}
+
+		template <std::size_t Dimension, typename Scalar>
+		constexpr Vector<Dimension, Scalar> operator*(Scalar scalar, const Vector<Dimension, Scalar>& vector) noexcept
+		{
+			Vector<Dimension, Scalar> result{ vector };
+			result *= scalar;
 			return result;
 		}
 
