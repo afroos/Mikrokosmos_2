@@ -1,7 +1,11 @@
 module;
 
+#include <functional>
+#include <map>
 #include <memory>
 #include <span>
+#include <string>
+#include <string_view>
 
 export module Mikrokosmos.Graphics.Rendering.Device;
 
@@ -27,6 +31,7 @@ import Mikrokosmos.Graphics.Rendering.SwapChainPresenter;
 import Mikrokosmos.Graphics.Rendering.Texture;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;
+import Mikrokosmos.Graphics.Rendering.VertexShader;
 import Mikrokosmos.Graphics.Rendering.VertexShaderStage;
 import Mikrokosmos.Graphics.Rendering.VertexStream;
 import Mikrokosmos.Graphics.Rendering.Viewport;
@@ -75,6 +80,21 @@ export namespace mk
 		std::shared_ptr<RenderTargetView> createRenderTargetView(Texture2D* resource)
 		{
 			return std::make_shared<RenderTargetView>(resource);
+		}
+
+		std::shared_ptr<VertexShader> createVertexShader(std::string_view type)
+		{
+			static std::map<
+				std::string,
+				std::function<std::shared_ptr<VertexShader>()>> dispatchTable
+			{
+				{ "Default", []() { return std::make_shared<VertexShader>();      } },
+				{ "Basic",   []() { return std::make_shared<BasicVertexShader>(); } }
+			};
+
+			auto it = dispatchTable.find(type.data());
+			if (it != dispatchTable.end()) return it->second();
+			else return nullptr;
 		}
 
 	private:

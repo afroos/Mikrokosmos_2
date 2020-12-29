@@ -6,6 +6,8 @@ module;
 
 export module Mikrokosmos.Mathematics.Algebra.Matrix;
 
+import Mikrokosmos.Mathematics.Algebra.Vector;
+
 export
 {
 	namespace mk 
@@ -131,7 +133,7 @@ export
 		};
 
 		template <std::size_t NumRows1, std::size_t NumColumns1, std::size_t NumRows2, std::size_t NumColumns2, typename Scalar>
-		constexpr Matrix<NumRows1, NumColumns2, Scalar> operator*(Matrix<NumRows1, NumColumns1, Scalar>& matrix1, const Matrix<NumRows2, NumColumns2, Scalar>& matrix2)
+		constexpr Matrix<NumRows1, NumColumns2, Scalar> operator*(const Matrix<NumRows1, NumColumns1, Scalar>& matrix1, const Matrix<NumRows2, NumColumns2, Scalar>& matrix2)
 			requires (NumColumns1 == NumRows2)
 		{
 			Matrix<NumRows1, NumColumns2, Scalar> result;
@@ -142,8 +144,23 @@ export
 					result(row, column) = Scalar{ 0 };
 					for (Index i = 0; i < matrix1.columns(); ++i)
 					{
-						result(row, column) += matrix1(row, i) * matrix2(i, column);
+						result[row][column] += matrix1[row][i] * matrix2[i][column];
 					}
+				}
+			}
+			return result;
+		}
+
+		template <std::size_t NumRows, std::size_t NumColumns, typename Scalar>
+		constexpr Vector<NumColumns, Scalar> operator*(Matrix<NumRows, NumColumns, Scalar>& matrix, const Vector<NumColumns, Scalar>& vector)
+		{
+			Vector<NumColumns, Scalar> result;
+			for (Index row = 0; row < matrix.rows(); ++row)
+			{
+				result[row] = Scalar{ 0 };
+				for (Index column = 0; column < matrix.columns(); ++column)
+				{
+					result[row] += matrix[row][column] * vector[column];
 				}
 			}
 			return result;

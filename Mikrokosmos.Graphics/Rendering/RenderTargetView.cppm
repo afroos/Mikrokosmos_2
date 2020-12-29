@@ -35,6 +35,11 @@ export namespace mk
 			return _resource->at(indices...);
 		}
 
+		void clear(const Color& color)
+		{
+			_resource->fill(color);
+		}
+
 	private:
 
 		Texture2D* _resource;

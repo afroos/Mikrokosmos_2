@@ -1,4 +1,5 @@
 #include <cstdint>
+#include <cmath>
 #include <iostream>
 #include <memory>
 #include <SFML/Graphics.hpp>
@@ -104,7 +105,9 @@ int main()
     context->inputAssemblerStage()->setVertexBuffer(vertexBuffer);
     context->inputAssemblerStage()->setIndexBuffer(indexBuffer);
 
-    //context->vertexShaderStage()->setShader(vertexShader);
+    auto vertexShader = device->createVertexShader("Basic");
+
+    context->vertexShaderStage()->setShader(vertexShader);
 
     context->rasterizerStage()->setState(mk::RasterizerState{ .fillMode = mk::FillMode::Wireframe });
     context->rasterizerStage()->setViewport({ 0.0, 0.0, (float)width, (float)height });
@@ -113,24 +116,18 @@ int main()
 
     context->outputMergerStage()->setRenderTargetView(*renderTargetView);
 
-        auto start = std::chrono::high_resolution_clock::now();
-
-    context->drawIndexed(indexBuffer->size(), 0, 0);
-   
-        auto finish = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> elapsed = finish - start;
-        std::cout << "Elapsed time: " << elapsed.count() << " s\n";
-    
-                //auto vertexShader = device->createVertexShader(...);
 
                 //auto effect = std::make_shared<mk::Effect>();
    
                 //auto triangle = std::make_shared<mk::Mesh>(vertexBuffer, indexBuffer, effect);
 
     
+    auto model = mk::Matrix44f::Identity();
+    
+    auto projection = mk::Orthographic(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+    
+    auto angle = 0.0f;
 
-    
-    
     while (window.isOpen())
     {
         sf::Event event;
@@ -139,7 +136,25 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+        auto start = std::chrono::high_resolution_clock::now();
 
+        renderTargetView->clear(mk::Color::Black());
+
+        const float radius = 5.0f;
+        angle += 0.01f;
+        float camX = std::sin(angle) * radius;
+        float camZ = std::cos(angle) * radius;
+
+        auto view = mk::LookAt(mk::Point3f{ camX, 0.0f, camZ }, mk::Point3f{ 0.0f, 0.0f, 0.0f }, mk::Vector3f{0.0, 1.0, 0.0});
+
+        context->vertexShaderStage()->shader()->modelViewProjection() = model * view * projection;
+
+        context->drawIndexed(indexBuffer->size(), 0, 0);
+
+        auto finish = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsed = finish - start;
+        std::cout << "Elapsed time: " << elapsed.count() << " s\n";
+        
         swapChain->present();
         //window.clear();
         //window.draw(sprite);

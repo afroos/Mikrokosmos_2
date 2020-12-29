@@ -151,7 +151,7 @@ export
 		template <std::size_t Dimension, typename Scalar>
 		constexpr Scalar length(const Vector<Dimension, Scalar>& vector) noexcept
 		{
-			return std::sqrt(lengthSquared(vector));
+			return (float) std::sqrt((double) lengthSquared(vector));
 		}
 
 		template <std::size_t Dimension, typename Scalar>
@@ -159,7 +159,7 @@ export
 		{
 			Scalar length2 = length(vector);
 
-			if (length2 != 0) return (vector / length2);
+			if (length2 != 0.0f) return (vector / length2);
 			else return Vector<Dimension, Scalar>::Zero();
 		}
 

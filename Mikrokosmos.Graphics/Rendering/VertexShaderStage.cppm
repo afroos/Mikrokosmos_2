@@ -11,98 +11,48 @@ import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.IndexBuffer;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.VertexBuffer;
+import Mikrokosmos.Graphics.Rendering.VertexShader;
 import Mikrokosmos.Graphics.Rendering.VertexStream;
 
 export namespace mk
 {
-	class VertexShader
+	class VertexShaderStage
 	{
 	public:
 
-		VertexShader() = default;
+		VertexShaderStage() = default;
+
+		void setShader(std::shared_ptr<VertexShader> shader)
+		{
+			_shader = shader;
+		}
+
+		std::shared_ptr<VertexShader> shader() const { return _shader; }
 
 		VertexStream process(const VertexStream& vertexStream)
 		{
-		//	static VertexBuffer outputVertexes{ vertexStream.size() };
-		//	static IndexBuffer outputIndexes{ vertexStream.size() };	
-		//	static VertexStream outputVertexStream{ outputVertexes, outputIndexes, outputIndexes.size(), 0, 0 };
-
-		//	for (std::size_t i = 0; i < vertexStream.size(); ++i)
-		//	{
-		//		outputVertexes.at(i) = vertexStream[i];
-		//		outputIndexes.at(i) = i;
-		//	}
-
+			processedVertexes.resize(vertexStream.vertexCount());
+			
 			auto outputVertexStream = vertexStream;
+
+			std::size_t index = 0;
+			for (auto vertex : vertexStream.vertexes())
+			{
+				processedVertexes[index] = _shader->process(vertex);
+				index++;
+			}
+
+			outputVertexStream.updateVertexes(processedVertexes);
 			
 			return outputVertexStream;
 		}
 
+		
+
 	private:
+		std::vector<Vertex> processedVertexes;
+
+		std::shared_ptr<VertexShader> _shader;
 
 	};
 }
-
-/*
-Input Assembler
-	*Input layout
-	1 or more vertex buffers
-	0 or 1 index buffer
-	*index buffer format (16-bit or 32-bit)
-	primitive topology setting
-
-Vertex Shader
-	Vertex shader program
-	up to 16 constant buffers
-	up to 128 textures (shader resource view + texture resource)
-	*up to 16 samplers (ID3D11SamplerState)
-
-Rasterizer
-	rasterizer state (ID3D11RasterizerState)
-	up to 16 viewports
-	up to 16 scissor rectangles
-	
-Pixel Shader
-	Pixel shader program
-	up to 16 constant buffers
-	up to 128 textures (shader resource view + texture resource)
-	up to 16 samplers (ID3D11SamplerState)
-	
-Output Merger
-
-	blend state (ID3D11BlendState)
-	depth/stencil state (ID3D11DepthStencilState)
-	up to 8 render targets (render target resource view + texture resource)
-
-	So to draw anything, you have to set all this state before you call Draw or DrawIndexed.
-
-*/
-
-/*
-			Vertex processing
-				Vertex shader
-			Primitive processing
-				Primitive assembly
-				Viewport transformation
-				Clipping
-			Rasterization
-				Rasterization
-				Face culling
-			Fragment processing
-				Tests
-				Fragment shader
-			Pixel processing
-				Blend
-				Depth
-				Stencil
-*/
-
-// Vertex specification
-// Vertex shader
-// Primitive assembly
-// Clipping
-// Viewport transformation
-// Backface culling
-// Rasterization
-// Fragment shader
-// Framebuffer processing

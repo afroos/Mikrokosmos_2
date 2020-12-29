@@ -173,6 +173,7 @@
     <ClCompile Include="Rendering\Texture.cppm" />
     <ClCompile Include="Rendering\Vertex.cppm" />
     <ClCompile Include="Rendering\VertexBuffer.cppm" />
+    <ClCompile Include="Rendering\VertexShader.cppm" />
     <ClCompile Include="Rendering\VertexShaderStage.cppm" />
     <ClCompile Include="Rendering\VertexStream.cppm" />
     <ClCompile Include="Rendering\Viewport.cppm" />

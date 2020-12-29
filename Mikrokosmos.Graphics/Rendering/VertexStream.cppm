@@ -94,6 +94,11 @@ export namespace mk
 			return _indexes.size();
 		}
 
+		std::size_t vertexCount() const
+		{
+			return _vertexes.size();
+		}
+
 		bool empty() const
 		{
 			return _indexes.empty();
@@ -146,8 +151,12 @@ export namespace mk
 			_vertexes = newVertexes;
 		}
 
-	private:
+		std::span<Vertex> vertexes() const
+		{
+			return _vertexes;
+		}
 
+	private:
 		std::span<Vertex> _vertexes;
 		std::span<Index> _indexes;
 		std::size_t _baseVertexLocation;

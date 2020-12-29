@@ -91,7 +91,7 @@ export namespace mk
 						
 				Point2i position;
 				auto depth = float{};
-				auto color = interpolate(v0.color(), v0.position().w(), v1.color(), v1.position().w(), t);
+				auto color = Color::White();//interpolate(v0.color(), v0.position().w(), v1.color(), v1.position().w(), t);
 				auto normal = Vector3f{};
 				auto textureCoordinates = Vector2f{};
 				

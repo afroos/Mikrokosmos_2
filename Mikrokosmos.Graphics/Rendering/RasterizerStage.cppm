@@ -62,7 +62,6 @@ export namespace mk
 			auto vertexCount = primitiveStream[0].vertexCount();
 
 			std::vector<Vertex> vertexes{ vertexCount };
-			//vertexes.reserve(vertexCount);
 
 			for (auto& primitive : primitiveStream)
 			{
@@ -82,20 +81,20 @@ export namespace mk
 						position.y() < -position.w() || position.y() > position.w() ||
 						position.z() < -position.w() || position.z() > position.w())
 					{
-						clipped = true;
+						//clipped = true;
 						break;
 					}
 				}
 				if (clipped) continue;
 
 				// Perspective divide (clip space to NDC space)
-				for (auto& vertex : vertexes)
+				/*for (auto& vertex : vertexes)
 				{
 					auto& position = vertex.position();
 					position.x() /= position.w();
 					position.y() /= position.w();
 					position.z() /= position.w();
-				}
+				}*/
 
 				// Backface culling (face culling)
 
