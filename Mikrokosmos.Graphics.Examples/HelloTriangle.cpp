@@ -47,22 +47,31 @@ int main()
     in.open("african_head.obj", std::ifstream::in);
     if (in.fail()) return 69;
     std::string line;
-    while (!in.eof()) {
+    while (!in.eof()) 
+    {
         std::getline(in, line);
         std::istringstream iss(line.c_str());
         char trash;
-        if (!line.compare(0, 2, "v ")) {
+        if (!line.compare(0, 2, "v ")) 
+        {
             iss >> trash;
             mk::Vector3f position;  mk::Vertex vertex;
             float v;
-            for (int i = 0; i < 3; i++) { iss >> v; vertex.position()[i] = v * 0.99f; }
+            for (int i = 0; i < 3; i++) 
+            { 
+                iss >> v; 
+                vertex.position()[i] = v * 0.99f; 
+            }
             vertex.position().w() = 1.0f;
             vertex.color() = mk::Color::White();
             vertexes.push_back(vertex);
-        } else if (!line.compare(0, 2, "f ")) {
+        } 
+        else if (!line.compare(0, 2, "f ")) 
+        {
             int itrash, idx;
             iss >> trash;
-            while (iss >> idx >> trash >> itrash >> trash >> itrash) {
+            while (iss >> idx >> trash >> itrash >> trash >> itrash) 
+            {
                 idx--; // in wavefront obj all indices start at 1, not zero
                 indexes.push_back(idx);
             }
@@ -128,6 +137,8 @@ int main()
     
     auto angle = 0.0f;
 
+
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -146,6 +157,8 @@ int main()
         float camZ = std::cos(angle) * radius;
 
         auto view = mk::LookAt(mk::Point3f{ camX, 0.0f, camZ }, mk::Point3f{ 0.0f, 0.0f, 0.0f }, mk::Vector3f{0.0, 1.0, 0.0});
+
+        std::cout << "MVP: " << model * view * projection << std::endl;
 
         context->vertexShaderStage()->shader()->modelViewProjection() = model * view * projection;
 

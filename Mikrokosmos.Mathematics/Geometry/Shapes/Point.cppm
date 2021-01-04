@@ -2,10 +2,13 @@ module;
 
 #include <cassert>
 #include <cstddef>
+#include <ostream>
 
 export module Mikrokosmos.Mathematics.Geometry.Point;
 
 import Mikrokosmos.Mathematics.Algebra.Vector;
+
+using Index = std::size_t;
 
 export namespace mk 
 {
@@ -23,17 +26,19 @@ export namespace mk
 		{
 		}
 
-		constexpr const Scalar& operator[](std::size_t index) const
+		constexpr const Scalar& operator[](Index index) const
 		{
-			assert(index < _coordinates.size());
+			assert(index < size());
 			return _coordinates[index];
 		}
 
-		constexpr Scalar& operator[](std::size_t index)
+		constexpr Scalar& operator[](Index index)
 		{
-			assert(index < _coordinates.size());
+			assert(index < size());
 			return _coordinates[index];
 		}
+
+		constexpr std::size_t size() const noexcept { return Dimension; }
 
 		constexpr Scalar& x() requires (Dimension > 0) { return _coordinates[0]; }
 
@@ -68,6 +73,22 @@ export namespace mk
 	constexpr Vector<Dimension, Scalar> operator-(const Point<Dimension, Scalar>& point1, const Point<Dimension, Scalar>& point2) noexcept
 	{
 		return (point1.coordinates() - point2.coordinates());
+	}
+
+	template <std::size_t Dimension, typename Scalar>
+	std::ostream& operator<<(std::ostream& out, const Point<Dimension, Scalar>& point) noexcept
+	{
+		out << "[ ";
+
+		for (Index index = 0; index < point.size(); ++index)
+		{
+			out << std::showpos << std::scientific << point[index];
+			if (index < point.size() - 1) out << ", ";
+		}
+		
+		out << " ]";
+
+		return out;
 	}
 
 }

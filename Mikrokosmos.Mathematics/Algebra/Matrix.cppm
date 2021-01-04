@@ -2,18 +2,19 @@ module;
 
 #include <array>
 #include <cassert>
+#include <ostream>
 #include <span>
 
 export module Mikrokosmos.Mathematics.Algebra.Matrix;
 
 import Mikrokosmos.Mathematics.Algebra.Vector;
 
+using Index = std::size_t;
+
 export
 {
 	namespace mk 
 	{
-		using Index = std::size_t;
-
 		template <std::size_t NumRows, std::size_t NumColumns, typename Scalar>
 		class Matrix
 		{
@@ -27,6 +28,8 @@ export
 			public:
 				
 				constexpr Row() = delete;
+
+				constexpr std::size_t size() const noexcept { return _matrix.columns(); }
 
 				constexpr Scalar& operator[](Index column) noexcept
 				{
@@ -166,7 +169,6 @@ export
 			return result;
 		}
 
-
 		using Matrix22  = Matrix<2, 2, double>;
 		using Matrix22i = Matrix<2, 2, int>;
 		using Matrix22f = Matrix<2, 2, float>;
@@ -181,6 +183,29 @@ export
 		using Matrix44i = Matrix<4, 4, int>;
 		using Matrix44f = Matrix<4, 4, float>;
 		using Matrix44d = Matrix<4, 4, double>;
+
+		template <std::size_t NumRows, std::size_t NumColumns, typename Scalar>
+		std::ostream& operator<<(std::ostream& out, const Matrix<NumRows, NumColumns, Scalar>& matrix) noexcept
+		{
+			out << '\n';
+
+			for (Index row = 0; row < matrix.rows(); ++row)
+			{
+				out << "[ ";
+
+				for (Index column = 0; column < matrix.columns(); ++column)
+				{
+					out << std::showpos << std::scientific << matrix[row][column];
+					if (column < matrix.columns() - 1) out << ", ";
+				}
+
+				out << " ]";
+
+				if (row < matrix.rows() - 1) out << '\n';
+			}
+
+			return out;
+		}
 
 	}
 }

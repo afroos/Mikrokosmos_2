@@ -3,15 +3,16 @@ module;
 #include <array>
 #include <cassert>
 #include <cmath>
+#include <ostream>
 
 export module Mikrokosmos.Mathematics.Algebra.Vector;
+
+using Index = std::size_t;
 
 export
 {
 	namespace mk 
 	{
-		using Index = std::size_t;
-
 		template <std::size_t Dimension, typename Scalar>
 		class Vector
 		{
@@ -35,15 +36,17 @@ export
 
 			constexpr const Scalar& operator[](Index index) const
 			{
-				assert(index < _coordinates.size());
+				assert(index < size());
 				return _coordinates[index];
 			}
 
 			constexpr Scalar& operator[](Index index)
 			{
-				assert(index < _coordinates.size());
+				assert(index < size());
 				return _coordinates[index];
 			}
+
+			constexpr std::size_t size() const noexcept { return Dimension; }
 
 			constexpr Scalar& x() requires (Dimension > 0) { return _coordinates[0]; }
 
@@ -63,18 +66,18 @@ export
 
 			constexpr Vector& operator-=(const Vector& other) noexcept
 			{
-				for (Index i = 0; i < Dimension; ++i)
+				for (Index index = 0; index < size(); ++index)
 				{
-					(*this)[i] -= other[i];
+					_coordinates[index] -= other[index];
 				}
 				return *this;
 			}
 
 			constexpr Vector& operator*=(const Scalar scalar) noexcept
 			{
-				for (Index i = 0; i < Dimension; ++i)
+				for (Index index = 0; index < size(); ++index)
 				{
-					(*this)[i] *= scalar;
+					_coordinates[index] *= scalar;
 				}
 				return *this;
 			}
@@ -135,7 +138,7 @@ export
 		constexpr Scalar dot(const Vector<Dimension, Scalar>& vector1, const Vector<Dimension, Scalar>& vector2) noexcept
 		{
 			auto result = Scalar{ 0 };
-			for (Index i = 0; i < Dimension; ++i)
+			for (Index i = 0; i < vector1.size(); ++i)
 			{
 				result += vector1[i] * vector2[i];
 			}
@@ -173,6 +176,22 @@ export
 			result.z() = vector1.x() * vector2.y() - vector1.y() * vector2.x();
 
 			return result;
+		}
+
+		template <std::size_t Dimension, typename Scalar>
+		std::ostream& operator<<(std::ostream& out, const Vector<Dimension, Scalar>& vector) noexcept
+		{
+			out << "[ ";
+
+			for (Index index = 0; index < vector.size(); ++index) 
+			{
+				out << std::showpos << std::scientific << vector[index];
+				if (index < vector.size() - 1) out << ", ";
+			}
+
+			out << " ]";
+
+			return out;
 		}
 
 	}

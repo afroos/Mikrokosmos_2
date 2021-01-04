@@ -9,6 +9,8 @@ import Mikrokosmos.Mathematics.Algebra.Matrix;
 import Mikrokosmos.Mathematics.Algebra.Vector;
 import Mikrokosmos.Mathematics.Geometry.Point;
 
+using Index = std::size_t;
+
 export
 {
 	namespace mk 
