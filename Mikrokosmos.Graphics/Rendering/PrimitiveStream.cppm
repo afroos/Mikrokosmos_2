@@ -4,7 +4,7 @@ module;
 
 export module Mikrokosmos.Graphics.Rendering.PrimitiveStream;
 
-import Mikrokosmos.Core.Array;
+import Mikrokosmos.Containers.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.Primitive;
 import Mikrokosmos.Graphics.Rendering.Vertex;

@@ -4,7 +4,7 @@ module;
 
 export module Mikrokosmos.Graphics.Rendering.Engine;
 
-import Mikrokosmos.Core.Array;
+import Mikrokosmos.Containers.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.Device;
 import Mikrokosmos.Graphics.Rendering.DeviceContext;

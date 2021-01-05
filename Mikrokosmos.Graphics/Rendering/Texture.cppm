@@ -2,7 +2,7 @@ module;
 
 export module Mikrokosmos.Graphics.Rendering.Texture;
 
-import Mikrokosmos.Core.Array;
+import Mikrokosmos.Containers.Array;
 import Mikrokosmos.Graphics.Color;
 
 export namespace mk 

@@ -45,5 +45,8 @@
     <ClCompile Include="Geometry\Transformations\MatrixTransform.cppm">
       <Filter>Source Files\Geometry\Transformations</Filter>
     </ClCompile>
+    <ClCompile Include="Mathematics.cppm">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

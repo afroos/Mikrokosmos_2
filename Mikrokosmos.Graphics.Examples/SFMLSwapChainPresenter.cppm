@@ -5,7 +5,7 @@ module;
 
 export module Mikrokosmos.Platform.SFML.SFMLSwapChainPresenter;
 
-import Mikrokosmos.Core.Array;
+import Mikrokosmos.Containers.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.SwapChainPresenter;
 

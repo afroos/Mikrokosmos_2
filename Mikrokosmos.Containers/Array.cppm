@@ -7,7 +7,7 @@ module;
 #include <type_traits>
 #include <vector>
 
-export module Mikrokosmos.Core.Array;
+export module Mikrokosmos.Containers.Array;
 
 export namespace mk
 {

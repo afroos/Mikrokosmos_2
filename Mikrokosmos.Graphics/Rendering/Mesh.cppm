@@ -4,7 +4,7 @@ module;
 
 export module Mikrokosmos.Graphics.Rendering.Mesh;
 
-import Mikrokosmos.Core.Array;
+import Mikrokosmos.Containers.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.Effect;
 import Mikrokosmos.Graphics.Rendering.IndexBuffer;

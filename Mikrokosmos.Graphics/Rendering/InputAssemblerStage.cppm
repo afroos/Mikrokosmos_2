@@ -9,7 +9,7 @@ module;
 
 export module Mikrokosmos.Graphics.Rendering.InputAssemblerStage;
 
-import Mikrokosmos.Core.Array;
+import Mikrokosmos.Containers.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.IndexBuffer;
 import Mikrokosmos.Graphics.Rendering.Primitive;

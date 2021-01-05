@@ -4,7 +4,7 @@ module;
 
 export module Mikrokosmos.Graphics.Rendering.Fragment;
 
-import Mikrokosmos.Core.Array;
+import Mikrokosmos.Containers.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Mathematics.Algebra.Vector;
 import Mikrokosmos.Mathematics.Geometry.Point;

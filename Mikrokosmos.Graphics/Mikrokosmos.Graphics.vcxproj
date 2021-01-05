@@ -147,7 +147,6 @@
     <ClCompile Include="Graphics.cppm">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Rendering\Array.cppm" />
     <ClCompile Include="Rendering\DeviceContext.cppm" />
     <ClCompile Include="Rendering\Effect.cppm" />
     <ClCompile Include="Rendering\Engine.cppm" />
@@ -184,6 +183,12 @@
     <ClCompile Include="SceneGraph\Node.cppm" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mikrokosmos.Containers\Mikrokosmos.Containers.vcxproj">
+      <Project>{9d6a8b8c-76f4-40fb-9cef-5d071d73781e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mikrokosmos.Debugging\Mikrokosmos.Debugging.vcxproj">
+      <Project>{aeb32348-2efb-4cf2-985c-b5da525c7666}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Mikrokosmos.Mathematics\Mikrokosmos.Mathematics.vcxproj">
       <Project>{ba7a2fa3-78eb-4ad1-9957-87bd3df2e6e5}</Project>
     </ProjectReference>

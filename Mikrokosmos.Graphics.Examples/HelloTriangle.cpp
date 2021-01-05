@@ -7,13 +7,13 @@
 #include <string>
 
 #include <chrono>
-#include <iostream>
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <vector>
 
-import Mikrokosmos.Core.Array;
+import Mikrokosmos.Containers;
+import Mikrokosmos.Debugging;
 import Mikrokosmos.Graphics;
 import Mikrokosmos.Mathematics.Algebra;
 import Mikrokosmos.Mathematics.Geometry;
@@ -21,25 +21,6 @@ import Mikrokosmos.Platform.SFML.SFMLSwapChainPresenter;
 
 int main()
 {
-
-    mk::Matrix<3, 2, float> m1{ {1.0f, 2.0f}, {3.0f, 4.0f}, {5.0f, 6.0f} };
-
-    mk::Matrix<2, 3, float> m2{ {1.0f, 2.0f, 3.0f}, {4.0f, 5.0f, 6.0f} };
-
-   // auto result = m1 * m2;
-
-   // auto result = mk::Translation(mk::Vector3f{2.0f, 3.0f, 4.0f});
-
-    auto result = mk::LookAt(mk::Point3f{ 5.0f, 6.0f, 7.0f }, mk::Point3f{ 7.0f, 6.0f, 7.0f }, mk::Vector3f{ 0.0f, 1.0f, 0.0f });
-
-    for (std::size_t row = 0; row < result.rows(); ++row)
-    {
-        for (std::size_t column = 0; column < result.columns(); ++column)
-        {
-            std::cout << "(" << row << "," << column << ") = " << result[row][column] << std::endl;
-        }
-    }
-
     std::vector<mk::Vertex> vertexes;
     std::vector<mk::Index> indexes;
 
@@ -133,7 +114,7 @@ int main()
     
     auto model = mk::Matrix44f::Identity();
     
-    auto projection = mk::Orthographic(-1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+    auto projection = mk::Orthographic(-1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f);
     
     auto angle = 0.0f;
 
@@ -157,8 +138,11 @@ int main()
         float camZ = std::cos(angle) * radius;
 
         auto view = mk::LookAt(mk::Point3f{ camX, 0.0f, camZ }, mk::Point3f{ 0.0f, 0.0f, 0.0f }, mk::Vector3f{0.0, 1.0, 0.0});
-
-        std::cout << "MVP: " << model * view * projection << std::endl;
+        
+        mk::print("M:", model);
+        mk::print("V:", view);
+        mk::print("P:", projection);
+        mk::print("MVP:", model* view* projection);
 
         context->vertexShaderStage()->shader()->modelViewProjection() = model * view * projection;
 
@@ -169,9 +153,6 @@ int main()
         std::cout << "Elapsed time: " << elapsed.count() << " s\n";
         
         swapChain->present();
-        //window.clear();
-        //window.draw(sprite);
-        //window.display();
     }
 
     return 0;

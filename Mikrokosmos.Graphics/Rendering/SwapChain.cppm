@@ -5,7 +5,7 @@ module;
 
 export module Mikrokosmos.Graphics.Rendering.SwapChain;
 
-import Mikrokosmos.Core.Array;
+import Mikrokosmos.Containers.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.SwapChainPresenter;
 import Mikrokosmos.Graphics.Rendering.Texture;

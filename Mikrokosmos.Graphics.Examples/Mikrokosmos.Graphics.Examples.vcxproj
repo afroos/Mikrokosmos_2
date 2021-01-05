@@ -158,6 +158,12 @@
     <ClCompile Include="SFMLSwapChainPresenter.cppm" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mikrokosmos.Containers\Mikrokosmos.Containers.vcxproj">
+      <Project>{9d6a8b8c-76f4-40fb-9cef-5d071d73781e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mikrokosmos.Debugging\Mikrokosmos.Debugging.vcxproj">
+      <Project>{aeb32348-2efb-4cf2-985c-b5da525c7666}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Mikrokosmos.Graphics\Mikrokosmos.Graphics.vcxproj">
       <Project>{36fb0fb0-4e8a-49b8-a6e6-cc606a6d302e}</Project>
     </ProjectReference>

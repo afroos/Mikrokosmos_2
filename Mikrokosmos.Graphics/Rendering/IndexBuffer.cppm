@@ -4,7 +4,7 @@ module;
 
 export module Mikrokosmos.Graphics.Rendering.IndexBuffer;
 
-import Mikrokosmos.Core.Array;
+import Mikrokosmos.Containers.Array;
 
 export namespace mk
 {

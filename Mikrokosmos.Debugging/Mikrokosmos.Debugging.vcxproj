@@ -18,11 +18,14 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Debugging.cppm" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{ba7a2fa3-78eb-4ad1-9957-87bd3df2e6e5}</ProjectGuid>
-    <RootNamespace>MikrokosmosMathematics</RootNamespace>
+    <ProjectGuid>{aeb32348-2efb-4cf2-985c-b5da525c7666}</ProjectGuid>
+    <RootNamespace>MikrokosmosDebugging</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -142,21 +145,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Algebra.cppm" />
-    <ClCompile Include="Algebra\Matrix.cppm" />
-    <ClCompile Include="Algebra\Vector.cppm" />
-    <ClCompile Include="Geometry.cppm" />
-    <ClCompile Include="Geometry\Shapes\LineSegment.cppm" />
-    <ClCompile Include="Geometry\Shapes\Point.cppm" />
-    <ClCompile Include="Geometry\Transformations\MatrixTransform.cppm" />
-    <ClCompile Include="Mathematics.cppm" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Mikrokosmos.Debugging\Mikrokosmos.Debugging.vcxproj">
-      <Project>{aeb32348-2efb-4cf2-985c-b5da525c7666}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

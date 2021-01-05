@@ -187,8 +187,6 @@ export
 		template <std::size_t NumRows, std::size_t NumColumns, typename Scalar>
 		std::ostream& operator<<(std::ostream& out, const Matrix<NumRows, NumColumns, Scalar>& matrix) noexcept
 		{
-			out << '\n';
-
 			for (Index row = 0; row < matrix.rows(); ++row)
 			{
 				out << "[ ";

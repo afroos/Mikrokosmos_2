@@ -51,9 +51,6 @@
     <ClCompile Include="Rendering\IndexBuffer.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\Array.cppm">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\Effect.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>

@@ -5,7 +5,7 @@ module;
 
 export module Mikrokosmos.Graphics.Rendering.DeviceContext;
 
-import Mikrokosmos.Core.Array;
+import Mikrokosmos.Containers.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.Fragment;
 import Mikrokosmos.Graphics.Rendering.FragmentStream;
