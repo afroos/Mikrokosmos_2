@@ -151,12 +151,15 @@
     <ClCompile Include="Rendering\Effect.cppm" />
     <ClCompile Include="Rendering\Engine.cppm" />
     <ClCompile Include="Rendering\Fragment.cppm" />
+    <ClCompile Include="Rendering\FragmentShader.cppm" />
+    <ClCompile Include="Rendering\FragmentShaderStage.cppm" />
     <ClCompile Include="Rendering\FragmentStream.cppm" />
     <ClCompile Include="Rendering\IndexBuffer.cppm" />
     <ClCompile Include="Rendering\InputAssemblerStage.cppm" />
     <ClCompile Include="Rendering\Mesh.cppm" />
     <ClCompile Include="Rendering\OutputMergerStage.cppm" />
-    <ClCompile Include="Rendering\PixelShader.cppm" />
+    <ClCompile Include="Rendering\Pixel.cppm" />
+    <ClCompile Include="Rendering\PixelStream.cppm" />
     <ClCompile Include="Rendering\Primitive.cppm" />
     <ClCompile Include="Rendering\PrimitiveStream.cppm" />
     <ClCompile Include="Rendering\PrimitiveTopology.cppm" />

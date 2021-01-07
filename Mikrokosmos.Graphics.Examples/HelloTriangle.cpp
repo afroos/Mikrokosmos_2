@@ -102,7 +102,9 @@ int main()
     context->rasterizerStage()->setState(mk::RasterizerState{ .fillMode = mk::FillMode::Wireframe });
     context->rasterizerStage()->setViewport({ 0.0, 0.0, (float)width, (float)height });
 
-    //context->pixelShaderStage()->setShader(pixelShader);
+    auto fragmentShader = device->createFragmentShader("Basic");
+
+    context->fragmentShaderStage()->setShader(fragmentShader);
 
     context->outputMergerStage()->setRenderTargetView(*renderTargetView);
 
@@ -118,6 +120,9 @@ int main()
     auto model = mk::Matrix44f::Identity();
     
     auto projection = mk::Orthographic(-1.0f, 1.0f, -1.0f, 1.0f, 0.0f, radius * 2.0f);
+
+    context->fragmentShaderStage()->shader()->_ambientColor = mk::Color{1.0f, 0.0f, 0.0f, 0.25f};
+    context->fragmentShaderStage()->shader()->_ambientIntensity = 1.0f;
 
     while (window.isOpen())
     {

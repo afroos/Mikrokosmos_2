@@ -13,11 +13,14 @@ import Mikrokosmos.Containers.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.DeviceContext;
 import Mikrokosmos.Graphics.Rendering.Fragment;
+import Mikrokosmos.Graphics.Rendering.FragmentShader;
+import Mikrokosmos.Graphics.Rendering.FragmentShaderStage;
 import Mikrokosmos.Graphics.Rendering.FragmentStream;
 import Mikrokosmos.Graphics.Rendering.IndexBuffer;
 import Mikrokosmos.Graphics.Rendering.InputAssemblerStage;
 import Mikrokosmos.Graphics.Rendering.OutputMerger;
-import Mikrokosmos.Graphics.Rendering.PixelShader;
+import Mikrokosmos.Graphics.Rendering.Pixel;
+import Mikrokosmos.Graphics.Rendering.PixelStream;
 import Mikrokosmos.Graphics.Rendering.Primitive;
 import Mikrokosmos.Graphics.Rendering.PrimitiveStream;
 import Mikrokosmos.Graphics.Rendering.PrimitiveTopology;
@@ -90,6 +93,21 @@ export namespace mk
 			{
 				{ "Default", []() { return std::make_shared<VertexShader>();      } },
 				{ "Basic",   []() { return std::make_shared<BasicVertexShader>(); } }
+			};
+
+			auto it = dispatchTable.find(type.data());
+			if (it != dispatchTable.end()) return it->second();
+			else return nullptr;
+		}
+
+		std::shared_ptr<FragmentShader> createFragmentShader(std::string_view type)
+		{
+			static std::map<
+				std::string,
+				std::function<std::shared_ptr<FragmentShader>()>> dispatchTable
+			{
+				{ "Default", []() { return std::make_shared<FragmentShader>();      } },
+				{ "Basic",   []() { return std::make_shared<BasicFragmentShader>(); } }
 			};
 
 			auto it = dispatchTable.find(type.data());

@@ -8,11 +8,14 @@ export module Mikrokosmos.Graphics.Rendering.DeviceContext;
 import Mikrokosmos.Containers.Array;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.Fragment;
+import Mikrokosmos.Graphics.Rendering.FragmentShader;
+import Mikrokosmos.Graphics.Rendering.FragmentShaderStage;
 import Mikrokosmos.Graphics.Rendering.FragmentStream;
 import Mikrokosmos.Graphics.Rendering.IndexBuffer;
 import Mikrokosmos.Graphics.Rendering.InputAssemblerStage;
 import Mikrokosmos.Graphics.Rendering.OutputMerger;
-import Mikrokosmos.Graphics.Rendering.PixelShader;
+import Mikrokosmos.Graphics.Rendering.Pixel;
+import Mikrokosmos.Graphics.Rendering.PixelStream;
 import Mikrokosmos.Graphics.Rendering.Primitive;
 import Mikrokosmos.Graphics.Rendering.PrimitiveStream;
 import Mikrokosmos.Graphics.Rendering.PrimitiveTopology;
@@ -39,7 +42,7 @@ export namespace mk
 			_inputAssemblerStage = std::make_shared<InputAssemblerStage>();
 			_vertexShaderStage = std::make_shared<VertexShaderStage>();
 			_rasterizerStage = std::make_shared<RasterizerStage>(_inputAssemblerStage);
-			_pixelShader = std::make_shared<PixelShader>();
+			_fragmentShaderStage = std::make_shared<FragmentShaderStage>();
 			_outputMergerStage = std::make_shared<OutputMergerStage>();
 		}
 
@@ -49,7 +52,7 @@ export namespace mk
 		
 		std::shared_ptr<RasterizerStage> rasterizerStage() { return _rasterizerStage; }
 		
-		std::shared_ptr<PixelShader> pixelShader() { return _pixelShader; }
+		std::shared_ptr<FragmentShaderStage> fragmentShaderStage() { return _fragmentShaderStage; }
 		
 		std::shared_ptr<OutputMergerStage> outputMergerStage() { return _outputMergerStage; }
 
@@ -74,16 +77,16 @@ export namespace mk
 			
 			auto fragmentStream = _rasterizerStage->process(primitiveStream);
 			
-			//_pixelShaderStage->process(fragmentStream);
+			auto processedPixelStream = _fragmentShaderStage->process(fragmentStream);
 			
-			_outputMergerStage->process(fragmentStream);
+			_outputMergerStage->process(processedPixelStream);
 
 		}
 
 		std::shared_ptr<InputAssemblerStage> _inputAssemblerStage;
 		std::shared_ptr<VertexShaderStage> _vertexShaderStage;
 		std::shared_ptr<RasterizerStage> _rasterizerStage;
-		std::shared_ptr<PixelShader> _pixelShader;
+		std::shared_ptr<FragmentShaderStage> _fragmentShaderStage;
 		std::shared_ptr<OutputMergerStage> _outputMergerStage;
 
 	};

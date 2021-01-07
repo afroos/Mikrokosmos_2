@@ -3,10 +3,12 @@ module;
 #include <cstddef>
 #include <memory>
 #include <span>
+#include <ostream>
 
 export module Mikrokosmos.Graphics.Rendering.VertexShader;
 
 import Mikrokosmos.Containers.Array;
+import Mikrokosmos.Debugging;
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Mathematics.Algebra.Matrix;
@@ -47,10 +49,8 @@ export namespace mk
 			auto result{ vertex };
 
 			result.position() = _modelViewProjection * vertex.position();
-
+			
 			return result;
 		}
-
-
 	};
 }

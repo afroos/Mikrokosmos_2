@@ -120,7 +120,7 @@ export namespace mk
 		    var viewport = _viewports[0];
 
 		    var outputInputBindings = ShaderOutputInputBindings.FromShaderSignatures(
-		        previousStageOutputSignature, pixelShader);
+		        previousStageOutputSignature, fragmentShader);
 
 			var rasterizer = PrimitiveRasterizerFactory.CreateRasterizer(
                 primitiveTopology, State.Description, multiSampleCount,

@@ -72,9 +72,6 @@
     <ClCompile Include="Rendering\DeviceContext.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="Rendering\PixelShader.cppm">
-      <Filter>Source Files\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="Rendering\VertexStream.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
@@ -127,6 +124,18 @@
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Rendering\VertexShader.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\FragmentShader.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\FragmentShaderStage.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\Pixel.cppm">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Rendering\PixelStream.cppm">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
   </ItemGroup>

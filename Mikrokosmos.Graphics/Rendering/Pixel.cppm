@@ -1,8 +1,6 @@
 module;
 
-//#include <cstddef>
-
-export module Mikrokosmos.Graphics.Rendering.Fragment;
+export module Mikrokosmos.Graphics.Rendering.Pixel;
 
 import Mikrokosmos.Containers.Array;
 import Mikrokosmos.Graphics.Color;
@@ -11,20 +9,18 @@ import Mikrokosmos.Mathematics.Geometry.Point;
 
 export namespace mk
 {
-	class Fragment
+	class Pixel
 	{
 
 	public:
 
-		Fragment() = default;
+		Pixel() = default;
 
-		Fragment(const Point2i& position, float depth, const Color& color, const Vector3f& normal, Vector2f textureCoordinates)
+		Pixel(const Point2i& position, float depth, const Color& color)
 			:
 			_position{ position },
 			_depth{ depth },
-			_color{ color },
-			_normal{ normal },
-			_textureCoordinates{ textureCoordinates }
+			_color{ color }
 		{
 		}
 
@@ -45,9 +41,6 @@ export namespace mk
 		Point2i _position;
 		float _depth;
 		Color _color;
-		Vector3f _normal;
-		Vector2f _textureCoordinates;
-		// primitive id?
 	};
 
 }
