@@ -79,9 +79,10 @@ export
 			result[1][2] = backward.y();
 			result[2][2] = backward.z();
 
-			result[3][0] = eyePosition.x();
-			result[3][1] = eyePosition.y();
-			result[3][2] = eyePosition.z();
+			result[0][3] = -dot(right, eyePosition.coordinates());
+			result[1][3] = -dot(up, eyePosition.coordinates());
+			result[2][3] = -dot(backward, eyePosition.coordinates());
+			
 			result[3][3] = Scalar{ 1 };
 
 			return result;
@@ -101,9 +102,10 @@ export
 			result[1][1] =   Scalar{ 2 } / (top - bottom);
 			result[2][2] = - Scalar{ 2 } / (far - near);
 
-			result[3][0] = - (right + left) / (right - left);
-			result[3][1] = - (top + bottom) / (top - bottom);
-			result[3][2] = - (far + near)   / (far - near);
+			result[0][3] = - (right + left) / (right - left);
+			result[1][3] = - (top + bottom) / (top - bottom);
+			result[2][3] = - (far + near)   / (far - near);
+			
 			result[3][3] =   Scalar{ 1 };
 
 			return result;

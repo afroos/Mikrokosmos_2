@@ -111,14 +111,13 @@ int main()
    
                 //auto triangle = std::make_shared<mk::Mesh>(vertexBuffer, indexBuffer, effect);
 
-    
-    auto model = mk::Matrix44f::Identity();
-    
-    auto projection = mk::Orthographic(-1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f);
-    
+    const auto radius = 5.0f;
+
     auto angle = 0.0f;
 
-
+    auto model = mk::Matrix44f::Identity();
+    
+    auto projection = mk::Orthographic(-1.0f, 1.0f, -1.0f, 1.0f, 0.0f, radius * 2.0f);
 
     while (window.isOpen())
     {
@@ -132,19 +131,13 @@ int main()
 
         renderTargetView->clear(mk::Color::Black());
 
-        const float radius = 5.0f;
         angle += 0.01f;
         float camX = std::sin(angle) * radius;
         float camZ = std::cos(angle) * radius;
 
         auto view = mk::LookAt(mk::Point3f{ camX, 0.0f, camZ }, mk::Point3f{ 0.0f, 0.0f, 0.0f }, mk::Vector3f{0.0, 1.0, 0.0});
-        
-        mk::print("M:", model);
-        mk::print("V:", view);
-        mk::print("P:", projection);
-        mk::print("MVP:", model* view* projection);
 
-        context->vertexShaderStage()->shader()->modelViewProjection() = model * view * projection;
+        context->vertexShaderStage()->shader()->modelViewProjection() = projection * view * model;
 
         context->drawIndexed(indexBuffer->size(), 0, 0);
 
