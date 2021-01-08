@@ -26,10 +26,17 @@ export
 			{
 			}
 
-
 			constexpr Vector(const Vector<3, Scalar>& vector, Scalar w) requires (Dimension == 4)
 				: _coordinates{ vector[0], vector[1], vector[2], w }
 			{
+			}
+
+			constexpr Vector(Vector<Dimension + 1, Scalar> other) noexcept
+			{
+				for (Index index = 0; index < size(); ++index)
+				{
+					_coordinates[index] = other[index];
+				}
 			}
 
 			static constexpr Vector Zero() noexcept { return Vector(); }

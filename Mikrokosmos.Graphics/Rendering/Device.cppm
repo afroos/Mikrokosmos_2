@@ -91,7 +91,7 @@ export namespace mk
 				std::string,
 				std::function<std::shared_ptr<VertexShader>()>> dispatchTable
 			{
-				{ "Default", []() { return std::make_shared<VertexShader>();      } },
+				{ "",        []() { return std::make_shared<VertexShader>();      } },
 				{ "Basic",   []() { return std::make_shared<BasicVertexShader>(); } }
 			};
 
@@ -106,7 +106,7 @@ export namespace mk
 				std::string,
 				std::function<std::shared_ptr<FragmentShader>()>> dispatchTable
 			{
-				{ "Default", []() { return std::make_shared<FragmentShader>();      } },
+				{ "",        []() { return std::make_shared<FragmentShader>();      } },
 				{ "Basic",   []() { return std::make_shared<BasicFragmentShader>(); } }
 			};
 

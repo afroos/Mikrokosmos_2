@@ -1,5 +1,6 @@
 module;
 
+#include <algorithm>
 #include <cstddef>
 #include <memory>
 #include <span>
@@ -12,6 +13,9 @@ import Mikrokosmos.Graphics.Rendering.Fragment;
 import Mikrokosmos.Graphics.Rendering.FragmentStream;
 import Mikrokosmos.Graphics.Rendering.Vertex;
 import Mikrokosmos.Graphics.Rendering.Texture;
+import Mikrokosmos.Mathematics.Algebra.Vector;
+
+using Index = std::size_t;
 
 export namespace mk
 {
@@ -45,9 +49,10 @@ export namespace mk
 		{
 			auto vertexCount = vertexes.size();
 			auto iterations = vertexCount > 2 ? vertexCount : vertexCount - 1;
-			for (std::size_t i = 0; i < iterations; ++i)
+			
+			for (Index i = 0; i < iterations; ++i)
 			{
-				std::size_t j = (i + 1) % vertexCount;
+				Index j = (i + 1) % vertexCount;
 				rasterizeLine(vertexes[i], vertexes[j], fragmentStream);
 			}
 		}
@@ -58,13 +63,14 @@ export namespace mk
 		{
 			bool steep = false;
 
-			int x0 = static_cast<int>(vertex0.position().x());
-			int y0 = static_cast<int>(vertex0.position().y());
-			int x1 = static_cast<int>(vertex1.position().x());
-			int y1 = static_cast<int>(vertex1.position().y());
-
 			Vertex v0 = vertex0;
 			Vertex v1 = vertex1;
+
+			auto x0 = static_cast<int>(v0.position().x());
+			auto y0 = static_cast<int>(v0.position().y());
+
+			auto x1 = static_cast<int>(v1.position().x());
+			auto y1 = static_cast<int>(v1.position().y());
 
 			if (std::abs(x0 - x1) < std::abs(y0 - y1)) {
 				std::swap(x0, y0);
@@ -132,7 +138,75 @@ export namespace mk
 
 		TriangleRasterizer() = default;
 
-		void rasterize(std::span<Vertex> vertexes, FragmentStream& fragmentStream) override {}
+		void rasterize(std::span<Vertex> vertexes, FragmentStream& fragmentStream) override 
+		{
+			rasterizeTriangle(vertexes[0], vertexes[1], vertexes[2], fragmentStream);
+		}
+
+	private:
+
+		void rasterizeTriangle(const Vertex& vertex0, const Vertex& vertex1, const Vertex& vertex2, FragmentStream& fragmentStream)
+		{
+
+			// Vertex positions.
+
+			Vector3f v0{ vertex0.position() };
+			Vector3f v1{ vertex1.position() };
+			Vector3f v2{ vertex2.position() };
+
+			// CW -> CCW? Area test?
+
+			auto area = edgeFunction(v0, v1, v2);
+
+			// Find triangle's AABB.
+			int xMin = std::min({ v0.x(), v1.x(), v2.x() });
+			int xMax = std::max({ v0.x(), v1.x(), v2.x() });
+			int yMin = std::min({ v0.y(), v1.y(), v2.y() });
+			int yMax = std::max({ v0.y(), v1.y(), v2.y() });
+
+			// Clip if outside screen?
+			
+			// Iterate through each pixel in triangle AABB.
+			for (auto y = yMin; y <= yMax; ++y)
+			{
+				for (auto x = xMin; x <= xMax; ++x)
+				{
+					//Test point.
+					Vector3f p{ x + 0.5f, y + 0.5f, 0.0f };
+
+					// Find barycentric coordinates?
+					auto w0 = edgeFunction(v1, v2, p);
+					auto w1 = edgeFunction(v2, v0, p);
+					auto w2 = edgeFunction(v0, v1, p);
+
+					// If pixel is inside triangle...
+					if (w0 >= 0 && w1 >= 0 && w2 >= 0)
+					{
+						w0 /= area;
+						w1 /= area;
+						w2 /= area;
+
+						auto position = Point2i{x, y};
+
+						auto depth = float{};
+
+						auto color = w0 * vertex0.color() + w1 * vertex1.color() + w2 * vertex2.color();
+						//auto z = 1.0f / (w0 * v0.z() + w1 * v1.z() + w2 * v2.z());
+						//color *= z;
+
+						auto normal = Vector3f{};
+						auto textureCoordinates = Vector2f{};
+						
+						fragmentStream.emplace_back(position, depth, color, normal, textureCoordinates);
+					}
+				}
+			}
+		}
+
+		constexpr float edgeFunction(const Vector3f& a, const Vector3f& b, const Vector3f& c) noexcept
+		{
+			return ( c.x() - a.x() ) * ( b.y() - a.y() ) - ( c.y() - a.y() ) * ( b.x() - a.x() );
+		}
 
 	};
 

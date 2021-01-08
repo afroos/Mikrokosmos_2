@@ -21,7 +21,7 @@ import Mikrokosmos.Platform.SFML.SFMLSwapChainPresenter;
 
 int main()
 {
-    std::vector<mk::Vertex> vertexes;
+  /*  std::vector<mk::Vertex> vertexes;
     std::vector<mk::Index> indexes;
 
     std::ifstream in;
@@ -58,7 +58,7 @@ int main()
             }
         }
 
-    }
+    }*/
 
     auto width = 800;
     auto height = 800;
@@ -77,17 +77,17 @@ int main()
 
     auto context = device->immediateContext();
 
-   /* mk::Vertex vertexes[] =
+    mk::Vertex vertexes[] =
     {
         { {-0.5f, -0.5f, +0.0f}, mk::Color::Red()   },
         { {+0.5f, -0.5f, +0.0f}, mk::Color::Green() },
         { {+0.0f, +0.5f, +0.0f}, mk::Color::Blue()  },
         { {+0.5f, +0.0f, +0.0f}, mk::Color::Yellow()  }
-    };*/
+    };
 
     auto vertexBuffer = device->createVertexBuffer(vertexes);
 
-   // mk::Index indexes[] = {0, 1, 2, 1, 3, 2, 1, 3, 0};
+    mk::Index indexes[] = {0, 1, 2};
 
     auto indexBuffer = device->createIndexBuffer(indexes);
 
@@ -99,10 +99,11 @@ int main()
 
     context->vertexShaderStage()->setShader(vertexShader);
 
-    context->rasterizerStage()->setState(mk::RasterizerState{ .fillMode = mk::FillMode::Wireframe });
+    //context->rasterizerStage()->setState(mk::RasterizerState{ .fillMode = mk::FillMode::Wireframe });
+    context->rasterizerStage()->setState(mk::RasterizerState{ .fillMode = mk::FillMode::Solid });
     context->rasterizerStage()->setViewport({ 0.0, 0.0, (float)width, (float)height });
 
-    auto fragmentShader = device->createFragmentShader("Basic");
+    auto fragmentShader = device->createFragmentShader("");
 
     context->fragmentShaderStage()->setShader(fragmentShader);
 
@@ -142,7 +143,7 @@ int main()
 
         auto view = mk::LookAt(mk::Point3f{ camX, 0.0f, camZ }, mk::Point3f{ 0.0f, 0.0f, 0.0f }, mk::Vector3f{0.0, 1.0, 0.0});
 
-        context->vertexShaderStage()->shader()->modelViewProjection() = projection * view * model;
+        context->vertexShaderStage()->shader()->modelViewProjection() = /*projection * view * model*/ mk::Matrix44f::Identity();
 
         context->drawIndexed(indexBuffer->size(), 0, 0);
 
