@@ -15,16 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cppm">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowApplication.cppm">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SFMLSwapChainPresenter.cppm">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Applications.cppm">
+    <ClCompile Include="Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

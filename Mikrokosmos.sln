@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Framework", "Framework", "{
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ColorTriangle", "Mikrokosmos.Examples\ColorTriangle\ColorTriangle.vcxproj", "{224E8D43-AFF9-428E-A91C-6A04566C4762}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mikrokosmos.Graphics.Examples", "Old\Mikrokosmos.Graphics.Examples.vcxproj", "{ECB4587B-0D30-4D92-89FF-384FA5001623}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mesh", "Mikrokosmos.Examples\Mesh\Mesh.vcxproj", "{BC01A15D-C80A-4D03-8FBD-421613129715}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,14 +77,14 @@ Global
 		{224E8D43-AFF9-428E-A91C-6A04566C4762}.Release|x64.Build.0 = Release|x64
 		{224E8D43-AFF9-428E-A91C-6A04566C4762}.Release|x86.ActiveCfg = Release|Win32
 		{224E8D43-AFF9-428E-A91C-6A04566C4762}.Release|x86.Build.0 = Release|Win32
-		{ECB4587B-0D30-4D92-89FF-384FA5001623}.Debug|x64.ActiveCfg = Debug|x64
-		{ECB4587B-0D30-4D92-89FF-384FA5001623}.Debug|x64.Build.0 = Debug|x64
-		{ECB4587B-0D30-4D92-89FF-384FA5001623}.Debug|x86.ActiveCfg = Debug|Win32
-		{ECB4587B-0D30-4D92-89FF-384FA5001623}.Debug|x86.Build.0 = Debug|Win32
-		{ECB4587B-0D30-4D92-89FF-384FA5001623}.Release|x64.ActiveCfg = Release|x64
-		{ECB4587B-0D30-4D92-89FF-384FA5001623}.Release|x64.Build.0 = Release|x64
-		{ECB4587B-0D30-4D92-89FF-384FA5001623}.Release|x86.ActiveCfg = Release|Win32
-		{ECB4587B-0D30-4D92-89FF-384FA5001623}.Release|x86.Build.0 = Release|Win32
+		{BC01A15D-C80A-4D03-8FBD-421613129715}.Debug|x64.ActiveCfg = Debug|x64
+		{BC01A15D-C80A-4D03-8FBD-421613129715}.Debug|x64.Build.0 = Debug|x64
+		{BC01A15D-C80A-4D03-8FBD-421613129715}.Debug|x86.ActiveCfg = Debug|Win32
+		{BC01A15D-C80A-4D03-8FBD-421613129715}.Debug|x86.Build.0 = Debug|Win32
+		{BC01A15D-C80A-4D03-8FBD-421613129715}.Release|x64.ActiveCfg = Release|x64
+		{BC01A15D-C80A-4D03-8FBD-421613129715}.Release|x64.Build.0 = Release|x64
+		{BC01A15D-C80A-4D03-8FBD-421613129715}.Release|x86.ActiveCfg = Release|Win32
+		{BC01A15D-C80A-4D03-8FBD-421613129715}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +96,7 @@ Global
 		{AEB32348-2EFB-4CF2-985C-B5DA525C7666} = {5250E41B-451D-465B-8350-E198787659AC}
 		{4E7CE6B0-AB44-4523-8E22-91FBFF7BF378} = {5250E41B-451D-465B-8350-E198787659AC}
 		{224E8D43-AFF9-428E-A91C-6A04566C4762} = {B94979B3-2C29-44B4-9B16-7B267169632E}
+		{BC01A15D-C80A-4D03-8FBD-421613129715} = {B94979B3-2C29-44B4-9B16-7B267169632E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99840485-C82B-4E0E-BE45-75B5025AA56D}

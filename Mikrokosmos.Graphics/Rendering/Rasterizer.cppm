@@ -159,10 +159,10 @@ export namespace mk
 			auto area = edgeFunction(v0, v1, v2);
 
 			// Find triangle's AABB.
-			int xMin = std::min({ v0.x(), v1.x(), v2.x() });
-			int xMax = std::max({ v0.x(), v1.x(), v2.x() });
-			int yMin = std::min({ v0.y(), v1.y(), v2.y() });
-			int yMax = std::max({ v0.y(), v1.y(), v2.y() });
+			auto xMin = static_cast<int>(std::min({ v0.x(), v1.x(), v2.x() }));
+			auto xMax = static_cast<int>(std::max({ v0.x(), v1.x(), v2.x() }));
+			auto yMin = static_cast<int>(std::min({ v0.y(), v1.y(), v2.y() }));
+			auto yMax = static_cast<int>(std::max({ v0.y(), v1.y(), v2.y() }));
 
 			// Clip if outside screen?
 			

@@ -15,8 +15,8 @@ export namespace mk
 
 		struct Configuration
 		{
-			std::string name{ "Test" };
-			Vector2i windowSize{ 800, 600 };
+			std::string name{ "Mikrokosmos Application" };
+			Vector2u windowSize{ 800, 600 };
 		};
 
 		WindowApplication()
@@ -25,6 +25,20 @@ export namespace mk
 		{
 
 		}
+
+
+		WindowApplication(const Configuration& configuration)
+			:
+			_width{ configuration.windowSize.x() },
+			_height{ configuration.windowSize.y() },
+			_window{ sf::VideoMode{_width, _height}, configuration.name }
+		{
+
+		}
+
+		std::size_t width() const { return _width; }
+
+		std::size_t height() const { return _height; }
 
 		virtual void initialize() noexcept
 		{
@@ -61,16 +75,11 @@ export namespace mk
 
 	protected:
 
-		WindowApplication(const Configuration& configuration)
-			:
-			_window{ sf::VideoMode(configuration.windowSize.x(), configuration.windowSize.y()), configuration.name }
-		{
-
-		}
+		std::size_t _width;
+		std::size_t _height;
+		sf::RenderWindow _window;
 
 	private:
-
-		sf::RenderWindow _window;
 
 	};
 }

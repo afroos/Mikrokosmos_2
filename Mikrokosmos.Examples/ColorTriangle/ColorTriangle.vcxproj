@@ -149,9 +149,6 @@
     <ProjectReference Include="..\..\Mikrokosmos.Graphics\Mikrokosmos.Graphics.vcxproj">
       <Project>{36fb0fb0-4e8a-49b8-a6e6-cc606a6d302e}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\Mikrokosmos.Mathematics\Mikrokosmos.Mathematics.vcxproj">
-      <Project>{ba7a2fa3-78eb-4ad1-9957-87bd3df2e6e5}</Project>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColorTriangle.cpp" />
