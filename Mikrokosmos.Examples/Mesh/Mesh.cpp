@@ -24,7 +24,7 @@ public:
 
     Mesh()
 		:
-        mk::WindowApplication{ {.name = "Color Triangle", .windowSize = {800, 800}} }
+        mk::WindowApplication{ {.name = "Mesh", .windowSize = {800, 800}} }
 	{
 
 	}
@@ -45,6 +45,9 @@ public:
         std::vector<mk::Vertex> vertexes;
         std::vector<mk::Index> indexes;
 
+        std::vector<mk::Vector4f> positions;
+        std::vector<mk::Vector3f> normals;
+
         std::ifstream in;
         in.open("african_head.obj", std::ifstream::in);
         if (in.fail()) return;
@@ -57,16 +60,22 @@ public:
             if (!line.compare(0, 2, "v "))
             {
                 iss >> trash;
-                mk::Vector3f position;  mk::Vertex vertex;
                 float v;
+                mk::Vector4f position;
                 for (int i = 0; i < 3; i++)
                 {
                     iss >> v;
-                    vertex.position()[i] = v * 0.99f;
+                    position[i] = v * 0.99f;
                 }
-                vertex.position().w() = 1.0f;
-                vertex.color() = mk::Color{ rand() % 256, rand() % 256, rand() % 256 };
-                vertexes.push_back(vertex);
+                position[3] = 1.0f;
+
+                positions.push_back(position);
+            }
+            else if (!line.compare(0, 3, "vn ")) {
+                iss >> trash >> trash;
+                mk::Vector3f n;
+                for (int i = 0; i < 3; i++) iss >> n[i];
+                normals.push_back(normalize(n));
             }
             else if (!line.compare(0, 2, "f "))
             {
@@ -78,7 +87,15 @@ public:
                     indexes.push_back(idx);
                 }
             }
+        }
 
+        for (std::size_t i = 0; i < positions.size(); i++)
+        {
+            mk::Vertex vertex;
+            vertex.position() = positions[i];
+            vertex.color() = mk::Color{ rand() % 256, rand() % 256, rand() % 256 };
+            vertex.normal() = normals[i];
+            vertexes.push_back(vertex);
         }
 
         auto vertexBuffer = device->createVertexBuffer(vertexes);
@@ -93,14 +110,14 @@ public:
 
         context->vertexShaderStage()->setShader(vertexShader);
 
-        context->rasterizerStage()->setState(mk::RasterizerState{ .fillMode = mk::FillMode::Wireframe });
+        context->rasterizerStage()->setState(mk::RasterizerState{ .fillMode = mk::FillMode::Solid });
         context->rasterizerStage()->setViewport({ 0.0, 0.0, (float)_width, (float)_height });
 
-        auto fragmentShader = device->createFragmentShader("");
+        auto fragmentShader = device->createFragmentShader("Basic");
 
         context->fragmentShaderStage()->setShader(fragmentShader);
-          context->fragmentShaderStage()->shader()->_ambientColor = mk::Color{ 1.0f, 0.0f, 0.0f, 0.25f };
-          context->fragmentShaderStage()->shader()->_ambientIntensity = 1.0f;
+        context->fragmentShaderStage()->shader()->_ambientColor = mk::Color::Green();
+        context->fragmentShaderStage()->shader()->_ambientIntensity = 1.0f;
 
         context->outputMergerStage()->setRenderTargetView(*renderTargetView);
 	}
@@ -115,7 +132,9 @@ public:
 
         auto view = mk::LookAt(mk::Point3f{ camX, 0.0f, camZ }, mk::Point3f{ 0.0f, 0.0f, 0.0f }, mk::Vector3f{ 0.0, 1.0, 0.0 });
 
-        context->vertexShaderStage()->shader()->modelViewProjection() = projection * view * model;
+        context->vertexShaderStage()->shader()->_modelViewProjection = projection * view * model;
+
+        context->fragmentShaderStage()->shader()->_lightDirection = mk::Vector4f{ 0.0f, 0.0f, 1.0f, 0.0f };
 
         context->drawIndexed(context->inputAssemblerStage()->indexBuffer()->size(), 0, 0);
 

@@ -71,6 +71,15 @@ export
 
 			constexpr const Scalar& w() const requires (Dimension > 3) { return _coordinates[3]; }
 
+			constexpr Vector& operator+=(const Vector& other) noexcept
+			{
+				for (Index index = 0; index < size(); ++index)
+				{
+					_coordinates[index] += other[index];
+				}
+				return *this;
+			}
+
 			constexpr Vector& operator-=(const Vector& other) noexcept
 			{
 				for (Index index = 0; index < size(); ++index)
@@ -121,6 +130,14 @@ export
 		using Vector4d = Vector<4, double>;
 
 		template <std::size_t Dimension, typename Scalar>
+		constexpr Vector<Dimension, Scalar> operator+(const Vector<Dimension, Scalar>& vector1, const Vector<Dimension, Scalar>& vector2) noexcept
+		{
+			Vector<Dimension, Scalar> result{ vector1 };
+			result += vector2;
+			return result;
+		}
+
+		template <std::size_t Dimension, typename Scalar>
 		constexpr Vector<Dimension, Scalar> operator-(const Vector<Dimension, Scalar>& vector1, const Vector<Dimension, Scalar>& vector2) noexcept
 		{
 			Vector<Dimension, Scalar> result{ vector1 };
@@ -134,6 +151,12 @@ export
 			Vector<Dimension, Scalar> result{ vector };
 			result *= scalar;
 			return result;
+		}
+
+		template <std::size_t Dimension, typename Scalar>
+		constexpr Vector<Dimension, Scalar> operator*(const Vector<Dimension, Scalar>& vector, Scalar scalar) noexcept
+		{
+			return scalar * vector;
 		}
 
 		template <std::size_t Dimension, typename Scalar>

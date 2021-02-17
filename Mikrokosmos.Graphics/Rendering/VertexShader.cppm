@@ -25,16 +25,17 @@ export namespace mk
 
 		virtual Vertex process(const Vertex& vertex)
 		{
-			auto result{ vertex };
+			auto output{ vertex };
 			
-			return result;
+			return output;
 		}
 
-		Matrix44f& modelViewProjection() { return _modelViewProjection; }
-
-	protected:
-
 		Matrix44f _modelViewProjection{ Matrix44f::Identity() };
+
+		Matrix44f _model{ Matrix44f::Identity() };
+
+
+	private:
 
 	};
 
@@ -46,11 +47,13 @@ export namespace mk
 
 		Vertex process(const Vertex& vertex) override
 		{
-			auto result{ vertex };
+			auto output{ vertex };
 
-			result.position() = _modelViewProjection * vertex.position();
+			output.position() = _modelViewProjection * vertex.position();
 			
-			return result;
+			output.normal() = _model * Vector4f{ vertex.normal(), 0.0f };
+			
+			return output;
 		}
 	};
 }

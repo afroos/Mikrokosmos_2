@@ -194,7 +194,7 @@ export namespace mk
 						//auto z = 1.0f / (w0 * v0.z() + w1 * v1.z() + w2 * v2.z());
 						//color *= z;
 
-						auto normal = Vector3f{};
+						auto normal = w0 * vertex0.normal() + w1 * vertex1.normal() + w2 * vertex2.normal();
 						auto textureCoordinates = Vector2f{};
 						
 						fragmentStream.emplace_back(position, depth, color, normal, textureCoordinates);

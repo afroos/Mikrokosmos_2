@@ -1,13 +1,22 @@
 module;
 
+#include <algorithm>
+
 export module Mikrokosmos.Graphics.Rendering.FragmentShader;
 
 import Mikrokosmos.Graphics.Color;
 import Mikrokosmos.Graphics.Rendering.Fragment;
 import Mikrokosmos.Graphics.Rendering.Pixel;
+import Mikrokosmos.Mathematics.Algebra.Vector;
 
 export namespace mk
 {
+	template<typename T>
+	constexpr const T& saturate(const T& value)
+	{
+		return std::clamp(value, T{ 0 }, T{ 1 });
+	}
+
 	class FragmentShader
 	{
 	public:
@@ -16,14 +25,16 @@ export namespace mk
 
 		virtual Pixel process(const Fragment& fragment)
 		{
-			Pixel result{ fragment.position(), fragment.depth(), fragment.color() };
+			Pixel output{ fragment.position(), fragment.depth(), fragment.color() };
 
-			return result;
+			return output;
 		}
 
 		Color _ambientColor;
 
 		float _ambientIntensity;
+
+		Vector3f _lightDirection;
 
 	private:
 
@@ -37,11 +48,13 @@ export namespace mk
 
 		Pixel process(const Fragment& fragment) override
 		{
-			Pixel result{ fragment.position(), fragment.depth(), fragment.color() };
+			Pixel output{ fragment.position(), fragment.depth(), fragment.color() };
 
-			result.color() = _ambientColor * _ambientIntensity;
+			auto lightIntensity = saturate(dot(normalize(fragment.normal()), _lightDirection));
 
-			return result;
+			output.color() = (_ambientColor * _ambientIntensity) * lightIntensity;
+
+			return output;
 		}
 
 	};

@@ -40,6 +40,10 @@ export namespace mk
 
 		const Color& color() const { return _color; }
 
+		Vector3f& normal() { return _normal; }
+
+		const Vector3f& normal() const { return _normal; }
+
 	private:
 
 		Point2i _position;

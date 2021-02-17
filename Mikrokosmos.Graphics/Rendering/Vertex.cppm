@@ -15,10 +15,11 @@ export namespace mk
 
 		Vertex() = default;
 
-		Vertex(const Point3f& position, const Color& color)
+		Vertex(const Point3f& position, const Color& color, const Vector3f normal)
 			:
 			_position{ position.coordinates(), 1.0f },
-			_color{ color }
+			_color{ color },
+			_normal{ normal }
 		{
 		}
 
@@ -30,11 +31,15 @@ export namespace mk
 
 		const Color& color() const { return _color; }
 
+		Vector3f& normal() { return _normal; }
+
+		const Vector3f& normal() const { return _normal; }
+
 	private:
 
 		Vector4f _position;
 		Color _color;
-		//Vector3f _normal;
+		Vector3f _normal;
 		//Vector2f _textureCoordinates;
 
 	};
