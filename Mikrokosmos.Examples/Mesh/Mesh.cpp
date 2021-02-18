@@ -110,10 +110,10 @@ public:
 
         context->vertexShaderStage()->setShader(vertexShader);
 
-        context->rasterizerStage()->setState(mk::RasterizerState{ .fillMode = mk::FillMode::Solid });
+        context->rasterizerStage()->setState(mk::RasterizerState{ .fillMode = mk::FillMode::Wireframe, .cullMode = mk::CullMode::None });
         context->rasterizerStage()->setViewport({ 0.0, 0.0, (float)_width, (float)_height });
 
-        auto fragmentShader = device->createFragmentShader("Basic");
+        auto fragmentShader = device->createFragmentShader("");
 
         context->fragmentShaderStage()->setShader(fragmentShader);
         context->fragmentShaderStage()->shader()->_ambientColor = mk::Color::Green();

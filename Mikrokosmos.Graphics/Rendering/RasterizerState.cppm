@@ -12,9 +12,17 @@ export namespace mk
 		Solid
 	};
 
+	enum class CullMode
+	{
+		None,
+		Front,
+		Back
+	};
+
 	struct RasterizerState
 	{
 		FillMode fillMode{ FillMode::Solid };
+		CullMode cullMode{ CullMode::None  };
 	};
 
 }

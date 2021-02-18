@@ -70,9 +70,9 @@ export namespace mk
 					vertexes[i] = primitive.vertex(i);
 				}
 				
-				// frustum culling
+				// Frustum culling.
 
-				// Frustum clipping
+				// Frustum clipping.
 				auto clipped = false;
 				for (auto& vertex : vertexes)
 				{
@@ -89,7 +89,7 @@ export namespace mk
 				}
 				if (clipped) continue;
 
-				// Perspective divide (clip space to NDC space)
+				// Perspective divide (clip space to NDC space).
 				for (auto& vertex : vertexes)
 				{
 					auto& position = vertex.position();
@@ -98,9 +98,25 @@ export namespace mk
 					position.z() /= position.w();
 				}
 
-				// Backface culling (face culling)
+				// Face culling.
+				if (vertexCount > 2)
+				{
+					Vector3f a{ vertexes[0].position() };
+					Vector3f b{ vertexes[1].position() };
+					Vector3f c{ vertexes[2].position() };
 
-				// Viewport transformation (NDC space to screen space)
+					auto ab = b - a;
+					auto ac = c - a;
+
+					auto normal = cross(ab, ac);
+
+					auto isCounterClockwise = (normal.z() > 0.0f);
+
+					if (_state.cullMode == CullMode::Front &&  isCounterClockwise || 
+						_state.cullMode == CullMode::Back  && !isCounterClockwise) continue;
+				}
+
+				// Viewport transformation (NDC space to screen space).
 				for (auto& vertex : vertexes)
 				{
 					auto& position = vertex.position();
