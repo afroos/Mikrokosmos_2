@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Mesh.cpp">
+    <ClCompile Include="MeshExample.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

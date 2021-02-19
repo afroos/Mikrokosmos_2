@@ -22,7 +22,8 @@ export namespace mk
 	struct RasterizerState
 	{
 		FillMode fillMode{ FillMode::Solid };
-		CullMode cullMode{ CullMode::None  };
+		CullMode cullMode{ CullMode::Back  };
+		bool frontCounterClockwise{ false };
 	};
 
 }

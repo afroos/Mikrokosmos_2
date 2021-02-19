@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{224e8d43-aff9-428e-a91c-6a04566c4762}</ProjectGuid>
-    <RootNamespace>ColorTriangle</RootNamespace>
+    <ProjectGuid>{0d4b4f2e-de1b-4ff1-bdd3-8f1db46eace2}</ProjectGuid>
+    <RootNamespace>Cube</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,7 +151,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TriangleExample.cpp" />
+    <ClCompile Include="CubeExample.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,7 +4,7 @@
 import Mikrokosmos.Applications;
 import Mikrokosmos.Graphics;
 
-class ColorTriangle : public mk::WindowApplication
+class CubeExample : public mk::WindowApplication
 {
 public:
 
@@ -14,7 +14,7 @@ public:
     std::shared_ptr<mk::RenderTargetView> renderTargetView;
     std::shared_ptr<mk::DeviceContext> context;
 
-	ColorTriangle()
+    CubeExample()
 		:
         mk::WindowApplication{ {.name = "Color Triangle", .windowSize = {800, 600}} }
 	{
@@ -75,6 +75,6 @@ public:
 
 int main()
 {
-	ColorTriangle application;
+    CubeExample application;
 	return application.run();
 }

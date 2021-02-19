@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ColorTriangle", "Mikrokosmo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mesh", "Mikrokosmos.Examples\Mesh\Mesh.vcxproj", "{BC01A15D-C80A-4D03-8FBD-421613129715}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cube", "Mikrokosmos.Examples\Cube\Cube.vcxproj", "{0D4B4F2E-DE1B-4FF1-BDD3-8F1DB46EACE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -85,6 +87,14 @@ Global
 		{BC01A15D-C80A-4D03-8FBD-421613129715}.Release|x64.Build.0 = Release|x64
 		{BC01A15D-C80A-4D03-8FBD-421613129715}.Release|x86.ActiveCfg = Release|Win32
 		{BC01A15D-C80A-4D03-8FBD-421613129715}.Release|x86.Build.0 = Release|Win32
+		{0D4B4F2E-DE1B-4FF1-BDD3-8F1DB46EACE2}.Debug|x64.ActiveCfg = Debug|x64
+		{0D4B4F2E-DE1B-4FF1-BDD3-8F1DB46EACE2}.Debug|x64.Build.0 = Debug|x64
+		{0D4B4F2E-DE1B-4FF1-BDD3-8F1DB46EACE2}.Debug|x86.ActiveCfg = Debug|Win32
+		{0D4B4F2E-DE1B-4FF1-BDD3-8F1DB46EACE2}.Debug|x86.Build.0 = Debug|Win32
+		{0D4B4F2E-DE1B-4FF1-BDD3-8F1DB46EACE2}.Release|x64.ActiveCfg = Release|x64
+		{0D4B4F2E-DE1B-4FF1-BDD3-8F1DB46EACE2}.Release|x64.Build.0 = Release|x64
+		{0D4B4F2E-DE1B-4FF1-BDD3-8F1DB46EACE2}.Release|x86.ActiveCfg = Release|Win32
+		{0D4B4F2E-DE1B-4FF1-BDD3-8F1DB46EACE2}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +107,7 @@ Global
 		{4E7CE6B0-AB44-4523-8E22-91FBFF7BF378} = {5250E41B-451D-465B-8350-E198787659AC}
 		{224E8D43-AFF9-428E-A91C-6A04566C4762} = {B94979B3-2C29-44B4-9B16-7B267169632E}
 		{BC01A15D-C80A-4D03-8FBD-421613129715} = {B94979B3-2C29-44B4-9B16-7B267169632E}
+		{0D4B4F2E-DE1B-4FF1-BDD3-8F1DB46EACE2} = {B94979B3-2C29-44B4-9B16-7B267169632E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {99840485-C82B-4E0E-BE45-75B5025AA56D}

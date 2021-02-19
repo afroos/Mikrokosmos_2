@@ -110,10 +110,10 @@ export namespace mk
 
 					auto normal = cross(ab, ac);
 
-					auto isCounterClockwise = (normal.z() > 0.0f);
+					auto faceIsCounterClockwise = (normal.z() > 0.0f);
 
-					if (_state.cullMode == CullMode::Front &&  isCounterClockwise || 
-						_state.cullMode == CullMode::Back  && !isCounterClockwise) continue;
+					if (faceIsCounterClockwise == _state.frontCounterClockwise && _state.cullMode == CullMode::Front   
+					    || faceIsCounterClockwise != _state.frontCounterClockwise && _state.cullMode == CullMode::Back) continue;
 				}
 
 				// Viewport transformation (NDC space to screen space).

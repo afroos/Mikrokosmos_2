@@ -155,7 +155,6 @@ export namespace mk
 			Vector3f v2{ vertex2.position() };
 
 			// CW -> CCW? Area test?
-
 			auto area = edgeFunction(v0, v1, v2);
 
 			// Find triangle's AABB.
@@ -166,7 +165,7 @@ export namespace mk
 
 			// Clip if outside screen?
 			
-			// Iterate through each pixel in triangle AABB.
+			// Iterate through each pixel inside the triangle's AABB.
 			for (auto y = yMin; y <= yMax; ++y)
 			{
 				for (auto x = xMin; x <= xMax; ++x)
@@ -180,7 +179,7 @@ export namespace mk
 					auto w2 = edgeFunction(v0, v1, p);
 
 					// If pixel is inside triangle...
-					if (w0 >= 0 && w1 >= 0 && w2 >= 0)
+					if ((w0 >= 0) == (w1 >= 0) && (w1 >= 0) == (w2 >= 0))
 					{
 						w0 /= area;
 						w1 /= area;
@@ -195,6 +194,7 @@ export namespace mk
 						//color *= z;
 
 						auto normal = w0 * vertex0.normal() + w1 * vertex1.normal() + w2 * vertex2.normal();
+						
 						auto textureCoordinates = Vector2f{};
 						
 						fragmentStream.emplace_back(position, depth, color, normal, textureCoordinates);
@@ -205,7 +205,9 @@ export namespace mk
 
 		constexpr float edgeFunction(const Vector3f& a, const Vector3f& b, const Vector3f& c) noexcept
 		{
-			return ( c.x() - a.x() ) * ( b.y() - a.y() ) - ( c.y() - a.y() ) * ( b.x() - a.x() );
+			//return (a.x() - b.x()) * (c.y() - a.y()) - (a.y() - b.y()) * (c.x() - a.x());
+			//return (c.x() - a.x()) * (b.y() - a.y()) - (c.y() - a.y()) * (b.x() - a.x());
+			return (b.x() - a.x()) * (c.y() - a.y()) - (b.y() - a.y()) * (c.x() - a.x());
 		}
 
 	};
