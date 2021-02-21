@@ -20,7 +20,7 @@ public:
     const float radius = 5.0f;
     float angle = 0.0f;
     mk::Matrix44f model = mk::Matrix44f::Identity();
-    mk::Matrix44f projection = mk::Orthographic(-1.0f, 1.0f, -1.0f, 1.0f, 0.0f, radius * 2.0f);
+    mk::Matrix44f projection = mk::Orthographic(2.0f, 2.0f, 0.0f, radius * 2.0f);
 
     Mesh()
 		:

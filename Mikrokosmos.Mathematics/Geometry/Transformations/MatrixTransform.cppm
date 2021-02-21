@@ -89,22 +89,20 @@ export
 		}
 
 		template <typename Scalar>
-		constexpr Matrix<4, 4, Scalar> Orthographic(Scalar left, 
-													Scalar right, 
-													Scalar bottom, 
-													Scalar top,
+		constexpr Matrix<4, 4, Scalar> Orthographic(Scalar width, 
+													Scalar height,
 													Scalar near, 
 													Scalar far) noexcept
 		{
 			Matrix<4, 4, Scalar> result;
 
-			result[0][0] =   Scalar{ 2 } / (right - left);
-			result[1][1] =   Scalar{ 2 } / (top - bottom);
-			result[2][2] = - Scalar{ 2 } / (far - near);
+			auto depthRange = Scalar{ 1 } / (near - far);
 
-			result[0][3] = - (right + left) / (right - left);
-			result[1][3] = - (top + bottom) / (top - bottom);
-			result[2][3] = - (far + near)   / (far - near);
+			result[0][0] = Scalar{ 2 } / width;
+			result[1][1] = Scalar{ 2 } / height;
+			result[2][2] = depthRange;
+
+			result[2][3] = near * depthRange;
 			
 			result[3][3] =   Scalar{ 1 };
 

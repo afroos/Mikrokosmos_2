@@ -173,13 +173,13 @@ export namespace mk
 					//Test point.
 					Vector3f p{ x + 0.5f, y + 0.5f, 0.0f };
 
-					// Find barycentric coordinates?
+					// Find barycentric coordinates.
 					auto w0 = edgeFunction(v1, v2, p);
 					auto w1 = edgeFunction(v2, v0, p);
 					auto w2 = edgeFunction(v0, v1, p);
 
 					// If pixel is inside triangle...
-					if ((w0 >= 0) == (w1 >= 0) && (w1 >= 0) == (w2 >= 0))
+					if ((w0 >= 0) == (w1 >= 0) && (w1 >= 0) == (w2 >= 0)) // Is this correct?
 					{
 						w0 /= area;
 						w1 /= area;
@@ -207,7 +207,7 @@ export namespace mk
 		{
 			//return (a.x() - b.x()) * (c.y() - a.y()) - (a.y() - b.y()) * (c.x() - a.x());
 			//return (c.x() - a.x()) * (b.y() - a.y()) - (c.y() - a.y()) * (b.x() - a.x());
-			return (b.x() - a.x()) * (c.y() - a.y()) - (b.y() - a.y()) * (c.x() - a.x());
+			return (b.x() - a.x()) * (c.y() - a.y()) - (b.y() - a.y()) * (c.x() - a.x()); // Is this correct? Can this be used with both CW and CCW windings?
 		}
 
 	};
