@@ -89,25 +89,56 @@ export
 		}
 
 		template <typename Scalar>
-		constexpr Matrix<4, 4, Scalar> Orthographic(Scalar width, 
-													Scalar height,
-													Scalar near, 
-													Scalar far) noexcept
+		constexpr Matrix<4, 4, Scalar> Orthographic(Scalar viewWidth, 
+													Scalar viewHeight,
+													Scalar nearPlaneDistance, 
+													Scalar farPlaneDistance) noexcept
 		{
 			Matrix<4, 4, Scalar> result;
 
-			auto depthRange = Scalar{ 1 } / (near - far);
+			auto depthRange = Scalar{ 1 } / (nearPlaneDistance - farPlaneDistance);
 
-			result[0][0] = Scalar{ 2 } / width;
-			result[1][1] = Scalar{ 2 } / height;
+			result[0][0] = Scalar{ 2 } / viewWidth;
+			
+			result[1][1] = Scalar{ 2 } / viewHeight;
+			
 			result[2][2] = depthRange;
-
-			result[2][3] = near * depthRange;
+			result[2][3] = nearPlaneDistance * depthRange;
 			
 			result[3][3] =   Scalar{ 1 };
 
 			return result;
 		}
+
+		template <typename Scalar>
+		constexpr Matrix<4, 4, Scalar> Perspective(Scalar verticalFOV,
+												   Scalar aspectRatio,
+												   Scalar nearPlaneDistance,
+												   Scalar farPlaneDistance) noexcept
+		{
+			Matrix<4, 4, Scalar> result;
+
+			double halfVerticalFOV = 0.5 * verticalFOV;
+			double cosFOV = std::cos(halfVerticalFOV);
+			double sinFOV = std::sin(halfVerticalFOV);
+
+			Scalar height = cosFOV / sinFOV;
+			auto width = height / aspectRatio;
+			auto depthRange = farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+
+			result[0][0] = width;
+			
+			result[1][1] = height;
+			
+			result[2][2] = depthRange;
+			result[2][3] = nearPlaneDistance * depthRange;
+
+			result[3][2] = - Scalar{ 1 };
+			result[3][3] = Scalar{ 1 };
+
+			return result;
+		}
+		
 
 	}
 }

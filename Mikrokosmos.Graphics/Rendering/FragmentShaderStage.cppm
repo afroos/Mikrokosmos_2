@@ -17,7 +17,12 @@ export namespace mk
 	{
 	public:
 
-		FragmentShaderStage() = default;
+		FragmentShaderStage()
+			:
+			_shader{ std::make_shared<FragmentShader>() }
+		{
+
+		}
 
 		void setShader(std::shared_ptr<FragmentShader> shader)
 		{

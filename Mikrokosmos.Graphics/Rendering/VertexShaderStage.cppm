@@ -20,7 +20,12 @@ export namespace mk
 	{
 	public:
 
-		VertexShaderStage() = default;
+		VertexShaderStage()
+			:
+			_shader{std::make_shared<VertexShader>()}
+		{
+
+		}
 
 		void setShader(std::shared_ptr<VertexShader> shader)
 		{

@@ -1,6 +1,7 @@
 module;
 
 #include <string>
+#include <string_view>
 
 export module Mikrokosmos.Applications.Application;
 
@@ -12,35 +13,48 @@ export namespace mk
 
 		Application() = default;
 
-		/*struct Configuration
+		Application(std::string_view name)
+			:
+			_name{ name }
 		{
-			std::string name{ "" };
-		};*/
+		}
+
+		Application(const Application&) = delete;
+		Application(Application&&) = delete;
+		Application& operator=(const Application&) = delete;
+		Application& operator=(Application&&) = delete;
 
 		virtual ~Application() = default;
 
-		virtual int run()
+		void run()
 		{
-			return 0;
+			initialize();
+			mainLoop();
+			cleanup();
+		}
+
+		void mainLoop()
+		{
+			while (shouldRun())
+			{
+				processInput();
+				update();
+				render();
+			}
 		}
 
 	protected:
 
-		
+		virtual void initialize()   {}
+		virtual bool shouldRun()    { return false; }
+		virtual void processInput() {}
+		virtual void update()       {}
+		virtual void render()       {}
+		virtual void cleanup()      {}
 
-		/*Application(const Configuration& configuration)
-			: 
-			_name{ configuration.name }
-		{
+	private:
 
-		}*/
-
-	/*	Application(const Application&) = delete;
-		Application(Application&&) = delete;
-		Application& operator=(const Application&) = delete;
-		Application& operator=(Application&&) = delete;*/
-
-		//std::string _name{"a"};
+		std::string _name{"Mikrokosmos Application"};
 
 	};
 }

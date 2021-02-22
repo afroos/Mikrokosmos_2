@@ -1,11 +1,13 @@
 module;
 
+#include <string>
+#include <string_view>
+
 #include <SFML/Graphics.hpp>
 
 export module Mikrokosmos.Applications.WindowApplication;
 
 import Mikrokosmos.Applications.Application;
-import Mikrokosmos.Mathematics.Algebra.Vector;
 
 export namespace mk
 {
@@ -13,52 +15,32 @@ export namespace mk
 	{
 	public:
 
-		struct Configuration
-		{
-			std::string name{ "Mikrokosmos Application" };
-			Vector2u windowSize{ 800, 600 };
-		};
-
-		WindowApplication()
+		WindowApplication() = delete;
+		
+		WindowApplication(std::string_view name, std::size_t windowWidth, std::size_t windowHeight)
 			:
-			WindowApplication{ {.name = "Window Application", .windowSize = {800,600}} }
+			Application{ name },
+			_window{ sf::VideoMode{windowWidth, windowHeight}, std::string{name} },
+			_windowWidth{ windowWidth },
+			_windowHeight{ windowHeight },
+			_windowAspectRatio{ static_cast<float>(windowWidth) / windowHeight }
 		{
-
 		}
 
+		std::size_t windowWidth() const { return _windowWidth; }
 
-		WindowApplication(const Configuration& configuration)
-			:
-			_width{ configuration.windowSize.x() },
-			_height{ configuration.windowSize.y() },
-			_window{ sf::VideoMode{_width, _height}, configuration.name }
-		{
+		std::size_t windowHeight() const { return _windowHeight; }
 
-		}
+		float windowAspectRatio() const { return _windowAspectRatio; }
 
-		std::size_t width() const { return _width; }
+	protected:
 
-		std::size_t height() const { return _height; }
-
-		virtual void initialize() noexcept
-		{
-
-		}
-
-		int run() override
+		bool shouldRun() override
 		{	
-			initialize();
-
-			while (_window.isOpen())
-			{
-				processInput();
-				draw();
-			}
-
-			return 0;
+			return _window.isOpen();
 		}
 
-		virtual void processInput() noexcept
+		void processInput() override
 		{
 			sf::Event event;
 			while (_window.pollEvent(event))
@@ -68,18 +50,13 @@ export namespace mk
 			}
 		}
 
-		virtual void draw() noexcept
-		{
-
-		}
-
-	protected:
-
-		std::size_t _width;
-		std::size_t _height;
 		sf::RenderWindow _window;
 
 	private:
+
+		std::size_t _windowWidth;
+		std::size_t _windowHeight;
+		float _windowAspectRatio;
 
 	};
 }

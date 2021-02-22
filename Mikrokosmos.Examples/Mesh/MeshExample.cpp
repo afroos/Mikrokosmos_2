@@ -17,10 +17,11 @@ public:
     std::shared_ptr<mk::RenderTargetView> renderTargetView;
     std::shared_ptr<mk::DeviceContext> context;
 
-    const float radius = 5.0f;
+    const float radius = 2.5f;
     float angle = 0.0f;
     mk::Matrix44f model = mk::Matrix44f::Identity();
-    mk::Matrix44f projection = mk::Orthographic(2.0f, 2.0f, 0.0f, radius * 2.0f);
+    //mk::Matrix44f projection = mk::Orthographic(2.0f, 2.0f, 0.0f, radius * 2.0f);
+    mk::Matrix44f projection = mk::Perspective(3.1415926535f / 4.0f, (float)_width/_height, 0.0f, radius * 2.0f);
 
     Mesh()
 		:
@@ -110,7 +111,10 @@ public:
 
         context->vertexShaderStage()->setShader(vertexShader);
 
-        context->rasterizerStage()->setState(mk::RasterizerState{ .fillMode = mk::FillMode::Wireframe, .cullMode = mk::CullMode::None });
+        context->rasterizerStage()->setState(mk::RasterizerState{ .fillMode = mk::FillMode::Wireframe,
+                                                                  .cullMode = mk::CullMode::Back,
+                                                                  .frontCounterClockwise = true });
+
         context->rasterizerStage()->setViewport({ 0.0, 0.0, (float)_width, (float)_height });
 
         auto fragmentShader = device->createFragmentShader("");

@@ -31,6 +31,8 @@ export namespace mk
 	{
 	public:
 
+		RasterizerStage() = delete;
+
 		RasterizerStage(std::shared_ptr<InputAssemblerStage> inputAssemblerStage)
 			:
 			_inputAssemblerStage{ inputAssemblerStage }
@@ -45,7 +47,7 @@ export namespace mk
 		void setState(const RasterizerState& state)
 		{
 			_state = state;
-			_rasterizer = RasterizerFactory::create(_inputAssemblerStage->primitiveTopology(), _state);
+			_rasterizer = std::move(RasterizerFactory::create(_inputAssemblerStage->primitiveTopology(), _state));
 		}
 
 		void setViewport(const Viewport& viewport)
